@@ -8,6 +8,7 @@ import { routerTransition } from '../router.animations';
     animations: [routerTransition()]
 })
 export class SignupComponent implements OnInit {
+    title="Bakery";
     constructor() {}
 
     ngOnInit() {}
