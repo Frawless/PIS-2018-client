@@ -1,16 +1,24 @@
-.user-profile {
-    float: right;
-}
+:host {
+    .user-profile {
+        float: right;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.navbar {
-    margin-bottom: 50px;
-    border-radius: 0;
-    justify-content: center;
-    background-color: #FFFEF2;
-}
+    app-login {
+        margin-right: 10px;
+    }
 
-/* Remove the jumbotron's default bottom margin */
-.jumbotron {
-    margin-bottom: 0;
-    background-color: #FFCC01;
+    .navbar {
+        margin-bottom: 50px;
+        border-radius: 0;
+        justify-content: center;
+        background-color: #FFFEF2;
+    }
+
+    /* Remove the jumbotron's default bottom margin */
+    .jumbotron {
+        margin-bottom: 0;
+        background-color: #FFCC01;
+    }
 }
