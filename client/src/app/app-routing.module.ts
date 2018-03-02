@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared';
+import { AuthGuard } from './_authentication/_guards/index';
 
 const routes: Routes = [
     { path: '', redirectTo: 'shop', pathMatch: 'full' },
