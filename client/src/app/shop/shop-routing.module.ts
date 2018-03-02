@@ -5,7 +5,10 @@ import { ShopComponent } from "./shop.component";
 const routes: Routes = [
     {
         path: '',
-        component: ShopComponent
+        component: ShopComponent,
+        children: [
+            { path: 'about', loadChildren: './about/about.module#AboutModule' }
+        ]
     }
 ];
 
