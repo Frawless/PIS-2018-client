@@ -17,7 +17,7 @@ import { LayoutModule } from '../layout/layout.module';
   ],
   declarations: [
       ShopComponent,
-      HeaderComponent,
+      HeaderComponent
   ]
 })
 export class ShopModule {}

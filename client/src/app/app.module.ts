@@ -17,6 +17,8 @@ import { AuthGuard } from './_authentication/_guards/index';
 import { JwtInterceptor } from './_authentication/_helpers/index';
 import { AuthenticationService, UserService } from './_authentication/_services/index';
 
+import { ProductsService } from './shop/products/products.service';
+
 // used to create fake backend
 import { fakeBackendProvider } from './_authentication/_helpers/index';
 
@@ -60,7 +62,8 @@ export function createTranslateLoader(http: HttpClient) {
             multi: true
         },
         // provider used to create fake backend
-        fakeBackendProvider
+        fakeBackendProvider,
+        ProductsService
     ],
     bootstrap: [AppComponent]
 })
