@@ -1,36 +1,91 @@
-<button type="button" class="btn btn-info btn-sm ml-auto" (click)="showDialog = !showDialog">
-    <i class="fa fa-user-circle-o mr-2"></i>Login
+<!--Login button-->
+<button type="button" class="btn btn-info btn-sm ml-auto" (click)="showDialog = !showDialog; showDialogLogin()" *ngIf="showLoginButton">
+    <i class="fa fa-user-circle-o mr-2"></i>Login/Registration
 </button>
 
-<app-dialog [(visible)]="showDialog">
-    <div class="login-page">
-        <div class="row justify-content-md-center">
-            <div class="col-md-10">
-                <alert></alert>
-                <img src="assets/images/logo.png" width="75px" class="user-avatar" />
-                <form name="form" role="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                        <!--<label for="username">Username</label>-->
-                        <input type="text" class="form-control input-underline input-lg" name="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Username" required />
-                        <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+<!--Login adn registration dialog-->
+<app-dialog [(visible)]="showDialog" *ngIf="showLogin">
+    <div class="row-user">
+        <alert></alert>
+        <img src="assets/images/logo.png" width="75px" class="user-avatar"/>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="login-page">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-10">
+                        <form [formGroup]="credentials" novalidate>
+                            <div class="form-group">
+                                <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Username" />
+                                <span  *ngIf="credentials.hasError('required', 'username') && credentials.get('username').touched">
+                                    Username is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Password" />
+                                <span  *ngIf="credentials.hasError('required', 'password') && credentials.get('password').touched">
+                                    Password is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <button [disabled]="loginLoading" class="btn rounded-btn" (click)="login()" >Login</button>
+                                <img *ngIf="loginLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                <!--[routerLink]="['/register']"-->
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                        <!--<label for="password">Password</label>-->
-                        <input type="password" class="form-control input-underline input-lg" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" required />
-                        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="login-page">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-10">
+                        <form [formGroup]="registration" novalidate>
+                            <div class="form-group">
+                                <input formControlName="firstName" type="text" class="form-control input-underline input-lg" placeholder="First Name" />
+                                <span  *ngIf="registration.hasError('required', 'firstName') && registration.get('firstName').touched">
+                                    First name is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input formControlName="lastName" type="text" class="form-control input-underline input-lg" placeholder="Last Name" />
+                                <span  *ngIf="registration.hasError('required', 'lastName')  && registration.get('lastName').touched">
+                                    Last name is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Username" />
+                                <span  *ngIf="registration.hasError('required', 'username') && registration.get('username').touched">
+                                    Username is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input formControlName="email" type="email" class="form-control input-underline input-lg" placeholder="Email" />
+                                <span  *ngIf="registration.hasError('email', 'email') && registration.get('email').touched">
+                                    Please enter the correct email, this email not valid.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Password" />
+                                <span  *ngIf="registration.hasError('required', 'password') && registration.get('password').touched">
+                                    Password is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <button [disabled]="registrationLoading" class="btn rounded-btn" (click)="register()">Register</button>
+                                <img *ngIf="registrationLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                <!--<a [routerLink]="['/login']" class="btn btn-link">Cancel</a>-->
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <button [disabled]="loading" class="btn rounded-btn" >Login</button>
-                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        <!--<a [routerLink]="['/register']" class="btn rounded-btn">Register</a>-->
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </app-dialog>
 
-
-
-
-
+<!--Logout button-->
+<button type="button" class="btn btn-info btn-sm ml-auto" (click)="logout()" *ngIf="!showLoginButton">
+    <i class="fa fa-user-circle-o mr-2"></i>Logout
+</button>
