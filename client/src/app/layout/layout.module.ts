@@ -10,7 +10,6 @@ import { HeaderComponent } from './components/header/header.component';
 
 import { DialogComponent } from '../dialog/dialog.component';
 import { LoginComponent} from '../login/login.component';
-import { SignupComponent } from '../signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AlertService} from "../_authentication/_services/alert.service";
 import {AlertComponent} from "../_authentication/_directives/alert.component";
@@ -30,13 +29,11 @@ import {AlertComponent} from "../_authentication/_directives/alert.component";
         HeaderComponent,
         DialogComponent,
         LoginComponent,
-        SignupComponent,
         AlertComponent
     ],
     exports: [
         DialogComponent,
         LoginComponent,
-        SignupComponent
     ],
     providers: [
         AlertService,
