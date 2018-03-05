@@ -8,7 +8,7 @@ const routes: Routes = [
         component: ShopComponent,
         children: [
             { path: 'about', loadChildren: './about/about.module#AboutModule' },
-            { path: 'products', loadChildren: './products/products.module#ProductsModule' }
+            { path: 'products', loadChildren: 'app/shop/products/products.module#ProductsModule' }
         ]
     }
 ];

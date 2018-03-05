@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { Product } from "./product";
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class ProductsService {
@@ -23,6 +26,41 @@ export class ProductsService {
             );
     }
 
+    // GET product by id. Will 404 if id not found
+    getProduct(id: number): Observable<Product> {
+      const url = `${this.apiUrl}${id}`;
+      return this.http.get<Product>(url).pipe(
+        //tap(_ => this.log(`fetched product id=${id}`)),
+        catchError(this.handleError<Product>(`getProduct id=${id}`))
+      );
+    }
+
+    //////// Save methods //////////
+    // POST: add a new product to the server
+
+    addProduct (product: Product): Observable<Product> {
+        return this.http.post<Product>(this.apiUrl, product, httpOptions).pipe(
+            catchError(this.handleError<Product>('addProduct'))
+        );
+    }
+/*
+    // DELETE: delete the product from the server
+    deleteHero (product: Product | number): Observable<Product> {
+        const id = typeof product === 'number' ? product : product.id;
+        const url = `${this.apiUrl}/${id}`;
+
+        return this.http.delete<Product>(url, httpOptions).pipe(
+            catchError(this.handleError<Product>('deleteProduct'))
+        );
+    }
+
+    // PUT: update the product on the server
+    updateHero (product: Product): Observable<any> {
+        return this.http.put(this.apiUrl, product, httpOptions).pipe(
+            catchError(this.handleError<any>('updateProduct'))
+        );
+    }
+*/
 
     /**
      * Handle Http operation that failed.
