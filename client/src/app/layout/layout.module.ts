@@ -34,6 +34,7 @@ import {AlertComponent} from "../_authentication/_directives/alert.component";
     exports: [
         DialogComponent,
         LoginComponent,
+        AlertComponent,
     ],
     providers: [
         AlertService,
