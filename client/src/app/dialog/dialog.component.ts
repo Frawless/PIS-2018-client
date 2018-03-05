@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import {Globals} from "../globals";
+import {AlertService} from "../_authentication/_services/alert.service";
 
 @Component({
   selector: 'app-dialog',
@@ -23,12 +25,17 @@ export class DialogComponent implements OnInit {
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(
+      private globals: Globals,
+      private alertService: AlertService,
+  ) { }
 
   ngOnInit() { }
 
   close() {
     this.visible = false;
+    this.globals.alertLogin = false;
     this.visibleChange.emit(this.visible);
+    this.alertService.clearAlert();
   }
 }
