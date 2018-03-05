@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Produkty:
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead class="ng-tns-c9-1">
+                    <tr class="ng-tns-c9-1">
+                        <th class="ng-tns-c9-1">Název</th>
+                        <th class="ng-tns-c9-1">Energetická hodnota</th>
+                        <th class="ng-tns-c9-1">Na skladě</th>
+                    </tr>
+                    </thead>
+                    <tbody class="ng-tns-c9-1">
+                    <tr *ngFor="let product of products" class="ng-tns-c9-1">
+                        <td class="ng-tns-c9-1">
+                          <a routerLink="/admin/products/detail/{{product.id}}">{{product.name}}</a>
+                        </td>
+                        <td class="ng-tns-c9-1">{{product.energyValue}}</td>
+                        <td class="ng-tns-c9-1">{{product.totalAmount}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

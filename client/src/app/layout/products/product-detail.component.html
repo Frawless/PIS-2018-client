@@ -1,0 +1,11 @@
+<div *ngIf="product">
+  <h2>{{ product.name }} - Detail</h2>
+  <div>
+    <label>Jméno:
+      <input [(ngModel)]="product.name" placeholder="name"/>
+    </label>
+  </div>
+
+  <button class="btn btn-success" (click)="save()">Uložit</button>
+  <button class="btn btn-danger" (click)="delete()">Smazat</button>
+</div>
