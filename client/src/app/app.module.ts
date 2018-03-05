@@ -21,6 +21,7 @@ import { ProductsService } from './shop/products/products.service';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_authentication/_helpers/index';
+import { Globals } from './globals';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -63,7 +64,8 @@ export function createTranslateLoader(http: HttpClient) {
         },
         // provider used to create fake backend
         fakeBackendProvider,
-        ProductsService
+        ProductsService,
+        Globals,
     ],
     bootstrap: [AppComponent]
 })
