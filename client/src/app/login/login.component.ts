@@ -5,6 +5,7 @@ import { routerTransition } from '../router.animations';
 import { AlertService, AuthenticationService } from '../_authentication/_services/index';
 import {UserService} from "../_authentication/_services/user.service";
 import {FormBuilder, Validators} from "@angular/forms";
+import {Globals} from "../globals";
 
 @Component({
     selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private userService: UserService,
         private alertService: AlertService,
-        private formBuilder: FormBuilder) {
+        private formBuilder: FormBuilder,
+        private globals: Globals) {
     }
 
     // @TODO check this
@@ -78,6 +80,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.router.url]);
                     this.showLogin = false;
                     this.showLoginButton = false;
+                    this.dismissLoginDialog();
                 },
                 error => {
                     this.alertService.error(error);
@@ -117,8 +120,15 @@ export class LoginComponent implements OnInit {
         this.registration.reset();
     }
 
-    showDialogLogin() {
+    showLoginDialog() {
+        this.alertService.clearAlert();
+        this.globals.alertLogin = true;
         this.showLogin = true;
         console.log(this.showLogin);
+    }
+
+    dismissLoginDialog() {
+        this.alertService.clearAlert();
+        this.globals.alertLogin = false;
     }
 }
