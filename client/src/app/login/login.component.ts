@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { routerTransition } from '../router.animations';
 
+
 import { AlertService, AuthenticationService } from '../_authentication/_services/index';
 import {UserService} from "../_authentication/_services/user.service";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -52,11 +53,12 @@ export class LoginComponent implements OnInit {
         })
         // Registration validators
         this.registration = this.formBuilder.group({
-            firstName: ['', [Validators.required, Validators.maxLength(40)]],
-            lastName: ['', [Validators.required, Validators.maxLength(40)]],
+            name: ['', [Validators.required, Validators.maxLength(40)]],
+            surname: ['', [Validators.required, Validators.maxLength(40)]],
             username: ['', [Validators.required, Validators.maxLength(40), Validators.minLength(4)]],
             email: ['', [Validators.email, Validators.required]],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
+            phoneNumber: ['']
             // @TODO jstejska: add min-length validator for password and regex validator for names
 
         })
@@ -74,7 +76,7 @@ export class LoginComponent implements OnInit {
 
         this.loginLoading = true;
 
-        this.authenticationService.login(this.credentials.username, this.credentials.password)
+        this.authenticationService.login(this.credentials.value)
             .subscribe(
                 data => {
                     this.router.navigate([this.router.url]);
@@ -98,7 +100,7 @@ export class LoginComponent implements OnInit {
         this.registrationLoading = true;
 
         // Submit - not working now
-        this.userService.create(this.registration)
+        this.userService.create(this.registration.value)
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);

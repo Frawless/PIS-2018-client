@@ -1,10 +1,17 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from '../_models/user';
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class UserService {
+
+    private usersUrl = 'http://localhost:8080/users/sing-up';
+
     constructor(private http: HttpClient) { }
 
     getAll() {
@@ -16,7 +23,8 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post('/api/users', user);
+        //return this.http.post('/api/users', user);
+        return this.http.post<User>(this.usersUrl, user, httpOptions);
     }
 
     update(user: User) {
