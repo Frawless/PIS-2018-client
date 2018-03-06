@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
 import { Product } from "./product";
 
 const httpOptions = {
@@ -14,34 +12,21 @@ export class ProductsService {
 
     private apiUrl = 'http://localhost:8080/products/';  // URL to web api
 
-    constructor(
-        private http: HttpClient
-    ){}
+    constructor( private http: HttpClient ){}
 
     /** GET products from the server */
     getProducts (): Observable<Product[]> {
-        return this.http.get<Product[]>(this.apiUrl)
-            .pipe(
-                catchError(this.handleError('getProducts', []))
-            );
+        return this.http.get<Product[]>(this.apiUrl);
     }
 
-    // GET product by id. Will 404 if id not found
+    // GET product by id
     getProduct(id: number): Observable<Product> {
-      const url = `${this.apiUrl}${id}`;
-      return this.http.get<Product>(url).pipe(
-        //tap(_ => this.log(`fetched product id=${id}`)),
-        catchError(this.handleError<Product>(`getProduct id=${id}`))
-      );
+      return this.http.get<Product>(this.apiUrl + id);
     }
 
-    //////// Save methods //////////
     // POST: add a new product to the server
-
     addProduct (product: Product): Observable<Product> {
-        return this.http.post<Product>(this.apiUrl, product, httpOptions).pipe(
-            catchError(this.handleError<Product>('addProduct'))
-        );
+        return this.http.post<Product>(this.apiUrl, product, httpOptions);
     }
 /*
     // DELETE: delete the product from the server
@@ -61,20 +46,4 @@ export class ProductsService {
         );
     }
 */
-
-    /**
-     * Handle Http operation that failed.
-     * Let the app continue.
-     * @param operation - name of the operation that failed
-     * @param result - optional value to return as the observable result
-     */
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            console.error(error); // log to console instead
-
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
-        };
-    }
 }
