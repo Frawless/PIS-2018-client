@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     // https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
+        //this.authenticationService.logout();
 
         // Login validators
         this.credentials = this.formBuilder.group({
