@@ -83,6 +83,11 @@ export class LoginComponent implements OnInit {
                     this.showLogin = false;
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
+
+                    // console.log("Saved data:");
+                    // console.log(localStorage.getItem('user'));
+                    // console.log(localStorage.getItem('token'));
+
                 },
                 error => {
                     this.alertService.error(error);

@@ -1,10 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+
+import 'rxjs/Rx';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'my-auth-token' })
 };
 
 @Injectable()
@@ -14,16 +14,28 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient) { }
 
-    login(data: Object) {
-      return this.http.post<any>(this.loginUrl, data, httpOptions)
-                .map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+    login(data: Credentials) {
+
+      return this.http.post<any>(this.loginUrl, data,
+          {
+              observe: 'response',
+              headers: new HttpHeaders()
+                  .set('Content-Type', 'X-Requested-With')
+          })
+            .map(response => {
+                // console.log(response.headers.get('Authorization'));
+                // console.log(response.headers);
+                // console.log(data);
+
+                const token = response.headers.get('Authorization');
+
+                if (data.username && token) {
+                    localStorage.setItem('user', data.username);
+                    localStorage.setItem('token', token);
                 }
-                return user;
-            });
+
+            return response;
+        });
 
     }
 
@@ -31,4 +43,9 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
     }
+}
+
+interface Credentials {
+    username?: string
+    password?: string
 }
