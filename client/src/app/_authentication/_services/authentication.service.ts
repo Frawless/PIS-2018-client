@@ -2,6 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import 'rxjs/Rx';
+import * as jwtDecode from 'jwt-decode';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'my-auth-token' })
@@ -30,8 +31,12 @@ export class AuthenticationService {
                 const token = response.headers.get('Authorization');
 
                 if (data.username && token) {
+                    const tokenPayload = jwtDecode(token);
+
                     localStorage.setItem('user', data.username);
                     localStorage.setItem('token', token);
+                    localStorage.setItem('role', tokenPayload.roles[0].authority);
+
                 }
 
             return response;
@@ -39,14 +44,16 @@ export class AuthenticationService {
 
     }
 
-    static logout() {
+    logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
     }
 }
 
-interface Credentials {
-    username?: string
-    password?: string
+export interface Credentials {
+    username?: string;
+    password?: string;
 }
+

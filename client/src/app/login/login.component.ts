@@ -4,9 +4,9 @@ import { routerTransition } from '../router.animations';
 
 
 import { AlertService, AuthenticationService } from '../_authentication/_services/index';
-import {UserService} from "../_authentication/_services/user.service";
-import {FormBuilder, Validators} from "@angular/forms";
-import {Globals} from "../globals";
+import {UserService} from '../_authentication/_services/user.service';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Globals} from '../globals';
 
 @Component({
     selector: 'app-login',
@@ -24,10 +24,8 @@ export class LoginComponent implements OnInit {
     loginLoading = false;
     registrationLoading = false;
     returnUrl: string;
-    title = 'Bakery';
 
-    // showLogin: boolean = true;
-    showLoginButton: boolean = true;
+    showLoginButton: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -42,15 +40,13 @@ export class LoginComponent implements OnInit {
     // @TODO check this
     // https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
     ngOnInit() {
-        // reset login status
-        //this.authenticationService.logout();
-
+        this.showLoginButton = true;
         // Login validators
         this.credentials = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
 
-        })
+        });
         // Registration validators
         this.registration = this.formBuilder.group({
             name: ['', [Validators.required, Validators.maxLength(40)]],
@@ -61,7 +57,7 @@ export class LoginComponent implements OnInit {
             phoneNumber: ['']
             // @TODO jstejska: add min-length validator for password and regex validator for names
 
-        })
+        });
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -69,7 +65,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         // Form validity check
-        if(!this.credentials.valid){
+        if (!this.credentials.valid) {
             this.alertService.error('Login form is not valid');
             return;
         }
@@ -84,9 +80,7 @@ export class LoginComponent implements OnInit {
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
 
-                    // console.log("Saved data:");
-                    // console.log(localStorage.getItem('user'));
-                    // console.log(localStorage.getItem('token'));
+                    this.alertService.success('Login was successful');
 
                 },
                 error => {
@@ -97,7 +91,7 @@ export class LoginComponent implements OnInit {
 
     register() {
         // Form validity check
-        if(!this.registration.valid){
+        if (!this.registration.valid) {
             this.alertService.error('Registration form is not valid');
             return;
         }
@@ -120,22 +114,23 @@ export class LoginComponent implements OnInit {
     }
 
     logout() {
+        this.authenticationService.logout();
         this.showLogin = false;
         this.showLoginButton = true;
         this.loginLoading = false;
         this.credentials.reset();
         this.registration.reset();
+        console.log('Logged out, storage is: ' + localStorage.getItem('user'));
     }
 
     showLoginDialog() {
         this.alertService.clearAlert();
         this.globals.alertLogin = true;
         this.showLogin = true;
-        console.log(this.showLogin);
     }
 
     dismissLoginDialog() {
-        this.alertService.clearAlert();
+        // this.alertService.clearAlert();
         this.globals.alertLogin = false;
     }
 }
