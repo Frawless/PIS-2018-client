@@ -1,12 +1,17 @@
-$topnav-background-color: #222;
+$topnav-background-color: #FFFEF2;
 .sidebar {
+    font-size: 18px;
     border-radius: 0;
-    position: fixed;
+    position: relative;
     z-index: 1000;
-    top: 56px;
-    left: 235px;
+    float: left;
+    padding-top: 30px;
+    padding-left: 30px;
+    //top: 56px;
+    //left: 235px;
     width: 235px;
-    margin-left: -235px;
+    //margin-left: -235px;
+    margin-top: 0px;
     border: none;
     border-radius: 0;
     overflow-y: auto;
@@ -41,7 +46,7 @@ $topnav-background-color: #222;
         }
         .header-fields {
             padding-top: 10px;
-        
+
             > .list-group-item:first-child {
                 border-top: 1px solid rgba(255, 255, 255, 0.2);
             }

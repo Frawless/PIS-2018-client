@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import { ProductsComponent } from "./products.component";
-import { ProductDetailComponent } from './product-detail.component';
-import { ProductNewComponent } from './product-new.component';
+import {RouterModule, Routes} from '@angular/router';
+import { ProductsComponent } from './products.component';
+import { ProductDetailComponent } from './detail/product-detail.component';
+import { ProductNewComponent } from './new/product-new.component';
 
 const routes: Routes = [
     { path: '', component: ProductsComponent },

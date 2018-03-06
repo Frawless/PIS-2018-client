@@ -4,4 +4,5 @@ import { Injectable } from '@angular/core';
 export class Globals {
     alertLogin: boolean = false;
     title: string =  'Bakery';
+    currentRole: any = 'USER';
 }

@@ -1,30 +1,30 @@
-<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
-    <div class="list-group">
-        <a routerLink="/admin/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+<nav class="sidebar navbar-expand-sm bg-dark navbar-dark" [ngClass]="{sidebarPushRight: isActive}">
+    <div class="navbar-nav nav flex-column">
+        <a routerLink="/admin/dashboard" [routerLinkActive]="['router-link-active']" class="nav-link">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;Dashboard
         </a>
         <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('pages')">
-                <span><i class="fa fa-lemon-o"></i>&nbsp;Products</span>
+            <a class="nav-link" (click)="addExpandClass('pages')">
+                <i class="fa fa-lemon-o"></i>&nbsp; Products
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
-                        <a routerLink="/admin/products/new"><span>New</span></a>
+                        <a class="nav-link" routerLink="/admin/products/new"><span>New</span></a>
                     </li>
                     <li>
-                        <a routerLink="/admin/products"><span>All</span></a>
+                        <a class="nav-link" routerLink="/admin/products"><span>All</span></a>
                     </li>
                 </ul>
             </li>
         </div>
-        <a routerLink="/admin/ingredients" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-tint"></i>Ingredients
+        <a routerLink="/admin/ingredients" [routerLinkActive]="['router-link-active']" class="nav-link">
+            <i class="fa fa-fw fa-tint"></i>&nbsp;Ingredients
         </a>
-        <a routerLink="/admin/cars" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="/admin/cars" [routerLinkActive]="['router-link-active']" class="nav-link">
             <i class="fa fa-fw fa-truck"></i>&nbsp;Cars
         </a>
-        <a routerLink="/admin/order" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="/admin/order" [routerLinkActive]="['router-link-active']" class="nav-link">
             <i class="fa fa-fw fa-shopping-cart"></i>&nbsp;Orders
         </a>
     </div>

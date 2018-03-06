@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
                     this.showLogin = false;
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
-
+                    this.globals.currentRole = localStorage.getItem('role');
                     this.alertService.success('Login was successful');
 
                 },
@@ -120,6 +120,7 @@ export class LoginComponent implements OnInit {
         this.loginLoading = false;
         this.credentials.reset();
         this.registration.reset();
+        this.globals.currentRole = 'USER';
         console.log('Logged out, storage is: ' + localStorage.getItem('user'));
     }
 

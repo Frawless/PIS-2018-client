@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Globals} from "../globals";
+import {Globals} from '../globals';
 
 @Component({
     selector: 'app-layout',
@@ -12,4 +12,8 @@ export class LayoutComponent implements OnInit {
     ) {}
 
     ngOnInit() {}
+
+    onChange() {
+        this.globals.currentRole = localStorage.getItem('role');
+    }
 }
