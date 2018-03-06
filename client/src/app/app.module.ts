@@ -17,7 +17,7 @@ import { AuthGuard } from './_authentication/_guards/index';
 import { JwtInterceptor } from './_authentication/_helpers/index';
 import { AuthenticationService, UserService } from './_authentication/_services/index';
 
-import { ProductsService } from './shop/products/products.service';
+import { ProductsService } from './layout/products/service/products.service';
 
 // used to create fake backend
 import { Globals } from './globals';

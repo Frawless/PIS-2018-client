@@ -6,7 +6,6 @@ const routes: Routes = [
     { path: '', redirectTo: 'shop', pathMatch: 'full' },
     { path: 'shop', loadChildren: './layout/layout.module#LayoutModule' },
     { path: 'admin', loadChildren: './layout/layout.module#LayoutModule', data: {expectedRole: ['ADMIN','EMPLOYEE']}, canActivate: [AuthGuard] },
-    { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'access-denied', loadChildren: './access-denied/access-denied.module#AccessDeniedModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: '**', redirectTo: '/shop' }
