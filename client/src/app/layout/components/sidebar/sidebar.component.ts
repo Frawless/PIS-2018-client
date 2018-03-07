@@ -7,9 +7,9 @@ import { Router, NavigationEnd } from '@angular/router';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-    isActive: boolean = false;
-    showMenu: string = '';
-    pushRightClass: string = 'push-right';
+    isActive = false;
+    showMenu = '';
+    pushRightClass = 'push-right';
 
     constructor(public router: Router) {
         this.router.events.subscribe(val => {
@@ -43,9 +43,5 @@ export class SidebarComponent {
     toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
-    }
-
-    onLoggedout() {
-        localStorage.removeItem('isLoggedin');
     }
 }

@@ -8,6 +8,8 @@ import {UserService} from '../_authentication/_services/user.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Globals} from '../globals';
 
+import * as jwtDecode from 'jwt-decode';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
     loginLoading = false;
     registrationLoading = false;
     returnUrl: string;
+    currentUser: string;
 
     showLoginButton: boolean;
 
@@ -60,14 +63,21 @@ export class LoginComponent implements OnInit {
         });
 
         // Loading current user
-        if  (localStorage.getItem('user') != null){
-          this.globals.currentRole = localStorage.getItem('role');
-          this.showLoginButton = false;
-          this.credentials.controls.username.value = localStorage.getItem('user');
-          }
+        if  (localStorage.getItem('token') != null) {
+            // this.globals.currentRole = localStorage.getItem('role');
+            this.showLoginButton = false;
+            this.getUserFromToken();
+        }
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
+
+    getUserFromToken() {
+        const token = localStorage.getItem('token');
+        if (token) {
+            this.currentUser =  jwtDecode(token).sub;
+        }
     }
 
     login() {
@@ -86,7 +96,7 @@ export class LoginComponent implements OnInit {
                     this.showLogin = false;
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
-                    this.globals.currentRole = localStorage.getItem('role');
+                    this.getUserFromToken();
                     this.alertService.success('Login was successful');
 
                 },
@@ -129,7 +139,7 @@ export class LoginComponent implements OnInit {
         this.credentials.reset();
         this.registration.reset();
         this.globals.currentRole = 'USER';
-        console.log('Logged out, storage is: ' + localStorage.getItem('user'));
+        console.log('Logged out, storage is: ' + localStorage.getItem('token'));
     }
 
     showLoginDialog() {

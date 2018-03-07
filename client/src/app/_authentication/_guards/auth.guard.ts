@@ -1,13 +1,17 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
+import * as jwtDecode from 'jwt-decode';
+
 @Injectable()
 export class AuthGuard implements CanActivate {
 
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const role = localStorage.getItem('role');
+
+        const token = localStorage.getItem('token');
+        const role = jwtDecode(token).roles[0].authority;
 
         const expectedRole = route.data.expectedRole;
 
