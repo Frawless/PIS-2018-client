@@ -59,6 +59,13 @@ export class LoginComponent implements OnInit {
 
         });
 
+        // Loading current user
+        if  (localStorage.getItem('user') != null){
+          this.globals.currentRole = localStorage.getItem('role');
+          this.showLoginButton = false;
+          this.credentials.controls.username.value = localStorage.getItem('user');
+          }
+
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -87,6 +94,7 @@ export class LoginComponent implements OnInit {
                     this.alertService.error(error);
                     this.loginLoading = false;
                 });
+                console.log(this.credentials.controls.username.value);
     }
 
     register() {
