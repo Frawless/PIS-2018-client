@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +16,7 @@ import { AuthGuard } from './_authentication/_guards/index';
 import { JwtInterceptor } from './_authentication/_helpers/index';
 import { AuthenticationService, UserService } from './_authentication/_services/index';
 
-import { ProductsService } from './layout/products/service/products.service';
+import { ProductsService } from './layout/shop/products/service/products.service';
 
 // used to create fake backend
 import { Globals } from './globals';

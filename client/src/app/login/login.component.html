@@ -1,10 +1,10 @@
 <!--Login button-->
-<button type="button" class="btn btn-info btn-sm ml-auto" (click)="showDialog = !showDialog; showLoginDialog()" *ngIf="showLoginButton">
+<button type="button" class="btn btn-info btn-sm ml-auto" (click)="showLoginDialog()" *ngIf="showLoginButton">
     <i class="fa fa-user-circle-o mr-2"></i>Login/Registration
 </button>
 
 <!--Login adn registration dialog-->
-<app-dialog [(visible)]="showDialog" *ngIf="showLogin">
+<app-dialog [(visible)]="showLogin" *ngIf="showLogin">
     <div class="row-user">
         <alert></alert>
         <img src="assets/images/logo.png" width="75px" class="user-avatar"/>
@@ -94,7 +94,7 @@
     <button type="button" class="btn btn-primary disabled btn-sm ml-auto">
         Loged: {{currentUser}}
     </button>
-    <button type="button" class="btn btn-info btn-sm ml-auto" (click)="showDialog = !showDialog; logout()">
+    <button type="button" class="btn btn-info btn-sm ml-auto" (click)="logout()">
         <i class="fa fa-user-circle-o mr-2"></i>Logout
     </button>
 </div>

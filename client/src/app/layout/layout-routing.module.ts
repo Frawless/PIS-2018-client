@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import {AuthGuard} from '../_authentication/_guards/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
         children: [
-            { path: 'products', loadChildren: './products/shop/shop.products.module#ShopProductsModule' },
-            { path: 'about', loadChildren: './about/about.module#AboutModule' },
+            { path: 'products', loadChildren: './shop/products/products.module#ProductsModule' },
+            { path: 'about', loadChildren: './shop/about/about.module#AboutModule' },
+            { path: 'admin/products', loadChildren: './admin/products/admin.products.module#AdminProductsModule' , data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]},
             { path: '', redirectTo: '/shop' },
         ]
     }

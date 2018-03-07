@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
     // https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
     ngOnInit() {
         this.showLoginButton = true;
+        this.showLogin = false;
         // Login validators
         this.credentials = this.formBuilder.group({
             username: ['', Validators.required],
@@ -80,6 +81,17 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    getCurrentRoleFromToken() {
+        const token = localStorage.getItem('token');
+        if (token) {
+            this.globals.currentRole = jwtDecode(token).roles[0].authority;
+        }
+        else{
+            this.globals.currentRole = 'USER';
+        }
+
+    }
+
     login() {
         // Form validity check
         if (!this.credentials.valid) {
@@ -97,6 +109,7 @@ export class LoginComponent implements OnInit {
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
                     this.getUserFromToken();
+                    this.getCurrentRoleFromToken();
                     this.alertService.success('Login was successful');
 
                 },
@@ -133,6 +146,7 @@ export class LoginComponent implements OnInit {
 
     logout() {
         this.authenticationService.logout();
+        this.getCurrentRoleFromToken();
         this.showLogin = false;
         this.showLoginButton = true;
         this.loginLoading = false;
