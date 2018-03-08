@@ -14,7 +14,7 @@ export class ProductsService {
 
     constructor( private http: HttpClient ) {}
 
-    /** GET products from the server */
+    // GET products from the server
     getProducts (): Observable<Product[]> {
         return this.http.get<Product[]>(this.apiUrl);
     }

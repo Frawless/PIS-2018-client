@@ -20,6 +20,6 @@ export class ProductNewComponent implements OnInit {
 
   add(): void {
      this.productsService.addProduct(this.product);
-     this.router.navigate(['/admin/products']);
+     this.router.navigate(['/shop/admin/products']);
   }
 }
