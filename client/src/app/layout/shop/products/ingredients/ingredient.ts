@@ -1,8 +1,8 @@
 export class Ingredient {
+    id: number;
     name: string;
     supplier: string;
     stored: number;
-    //dateOfManufacture: date??;
-    //bestBefore: date??;
-    //stored: number;
+    dateOfManufacture: Date;
+    bestBefore: Date;
 }

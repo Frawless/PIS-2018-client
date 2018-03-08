@@ -20,6 +20,7 @@ import { ProductsService } from './layout/shop/products/service/products.service
 
 // used to create fake backend
 import { Globals } from './globals';
+import {IngredientsService} from "./layout/shop/products/service/ingredients.service";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -55,6 +56,7 @@ export function createTranslateLoader(http: HttpClient) {
         },
         // provider used to create fake backend
         ProductsService,
+        IngredientsService,
         Globals,
     ],
     bootstrap: [AppComponent]

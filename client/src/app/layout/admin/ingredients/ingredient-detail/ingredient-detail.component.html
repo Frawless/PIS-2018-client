@@ -1,0 +1,20 @@
+<div *ngIf="ingredient">
+    <h2>{{ ingredient.name }} - Detail</h2>
+    <div>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Jméno:</label>
+            <input [(ngModel)]="ingredient.name" class="form-control" placeholder="Mouka"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Na skladě:</label>
+            <input [(ngModel)]="ingredient.stored" class="form-control" placeholder="50"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Dodavatel:</label>
+            <input [(ngModel)]="ingredient.supplier" class="form-control" placeholder="Lojza"/>
+        </fieldset>
+    </div>
+
+    <button class="btn btn-success" (click)="save()">Uložit</button>
+    <button class="btn btn-danger" (click)="delete()">Smazat</button>
+</div>

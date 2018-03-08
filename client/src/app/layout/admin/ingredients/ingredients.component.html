@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Ingredience:
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Název</th>
+                        <th>Dodavatel</th>
+                        <th>Na skladě</th>
+                        <th>Vyrobeno</th>
+                        <th>Expirace</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let ingredient of ingredients" class="">
+                        <td>
+                            <a routerLink="/shop/admin/ingredients/detail/{{ingredient.id}}">{{ingredient.name}}</a>
+                        </td>
+                        <td>{{ingredient.supplier}}</td>
+                        <td>{{ingredient.stored}}</td>
+                        <td>{{ingredient.dateOfManufacture | date:'dd.MM yyyy'}}</td>
+                        <td>{{ingredient.bestBefore | date:'dd.MM yyyy'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

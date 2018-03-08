@@ -4,10 +4,10 @@
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;Dashboard
         </a>
         <div class="nested-menu">
-            <a class="nav-link" (click)="addExpandClass('pages')">
+            <a class="nav-link" (click)="addExpandClass('products')">
                 <i class="fa fa-lemon-o"></i>&nbsp; Products
             </a>
-            <li class="nested" [class.expand]="showMenu === 'pages'">
+            <li class="nested" [class.expand]="showMenu === 'products'">
                 <ul class="submenu">
                     <li>
                         <a class="nav-link" routerLink="/shop/admin/products/new"><span>New</span></a>
@@ -18,9 +18,21 @@
                 </ul>
             </li>
         </div>
-        <a routerLink="/admin/ingredients" [routerLinkActive]="['router-link-active']" class="nav-link">
-            <i class="fa fa-fw fa-tint"></i>&nbsp;Ingredients
-        </a>
+        <div class="nested-menu">
+            <a class="nav-link" (click)="addExpandClass('ingredients')">
+                <i class="fa fa-tint"></i>&nbsp; Ingredients
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'ingredients'">
+                <ul class="submenu">
+                    <li>
+                        <a class="nav-link" routerLink="/shop/admin/ingredients/new"><span>New</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLink="/shop/admin/ingredients"><span>All</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
         <a routerLink="/admin/cars" [routerLinkActive]="['router-link-active']" class="nav-link">
             <i class="fa fa-fw fa-truck"></i>&nbsp;Cars
         </a>

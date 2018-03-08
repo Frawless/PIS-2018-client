@@ -8,9 +8,16 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: 'products', loadChildren: './shop/products/products.module#ProductsModule' },
+            { path: 'products', loadChildren: 'app/layout/shop/products/products.module#ProductsModule' },
             { path: 'about', loadChildren: './shop/about/about.module#AboutModule' },
-            { path: 'admin/products', loadChildren: './admin/products/admin.products.module#AdminProductsModule' , data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]},
+            { path: 'admin/products',
+              loadChildren: './admin/products/admin.products.module#AdminProductsModule' ,
+              data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]
+            },
+            { path: 'admin/ingredients',
+                loadChildren: './admin/ingredients/admin.ingredients.module#AdminIngredientsModule' ,
+                data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]
+            },
             { path: '', redirectTo: '/shop' },
         ]
     }
