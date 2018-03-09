@@ -7,7 +7,7 @@
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Na skladě:</label>
-            <input [(ngModel)]="ingredient.stored" class="form-control" placeholder="50"/>
+            <input type="number" [(ngModel)]="ingredient.stored" class="form-control" placeholder="50"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Dodavatel:</label>
@@ -15,11 +15,20 @@
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Vyrobeno dne:</label>
-            <input [(ngModel)]="ingredient.dateOfManufacture" class="form-control" placeholder="2018-05-05"/>
+            <input
+                   type="date" min="2018-01-01"
+                   (input)="ingredient.dateOfManufacture = $event.target.valueAsDate"
+                   value="{{ingredient.dateOfManufacture | date: 'yyy-MM-dd'}}"
+                   class="form-control"
+            />
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Expirace:</label>
-            <input [(ngModel)]="ingredient.bestBefore" class="form-control" placeholder="2018-06-06"/>
+            <input type="date"
+                   (input)="ingredient.bestBefore = $event.target.valueAsDate"
+                   value="{{ingredient.bestBefore | date: 'yyyy-MM-dd'}}"
+                   class="form-control"
+            />
         </fieldset>
     </div>
 
