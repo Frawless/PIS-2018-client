@@ -20,7 +20,8 @@ export class IngredientsNewComponent implements OnInit {
   }
 
   add(): void {console.log(this.ingredient);
-      this.ingredientService.addIngredient(this.ingredient);
+      this.ingredientService.addIngredient(this.ingredient)
+          .subscribe();
       this.router.navigate(['/shop/admin/ingredients']);
   }
 }

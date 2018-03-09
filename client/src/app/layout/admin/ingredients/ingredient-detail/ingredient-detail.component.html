@@ -13,6 +13,14 @@
             <label class="form-control-label" >Dodavatel:</label>
             <input [(ngModel)]="ingredient.supplier" class="form-control" placeholder="Lojza"/>
         </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Vyrobeno dne:</label>
+            <input [(ngModel)]="ingredient.dateOfManufacture" class="form-control" placeholder="2018-05-05"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Expirace:</label>
+            <input [(ngModel)]="ingredient.bestBefore" class="form-control" placeholder="2018-06-06"/>
+        </fieldset>
     </div>
 
     <button class="btn btn-success" (click)="save()">Uložit</button>

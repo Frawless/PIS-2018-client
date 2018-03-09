@@ -18,22 +18,24 @@ export class IngredientDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.getProduct();
+      this.getIngredient();
   }
 
-  getProduct(): void {
+  getIngredient(): void {
      const id = +this.route.snapshot.paramMap.get('id');
      this.ingredientsService.getIngredient(id)
          .subscribe(ingredient => this.ingredient = ingredient);
   }
 
   save(): void {
-      this.ingredientsService.update(this.ingredient);
+      this.ingredientsService.update(this.ingredient)
+          .subscribe();
       this.router.navigate(['/shop/admin/ingredients']);
   }
 
   delete(): void {
-      this.ingredientsService.delete(this.ingredient);
+      this.ingredientsService.delete(this.ingredient)
+          .subscribe();
       this.router.navigate(['/shop/admin/ingredients']);
   }
 
