@@ -8,7 +8,8 @@ const httpOptions = {
 
 @Injectable()
 export class IngredientsService {
-  private apiUrl = 'http://localhost:8080/ingredients/';  // URL to web api
+
+    private apiUrl = 'http://localhost:8080/ingredients/';  // URL to web api
 
     constructor( private http: HttpClient ) { }
 

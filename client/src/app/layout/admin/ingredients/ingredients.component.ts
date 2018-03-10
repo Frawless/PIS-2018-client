@@ -14,10 +14,10 @@ export class IngredientComponent implements OnInit {
   constructor( private ingredientsService: IngredientsService ) { }
 
   ngOnInit() {
-      this.getProducts();
+      this.getIngredients();
   }
 
-  getProducts(): void {
+  getIngredients(): void {
       this.ingredientsService.getIngredients()
           .subscribe(ingredients => this.ingredients = ingredients);
   }
