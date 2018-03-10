@@ -1,11 +1,38 @@
-<div *ngIf="product">
-  <h2>{{ product.name }} - Detail</h2>
-  <div>
-    <label>Jméno:
-      <input [(ngModel)]="product.name" placeholder="name"/>
-    </label>
-  </div>
+<h2>{{ product.name }} - Detail</h2>
+<div class="row" *ngIf="product">
+    <div class="col-md-4">
+        <fieldset class="form-group">
+            <label class="form-control-label" >Jméno:</label>
+            <input [(ngModel)]="product.name" class="form-control" placeholder="name"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >energyValue:</label>
+            <input [(ngModel)]="product.energyValue" class="form-control" placeholder="energyValue"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >totalAmount:</label>
+            <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="totalAmount"/>
+        </fieldset>
 
-  <button class="btn btn-success" (click)="save()">Uložit</button>
-  <button class="btn btn-danger" (click)="delete()">Smazat</button>
+        <div class="mb-5">
+            <label>Ingredience:</label>
+            <div class="input-group mt-2" *ngFor="let prodIng of product.ingredients; let i = index">
+                <select [(ngModel)]="product.ingredients[i].id" class="form-control">
+                    <option *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
+                </select>
+                <span class="input-group-addon">
+                   <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
+                       <i class="fa fa-fw fa-minus-square"></i>
+                   </button>
+                </span>
+            </div>
+            <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})">
+                <i class="fa fa-fw fa-plus-square"></i>
+            </button>
+        </div>
+
+        <button class="btn btn-success" (click)="save()">Uložit</button>
+        <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+    </div>
+
 </div>

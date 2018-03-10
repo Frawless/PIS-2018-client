@@ -22,4 +22,5 @@ export class AdminProductsComponent implements OnInit {
         this.productsService.getProducts()
             .subscribe(products => this.products = products);
     }
+
 }

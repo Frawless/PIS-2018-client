@@ -4,6 +4,7 @@ import { AdminProductsComponent } from './admin.products.component';
 import { AdminProductsRoutingModule } from './admin.products-routing.module';
 import { ProductNewComponent } from './new/product-new.component';
 import { FormsModule } from '@angular/forms';
+import {ProductDetailComponent} from "./detail/product-detail.component";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [
       AdminProductsComponent,
-      ProductNewComponent
+      ProductNewComponent,
+      ProductDetailComponent
   ]
 })
 export class AdminProductsModule { }

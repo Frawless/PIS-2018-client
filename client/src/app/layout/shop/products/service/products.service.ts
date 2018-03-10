@@ -25,7 +25,7 @@ export class ProductsService {
 
     // POST: add a new product to the server
     addProduct (product: Product) {
-        return this.http.post<Product>(this.apiUrl, product, httpOptions);
+        return this.http.post<Product>(this.apiUrl, JSON.stringify(product), httpOptions);
     }
 
     // DELETE: delete the product from the server
@@ -38,6 +38,9 @@ export class ProductsService {
 
     // PUT: update the product on the server
     update (product: Product) {
-        return this.http.put(this.apiUrl, product, httpOptions);
+        const id = typeof product === 'number' ? product : product.id;
+        const url = `${this.apiUrl}${id}`;
+
+        return this.http.put(url, JSON.stringify(product), httpOptions);
     }
 }

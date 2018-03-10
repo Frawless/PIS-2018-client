@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { ProductsService } from '../../../shop/products/service/products.service';
 import { Product } from '../../../shop/products/product';
+import {Ingredient} from "../../../shop/products/ingredients/ingredient";
+import {IngredientsService} from "../../../shop/products/service/ingredients.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -10,15 +12,18 @@ import { Product } from '../../../shop/products/product';
 })
 export class ProductDetailComponent implements OnInit {
   @Input() product: Product;
+  ingredients: Ingredient[];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private ingredientsService: IngredientsService
   ) {}
 
   ngOnInit() {
     this.getProduct();
+    this.getIngredients();
   }
 
   getProduct(): void {
@@ -27,7 +32,12 @@ export class ProductDetailComponent implements OnInit {
       .subscribe(product => this.product = product);
   }
 
-  save(): void {
+  getIngredients(): void {
+     this.ingredientsService.getIngredients()
+     .subscribe(ingredients => this.ingredients = ingredients);
+  }
+
+  save(): void {console.log(this.product.ingredients);console.log(JSON.stringify(this.product));console.log("-----");
       this.productsService.update(this.product)
           .subscribe();
       this.router.navigate(['/shop/admin/products']);
