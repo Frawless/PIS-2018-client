@@ -25,10 +25,6 @@ export class AuthenticationService {
                   .set('Content-Type', 'X-Requested-With')
           })
             .map(response => {
-                // console.log(response.headers.get('Authorization'));
-                // console.log(response.headers);
-                // console.log(data);
-
                 const token = response.headers.get('Authorization');
 
                 if (token) {

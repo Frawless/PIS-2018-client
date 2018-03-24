@@ -7,6 +7,7 @@ import { AlertService, AuthenticationService } from '../_authentication/_service
 import {UserService} from '../_authentication/_services/user.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Globals} from '../globals';
+import {Roles} from "../globals";
 
 import * as jwtDecode from 'jwt-decode';
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     registrationLoading = false;
     returnUrl: string;
     currentUser: string;
+    currentRole: string;
 
     showLoginButton: boolean;
 
@@ -68,6 +70,7 @@ export class LoginComponent implements OnInit {
             // this.globals.currentRole = localStorage.getItem('role');
             this.showLoginButton = false;
             this.getUserFromToken();
+            this.getCurrentRoleFromToken();
         }
 
         // get return url from route parameters or default to '/'
@@ -84,10 +87,19 @@ export class LoginComponent implements OnInit {
     getCurrentRoleFromToken() {
         const token = localStorage.getItem('token');
         if (token) {
-            this.globals.currentRole = jwtDecode(token).roles[0].authority;
+            const role = jwtDecode(token).roles[0].authority;
+            if (role === 'USER') {
+                this.globals.currentRole = Roles.USER;
+            } else if (role === 'EMPLOYEE') {
+                this.globals.currentRole = Roles.EMPLOYEE;
+            } else if (role === 'ADMIN') {
+                this.globals.currentRole = Roles.ADMIN;
+            } else {
+                this.globals.currentRole = Roles.NOTLOGED;
+            }
         }
         else{
-            this.globals.currentRole = 'USER';
+            this.globals.currentRole = Roles.USER;
         }
 
     }
@@ -145,14 +157,14 @@ export class LoginComponent implements OnInit {
     }
 
     logout() {
+        this.logoutRedirect();
         this.authenticationService.logout();
-        this.getCurrentRoleFromToken();
         this.showLogin = false;
         this.showLoginButton = true;
         this.loginLoading = false;
         this.credentials.reset();
         this.registration.reset();
-        this.globals.currentRole = 'USER';
+
         console.log('Logged out, storage is: ' + localStorage.getItem('token'));
     }
 
@@ -171,5 +183,18 @@ export class LoginComponent implements OnInit {
       this.getUserFromToken();
       return this.currentUser;
 
+    }
+
+    getCurrentRole(){
+        this.getCurrentRoleFromToken();
+        return this.globals.currentRole;
+    }
+
+    logoutRedirect() {
+        this.getCurrentRoleFromToken();
+        if ((this.globals.currentRole >= Roles.USER ) && this.router.url.indexOf('admin') > -1) {
+            this.router.navigateByUrl('/');
+        }
+        this.globals.currentRole = Roles.NOTLOGED;
     }
 }
