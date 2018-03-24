@@ -8,8 +8,9 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
+            { path: 'profil', loadChildren: './profil/profil.module#ProfilModule'},
             { path: 'products', loadChildren: 'app/layout/shop/products/products.module#ProductsModule' },
-            { path: 'about', loadChildren: './shop/about/about.module#AboutModule' },
+            { path: 'about', loadChildren: './shop/about/about.module#AboutModule'},
             { path: 'admin/products',
               loadChildren: './admin/products/admin.products.module#AdminProductsModule' ,
               data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]

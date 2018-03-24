@@ -166,4 +166,10 @@ export class LoginComponent implements OnInit {
         // this.alertService.clearAlert();
         this.globals.alertLogin = false;
     }
+
+    getCurrentUser(){
+      this.getUserFromToken();
+      return this.currentUser;
+
+    }
 }

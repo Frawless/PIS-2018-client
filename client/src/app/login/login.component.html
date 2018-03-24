@@ -91,11 +91,10 @@
 
 <!--Logout button-->
 <div *ngIf="!showLoginButton">
-    <button type="button" class="btn btn-primary disabled btn-sm ml-auto">
-        Loged: {{currentUser}}
+    <button type="button" class="btn btn-info btn-sm ml-auto" routerLink="/shop/profil" routerLinkActive="active">
+        <i class="fa fa-user-circle-o mr-2"></i>{{currentUser}}
     </button>
     <button type="button" class="btn btn-info btn-sm ml-auto" (click)="logout()">
         <i class="fa fa-user-circle-o mr-2"></i>Logout
     </button>
 </div>
-
