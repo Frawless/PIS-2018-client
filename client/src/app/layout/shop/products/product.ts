@@ -3,13 +3,13 @@ import {Ingredient} from './ingredients/ingredient';
 export class Product {
     id: number;
     name: string;
-    energyValue: number;
+    price: number;
     totalAmount: number;
     ingredients: Ingredient[];
 
-    constructor(name, energyValue, totalAmount, ingredients) {
+    constructor(name, price, totalAmount, ingredients) {
         this.name = name;
-        this.energyValue = energyValue;
+        this.price = price;
         this.totalAmount = totalAmount;
         this.ingredients = ingredients;
     }

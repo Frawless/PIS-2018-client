@@ -11,25 +11,25 @@
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Skladem:</label>
-            <input [(ngModel)]="ingredient.stored" class="form-control" placeholder="50"/>
+            <input [(ngModel)]="ingredient.unit" class="form-control" placeholder="50"/>
         </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Vyrobeno dne:</label>
-            <input
-                type="date" min="2018-01-01"
-                (input)="ingredient.dateOfManufacture = $event.target.valueAsDate"
-                value="{{ingredient.dateOfManufacture | date: 'yyy-MM-dd'}}"
-                class="form-control"
-            />
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Expirace:</label>
-            <input type="date"
-                   (input)="ingredient.bestBefore = $event.target.valueAsDate"
-                   value="{{ingredient.bestBefore | date: 'yyyy-MM-dd'}}"
-                   class="form-control"
-            />
-        </fieldset>
+        <!--<fieldset class="form-group">-->
+            <!--<label class="form-control-label" >Vyrobeno dne:</label>-->
+            <!--<input-->
+                <!--type="date" min="2018-01-01"-->
+                <!--(input)="ingredient.dateOfManufacture = $event.target.valueAsDate"-->
+                <!--value="{{ingredient.dateOfManufacture | date: 'yyy-MM-dd'}}"-->
+                <!--class="form-control"-->
+            <!--/>-->
+        <!--</fieldset>-->
+        <!--<fieldset class="form-group">-->
+            <!--<label class="form-control-label" >Expirace:</label>-->
+            <!--<input type="date"-->
+                   <!--(input)="ingredient.bestBefore = $event.target.valueAsDate"-->
+                   <!--value="{{ingredient.bestBefore | date: 'yyyy-MM-dd'}}"-->
+                   <!--class="form-control"-->
+            <!--/>-->
+        <!--</fieldset>-->
 
         <button class="btn btn-success" (click)="add();">
             Přidat

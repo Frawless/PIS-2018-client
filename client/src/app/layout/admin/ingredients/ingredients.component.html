@@ -11,8 +11,6 @@
                         <th>Název</th>
                         <th>Dodavatel</th>
                         <th>Na skladě</th>
-                        <th>Vyrobeno</th>
-                        <th>Expirace</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -21,9 +19,7 @@
                             <a routerLink="/shop/admin/ingredients/detail/{{ingredient.id}}">{{ingredient.name}}</a>
                         </td>
                         <td>{{ingredient.supplier}}</td>
-                        <td>{{ingredient.stored}}</td>
-                        <td>{{ingredient.dateOfManufacture | date:'dd.MM yyyy'}}</td>
-                        <td>{{ingredient.bestBefore | date:'dd.MM yyyy'}}</td>
+                        <td>{{ingredient.unit}}</td>
                     </tr>
                     </tbody>
                 </table>

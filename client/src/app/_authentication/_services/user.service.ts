@@ -23,7 +23,6 @@ export class UserService {
     }
 
     create(user: User) {
-        //return this.http.post('/api/users', user);
         return this.http.post<User>(this.usersUrl, user, httpOptions);
     }
 

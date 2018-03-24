@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
         });
         // Registration validators
         this.registration = this.formBuilder.group({
-            name: ['', [Validators.required, Validators.maxLength(40)]],
-            surname: ['', [Validators.required, Validators.maxLength(40)]],
-            username: ['', [Validators.required, Validators.maxLength(40), Validators.minLength(4)]],
+            firstname: ['', [Validators.required, Validators.maxLength(40)]],
+            lastname: ['', [Validators.required, Validators.maxLength(40)]],
+            username: ['', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]],
             email: ['', [Validators.email, Validators.required]],
             password: ['', Validators.required],
             phoneNumber: ['']
