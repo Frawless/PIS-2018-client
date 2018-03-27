@@ -1,37 +1,40 @@
-<h2>Profil - {{user}}</h2>
-<div class="row">
+<h2>Profil - {{this.username}}</h2>
+<div class="row" *ngIf="user">
     <div class="col-md-4">
         <fieldset class="form-group">
             <label class="form-control-label" >Jméno:</label>
-            <input  class="form-control" value=""/>
+            <input [(ngModel)]="user.firstname" class="form-control" value="{{user.firstname}}"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Příjmení:</label>
-            <input  class="form-control" value=""/>
+            <input [(ngModel)]="user.lastname" class="form-control" value="{{user.lastname}}"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Uživatelské jméno:</label>
-            <input  class="form-control" value=""/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Heslo:</label>
-            <input  class="form-control" value=""/>
+            <input [(ngModel)]="user.username" class="form-control" value="{{user.username}}"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Rola:</label>
-            <input  class="form-control" value=""/>
+            <select>
+            <option value="role" *ngFor="let role of this.roles">{{role}}</option>
+            </select>
+            <input class="form-control" value="{{user.roles[0].name}}"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >E-mail:</label>
-            <input  class="form-control" value=""/>
+            <input [(ngModel)]="user.email" class="form-control" value="{{user.email}}"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Telefon:</label>
-            <input  class="form-control" value=""/>
+            <input [(ngModel)]="user.phoneNumber" class="form-control" value="{{user.phoneNumber}}"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Adresa:</label>
+            <input [(ngModel)]="user.address" class="form-control" value="{{user.address}}"/>
         </fieldset>
 
-        <button class="btn btn-success" (click)="save()">Uložit</button>
-        <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+        <button class="btn btn-success" (click)="save()">Uložit změny</button>
+        <button *ngIf="user.roles[0].name != 'USER'" class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
     </div>
 
 </div>

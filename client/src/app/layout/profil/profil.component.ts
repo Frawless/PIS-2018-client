@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router} from '@angular/router';
 import { LoginComponent } from '../../login/login.component';
+import { UserService } from '../../_authentication/_services/user.service';
+import { User } from '../../_authentication/_models/user';
+import { AlertService } from '../../_authentication/_services/index';
 
 @Component({
   selector: 'app-profil',
@@ -7,16 +11,30 @@ import { LoginComponent } from '../../login/login.component';
   styleUrls: ['./profil.component.scss']
 })
 export class ProfilComponent implements OnInit {
+  @Input() user: User;
+  username: string;
+  roles = ['Admin','User','Employee'];
 
-  user: any = {};
-
-  constructor(private loginComponent: LoginComponent) {
-  }
+  constructor(
+    private loginComponent: LoginComponent,
+    private userService: UserService,
+    private alertService: AlertService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-      // TODO zmenit to getUserById zo service + getAllUser pre admina
-      this.user = this.loginComponent.getCurrentUser();
-      console.log(this.user);
+      this.username = this.loginComponent.getCurrentUser();
+      this.getCurrentUser(this.username);
   }
+
+  getCurrentUser(username: string){
+      this.userService.getCurrentUser(username).subscribe(user => this.user = user);
+  }
+
+
+  save(): void {console.log(this.user);
+        this.userService.update(this.user)
+            .subscribe();
+    }
 
 }
