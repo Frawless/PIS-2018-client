@@ -1,0 +1,28 @@
+<div class="row" *ngIf="order">
+    <h2>{{ order.id }} - Detail</h2>
+    <div class="col-md-4">
+        <fieldset class="form-group">
+            <label class="form-control-label" >Číslo obědnávky:</label>
+            <input [(ngModel)]="order.id" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >user</label>
+            <input [(ngModel)]="order.user.email" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Datum vytvoření:</label>
+            <input [(ngModel)]="order.createDate" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Datum expedice:</label>
+            <input [(ngModel)]="order.exportDate" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Stav:</label>
+            <input [(ngModel)]="order.state" class="form-control"/>
+        </fieldset>
+
+        <button class="btn btn-success" (click)="save()">Uložit</button>
+        <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+    </div>
+</div>

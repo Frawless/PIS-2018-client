@@ -15,6 +15,10 @@ const routes: Routes = [
               loadChildren: './admin/products/admin.products.module#AdminProductsModule' ,
               data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]
             },
+            { path: 'admin/orders',
+                loadChildren: './admin/orders/order.module#OrderModule' ,
+                data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]
+            },
             { path: 'admin/ingredients',
                 loadChildren: './admin/ingredients/admin.ingredients.module#AdminIngredientsModule' ,
                 data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]

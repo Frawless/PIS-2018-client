@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Objednávky:
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Číslo objednávky</th>
+                        <th>Vytvořeno</th>
+                        <th>Odesláno</th>
+                        <th>Stav</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>
+                          <a routerLink="/shop/admin/orders/detail/{{order.id}}">{{order.id}}</a>
+                        </td>
+                        <td>{{order.createDate | date: 'yyyy-MM-dd'}}</td>
+                        <td>{{order.exportDate| date: 'yyyy-MM-dd'}}</td>
+                        <td>{{order.state}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
