@@ -7,7 +7,7 @@ import { AlertService, AuthenticationService } from '../_authentication/_service
 import {UserService} from '../_authentication/_services/user.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Globals} from '../globals';
-import {Roles} from "../globals";
+import {Roles} from '../globals';
 
 import * as jwtDecode from 'jwt-decode';
 
@@ -97,8 +97,7 @@ export class LoginComponent implements OnInit {
             } else {
                 this.globals.currentRole = Roles.NOTLOGED;
             }
-        }
-        else{
+        } else {
             this.globals.currentRole = Roles.NOTLOGED;
         }
 
@@ -179,20 +178,22 @@ export class LoginComponent implements OnInit {
         this.globals.alertLogin = false;
     }
 
-    getCurrentUser(){
+    getCurrentUser() {
       this.getUserFromToken();
       return this.currentUser;
 
     }
 
-    getCurrentRole(){
+    getCurrentRole() {
         this.getCurrentRoleFromToken();
         return this.globals.currentRole;
     }
 
     logoutRedirect() {
         this.getCurrentRoleFromToken();
-        if ((this.globals.currentRole >= Roles.USER ) && this.router.url.indexOf('admin') > -1) {
+        if ((this.globals.currentRole >= Roles.USER )
+                && (this.router.url.indexOf('admin') > -1
+                || this.router.url.indexOf('profil') > -1)) {
             this.router.navigateByUrl('/');
         }
         this.globals.currentRole = Roles.NOTLOGED;

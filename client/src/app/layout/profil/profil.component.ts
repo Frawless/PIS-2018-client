@@ -27,7 +27,7 @@ export class ProfilComponent implements OnInit {
       this.getCurrentUser(this.username);
   }
 
-  getCurrentUser(username: string){
+  getCurrentUser(username: string) {
       this.userService.getCurrentUser(username)
           .subscribe(user => this.user = user);
   }
@@ -36,6 +36,21 @@ export class ProfilComponent implements OnInit {
   save(): void {console.log(this.user);
         this.userService.update(this.user)
             .subscribe();
+    }
+
+    getOrderPrice(order): number {
+        let totalPrice = 0;
+
+        order.items.forEach(element => {
+            totalPrice += this.getItemsPrice(element);
+        });
+
+
+        return totalPrice;
+    }
+
+    getItemsPrice(items): number {
+        return items.countOrdered * items.product.price;
     }
 
 }

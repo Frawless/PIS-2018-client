@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Order } from '../order';
-import {User} from "../../../../_authentication/_models/user";
+import {User} from '../../../../_authentication/_models/user';
+import {Globals} from '../../../../globals';
+import * as jwtDecode from 'jwt-decode';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,9 +13,11 @@ const httpOptions = {
 export class OrderService {
 
     private apiUrl = 'http://localhost:8080/orders/';  // URL to web api
-    private userUrl = 'http://localhost:8080/users/';  // URL to web api
 
-    constructor( private http: HttpClient ) {}
+    constructor(
+        private http: HttpClient,
+        private globals: Globals
+    ) {}
 
     // GET order from the server
     getOrders () {
@@ -22,7 +26,13 @@ export class OrderService {
 
     // GET order by id
     getOrder(id: number) {
-        return this.http.get<Order>(this.apiUrl + id);
+        if (this.globals.currentRole === 1) {
+            const username = jwtDecode(localStorage.getItem('token')).sub;
+            return this.http.get<Order>(this.apiUrl + username + '/' + id);
+        } else {
+            return this.http.get<Order>(this.apiUrl + id);
+        }
+
     }
 
     getUser(orderId: number) {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { OrderService } from '../service/order.service';
 import { Order } from '../order';
+import {Globals} from '../../../../globals';
 
 @Component({
   selector: 'app-order-detail',
@@ -11,10 +12,13 @@ import { Order } from '../order';
 export class OrderDetailComponent implements OnInit {
   @Input() order: Order;
 
+    states = ['PENDING', 'ACCEPTED', 'DONE', 'IN_PROCESS', 'READY'];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private orderService: OrderService,
+    private globals: Globals,
   ) {}
 
   ngOnInit() {
@@ -42,10 +46,10 @@ export class OrderDetailComponent implements OnInit {
         this.router.navigate(['/shop/admin/orders']);
     }
 
-    getOrderPrice(): number {
+    getOrderPrice(order): number {
         var totalPrice = 0;
 
-        this.order.items.forEach(element => {
+        order.items.forEach(element => {
             totalPrice += this.getItemsPrice(element);
         });
 

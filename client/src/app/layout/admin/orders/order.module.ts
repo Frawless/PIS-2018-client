@@ -4,18 +4,18 @@ import { OrderComponent } from './order.component';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderNewComponent } from './new/order-new.component';
 import { FormsModule } from '@angular/forms';
-import {OrderDetailComponent} from './detail/order-detail.component';
+import {OrderDetailModule} from './detail/order-detail.module';
 
 @NgModule({
   imports: [
     CommonModule,
     OrderRoutingModule,
-    FormsModule
+    FormsModule,
+      OrderDetailModule
   ],
   declarations: [
       OrderComponent,
       OrderNewComponent,
-      OrderDetailComponent
   ]
 })
 export class OrderModule { }

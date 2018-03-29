@@ -11,6 +11,7 @@ export enum Roles {
 @Injectable()
 export class Globals {
     alertLogin: boolean = false;
+    showSideBar: boolean = false;
     title: string =  'Bakery';
     currentRole: any = Roles.NOTLOGED;
 }

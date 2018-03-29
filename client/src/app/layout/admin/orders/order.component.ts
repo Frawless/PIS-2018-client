@@ -22,4 +22,19 @@ export class OrderComponent implements OnInit {
         this.orderService.getOrders()
             .subscribe(orders => this.orders = orders);
     }
+
+    getOrderPrice(order): number {
+        var totalPrice = 0;
+
+        order.items.forEach(element => {
+            totalPrice += this.getItemsPrice(element);
+        });
+
+
+        return totalPrice;
+    }
+
+    getItemsPrice(items): number {
+        return items.countOrdered * items.product.price;
+    }
 }

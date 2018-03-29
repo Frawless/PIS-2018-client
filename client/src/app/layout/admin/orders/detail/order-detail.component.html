@@ -31,7 +31,9 @@
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Stav:</label>
-            <input [ngModel]="order.state" (ngModelChange)="order.state=$event" class="form-control"/>
+            <select [ngModel]="order.state" (ngModelChange)="order.state=$event">
+                <option [selected]="order.state == state"  *ngFor="let state of this.states" [ngValue]="state">{{state}}</option>
+            </select>
         </fieldset>
 
         <div class="card-body table-responsive">
@@ -51,13 +53,15 @@
                 </tr>
                 <tr>
                     <td colspan="2">Celková cena</td>
-                    <td>{{getOrderPrice()}}</td>
+                    <td>{{getOrderPrice(order)}}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <div *ngIf="globals.currentRole > 1">
+            <button class="btn btn-success" (click)="save()">Uložit</button>
+            <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+        </div>
 
-        <button class="btn btn-success" (click)="save()">Uložit</button>
-        <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
     </div>
 </div>

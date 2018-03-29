@@ -4,7 +4,8 @@
 
 <app-header></app-header>
 <div>
-    <app-sidebar *ngIf="globals.currentRole != 1 "></app-sidebar>
+
+    <app-sidebar *ngIf="globals.currentRole > 1"></app-sidebar>
     <section class="main-container">
         <router-outlet></router-outlet>
     </section>

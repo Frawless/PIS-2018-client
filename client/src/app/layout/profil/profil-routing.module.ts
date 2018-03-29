@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from "@angular/router";
-import { ProfilComponent } from "./profil.component";
+import { Routes, RouterModule } from '@angular/router';
+import { ProfilComponent } from './profil.component';
+import {OrderDetailComponent} from '../admin/orders/detail/order-detail.component';
 
 const routes: Routes = [
     {
         path: '',
         component: ProfilComponent
-    }
+    },
+    { path: 'order/:id', component: OrderDetailComponent },
 ];
 
 @NgModule({
