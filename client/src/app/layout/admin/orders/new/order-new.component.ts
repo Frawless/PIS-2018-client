@@ -9,7 +9,7 @@ import { OrderService } from '../service/order.service';
   styleUrls: ['./order-new.component.scss']
 })
 export class OrderNewComponent implements OnInit {
-    @Input() product = new Order(null, null, null, null, null, [{}]);
+    @Input() order: Order;
 
     constructor(
         private router: Router,

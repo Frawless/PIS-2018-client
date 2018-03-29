@@ -16,9 +16,8 @@
         <fieldset class="form-group">
             <label class="form-control-label" >Rola:</label>
             <select>
-            <option value="role" *ngFor="let role of this.roles">{{role}}</option>
+                <option [selected]="user.roles[0].name == role" value="role" *ngFor="let role of this.roles">{{role}}</option>
             </select>
-            <input class="form-control" value="{{user.roles[0].name}}"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >E-mail:</label>

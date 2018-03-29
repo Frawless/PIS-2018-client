@@ -12,6 +12,6 @@ export enum Roles {
 export class Globals {
     alertLogin: boolean = false;
     title: string =  'Bakery';
-    currentRole: any = Roles.USER;
+    currentRole: any = Roles.NOTLOGED;
 }
 

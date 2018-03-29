@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit {
             }
         }
         else{
-            this.globals.currentRole = Roles.USER;
+            this.globals.currentRole = Roles.NOTLOGED;
         }
 
     }

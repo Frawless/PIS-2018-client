@@ -13,7 +13,7 @@ import { AlertService } from '../../_authentication/_services/index';
 export class ProfilComponent implements OnInit {
   @Input() user: User;
   username: string;
-  roles = ['Admin','User','Employee'];
+  roles = ['ADMIN', 'USER', 'EMPLOYEE'];
 
   constructor(
     private loginComponent: LoginComponent,
@@ -28,7 +28,8 @@ export class ProfilComponent implements OnInit {
   }
 
   getCurrentUser(username: string){
-      this.userService.getCurrentUser(username).subscribe(user => this.user = user);
+      this.userService.getCurrentUser(username)
+          .subscribe(user => this.user = user);
   }
 
 

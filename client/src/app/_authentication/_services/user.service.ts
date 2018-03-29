@@ -27,7 +27,7 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post<User>(this.usersUrl + "sing-up", user, httpOptions);
+        return this.http.post<User>(this.usersUrl + 'sing-up', user, httpOptions);
     }
 
     update(user: User) {

@@ -29,4 +29,31 @@ export class OrderDetailComponent implements OnInit {
         this.orderService.getUser(id)
             .subscribe(user => this.order.user = user);
     }
+
+    save(): void {
+        this.orderService.update(this.order)
+            .subscribe();
+        // this.router.navigate(['/shop/admin/orders']);
+    }
+
+    delete(): void {
+        this.orderService.delete(this.order)
+            .subscribe();
+        this.router.navigate(['/shop/admin/orders']);
+    }
+
+    getOrderPrice(): number {
+        var totalPrice = 0;
+
+        this.order.items.forEach(element => {
+            totalPrice += this.getItemsPrice(element);
+        });
+
+
+        return totalPrice;
+    }
+
+    getItemsPrice(items): number {
+        return items.countOrdered * items.product.price;
+    }
 }
