@@ -8,7 +8,7 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: 'profil', loadChildren: './profil/profil.module#ProfilModule'},
+            { path: 'profil/:username', loadChildren: './profil/profil.module#ProfilModule'},
             { path: 'products', loadChildren: 'app/layout/shop/products/products.module#ProductsModule' },
             { path: 'about', loadChildren: './shop/about/about.module#AboutModule'},
             { path: 'admin/products',

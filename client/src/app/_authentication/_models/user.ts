@@ -6,7 +6,7 @@
     lastname: string;
     email: string;
     phoneNumber: string;
-    address: string;
+    address: any;
     roles: string;
 
     constructor(username, firstname, lastname, email, phoneNumber, address, roles){

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { LoginComponent } from '../../login/login.component';
 import { UserService } from '../../_authentication/_services/user.service';
 import { User } from '../../_authentication/_models/user';
@@ -19,17 +19,24 @@ export class ProfilComponent implements OnInit {
     private loginComponent: LoginComponent,
     private userService: UserService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-      this.username = this.loginComponent.getCurrentUser();
+      this.username = this.route.snapshot.paramMap.get('username');
+      //this.username = this.loginComponent.getCurrentUser();
       this.getCurrentUser(this.username);
   }
 
   getCurrentUser(username: string) {
       this.userService.getCurrentUser(username)
-          .subscribe(user => this.user = user);
+          .subscribe(user => {
+            this.user = user,
+            this.user.password = "";
+          });
+
+
   }
 
 

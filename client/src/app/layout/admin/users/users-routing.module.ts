@@ -6,7 +6,8 @@ const routes: Routes = [
     {
         path: '',
         component: UsersComponent
-    }
+    }/*,
+    { path: ':username', component: OrderDetailComponent }*/
 ];
 
 @NgModule({

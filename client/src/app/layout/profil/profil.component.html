@@ -3,15 +3,19 @@
     <div class="col-md-4">
         <fieldset class="form-group">
             <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="user.firstname" class="form-control" value="{{user.firstname}}"/>
+            <input [(ngModel)]="user.firstname" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Příjmení:</label>
-            <input [(ngModel)]="user.lastname" class="form-control" value="{{user.lastname}}"/>
+            <input [(ngModel)]="user.lastname" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Uživatelské jméno:</label>
-            <input [(ngModel)]="user.username" class="form-control" value="{{user.username}}"/>
+            <input [(ngModel)]="user.username" class="form-control"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Heslo:</label>
+            <input type="password" [(ngModel)]="user.password" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Rola:</label>
@@ -21,15 +25,28 @@
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >E-mail:</label>
-            <input [(ngModel)]="user.email" class="form-control" value="{{user.email}}"/>
+            <input [(ngModel)]="user.email" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Telefon:</label>
-            <input [(ngModel)]="user.phoneNumber" class="form-control" value="{{user.phoneNumber}}"/>
+            <input [(ngModel)]="user.phoneNumber" class="form-control"/>
+        </fieldset>
+        <h3>Adresa:</h3>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Mesto:</label>
+            <input [ngModel]="user.address?.city" class="form-control" (ngModelChange)="user.address.city=$event"/>
         </fieldset>
         <fieldset class="form-group">
-            <label class="form-control-label" >Adresa:</label>
-            <input [(ngModel)]="user.address" class="form-control" value="{{user.address}}"/>
+            <label class="form-control-label" >Ulica:</label>
+            <input [ngModel]="user.address?.streetName" class="form-control" (ngModelChange)="user.address.streetName=$event"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Číslo:</label>
+            <input [ngModel]="user.address?.streetNumber" class="form-control" (ngModelChange)="user.address.streetNumber=$event"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >PSČ:</label>
+            <input [ngModel]="user.address?.psc" class="form-control" (ngModelChange)="user.address.psc=$event"/>
         </fieldset>
 
         <button class="btn btn-success" (click)="save()">Uložit změny</button>
@@ -56,7 +73,7 @@
                 <tbody>
                 <tr *ngFor="let order of user.orders">
                     <td>
-                        <a routerLink="/shop/profil/order/{{order.id}}">{{order.id}}</a>
+                        <a routerLink="/shop/profil/{{this.username}}/order/{{order.id}}">{{order.id}}</a>
                     </td>
                     <td>{{order.createDate | date: 'yyyy-MM-dd'}}</td>
                     <td>{{order.exportDate| date: 'yyyy-MM-dd'}}</td>
