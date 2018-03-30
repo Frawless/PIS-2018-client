@@ -1,0 +1,9 @@
+<h2>Profily</h2>
+<div class="row" *ngFor="let user of this.users">
+    <div class="col-md-4">
+        <fieldset class="form-group">
+            <label class="form-control-label" >Uživatelské jméno:</label>
+            <input [(ngModel)]="user.username" class="form-control" value="{{user.username}}"/>
+        </fieldset>
+    </div>
+</div>
