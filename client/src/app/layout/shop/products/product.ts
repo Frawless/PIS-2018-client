@@ -6,6 +6,7 @@ export class Product {
     price: number;
     totalAmount: number;
     ingredients: Ingredient[];
+    image: any;
 
     constructor(name, price, totalAmount, ingredients) {
         this.name = name;

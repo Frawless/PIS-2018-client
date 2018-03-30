@@ -14,6 +14,14 @@
             <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100"/>
         </fieldset>
 
+        <fieldset class="form-group">
+            <div class="custom-file">
+                <form (ngSubmit) = "submitPhoto()">
+                    <image-preview> </image-preview>
+                </form>
+            </div>
+        </fieldset>
+
         <div>
             <label>Ingredience:</label>
             <div class="input-group mt-2" *ngFor="let prodIng of product.ingredients; let i = index">

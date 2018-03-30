@@ -4,7 +4,8 @@ import { AdminProductsComponent } from './admin.products.component';
 import { AdminProductsRoutingModule } from './admin.products-routing.module';
 import { ProductNewComponent } from './new/product-new.component';
 import { FormsModule } from '@angular/forms';
-import {ProductDetailComponent} from "./detail/product-detail.component";
+import {ProductDetailComponent} from './detail/product-detail.component';
+import {MtImagePreviewComponent} from '../../components/image-preview/image-preview';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {ProductDetailComponent} from "./detail/product-detail.component";
   declarations: [
       AdminProductsComponent,
       ProductNewComponent,
-      ProductDetailComponent
+      ProductDetailComponent,
+      MtImagePreviewComponent
   ]
 })
 export class AdminProductsModule { }
