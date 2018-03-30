@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { OrderService } from '../service/order.service';
 import { Order } from '../order';
 import {Globals} from '../../../../globals';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-order-detail',
@@ -14,24 +15,34 @@ export class OrderDetailComponent implements OnInit {
 
     states = ['PENDING', 'ACCEPTED', 'DONE', 'IN_PROCESS', 'READY'];
 
+    isAdminDetail = true;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private orderService: OrderService,
     private globals: Globals,
+    private _location: Location,
   ) {}
 
   ngOnInit() {
-      this.getOrder();
+      this.getOrderInfo();
   }
 
-    getOrder(): void {
+    getOrderInfo(): void {
         const id = +this.route.snapshot.paramMap.get('id');
         this.orderService.getOrder(id)
             .subscribe(order => this.order = order);
 
+        if (this.router.url.indexOf('profil') > -1) {
+            this.isAdminDetail = false;
+            return;
+        }
+
         this.orderService.getUser(id)
             .subscribe(user => this.order.user = user);
+
+
     }
 
     save(): void {
@@ -47,7 +58,7 @@ export class OrderDetailComponent implements OnInit {
     }
 
     getOrderPrice(order): number {
-        var totalPrice = 0;
+        let totalPrice = 0;
 
         order.items.forEach(element => {
             totalPrice += this.getItemsPrice(element);
@@ -59,5 +70,9 @@ export class OrderDetailComponent implements OnInit {
 
     getItemsPrice(items): number {
         return items.countOrdered * items.product.price;
+    }
+
+    backClicked() {
+        this._location.back();
     }
 }
