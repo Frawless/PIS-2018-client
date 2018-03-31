@@ -193,7 +193,7 @@ export class LoginComponent implements OnInit {
         this.getCurrentRoleFromToken();
         if ((this.globals.currentRole >= Roles.USER )
                 && (this.router.url.indexOf('admin') > -1
-                || this.router.url.indexOf('profil') > -1)) {
+                || this.router.url.indexOf('user') > -1)) {
             this.router.navigateByUrl('/');
         }
         this.globals.currentRole = Roles.NOTLOGED;

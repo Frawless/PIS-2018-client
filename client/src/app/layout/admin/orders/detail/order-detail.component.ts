@@ -34,7 +34,7 @@ export class OrderDetailComponent implements OnInit {
         this.orderService.getOrder(id)
             .subscribe(order => this.order = order);
 
-        if (this.router.url.indexOf('profil') > -1) {
+        if (this.router.url.indexOf('user') > -1) {
             this.isAdminDetail = false;
             return;
         }

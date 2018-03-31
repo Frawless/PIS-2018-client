@@ -7,11 +7,11 @@ import {Globals} from '../../globals';
 import { AlertService } from '../../_authentication/_services/index';
 
 @Component({
-  selector: 'app-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.scss']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class ProfilComponent implements OnInit {
+export class UserComponent implements OnInit {
   @Input() user: User;
   username: string;
   currentUser: string;
