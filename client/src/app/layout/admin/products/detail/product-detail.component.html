@@ -5,9 +5,13 @@
             <label class="form-control-label" >Jméno:</label>
             <input [(ngModel)]="product.name" class="form-control" placeholder="Rohlík"/>
         </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Cena:</label>
+
+        <label>Cena:</label>
+        <fieldset class="input-group">
             <input [(ngModel)]="product.price" class="form-control" placeholder="3"/>
+            <div class="input-group-append">
+                <span class="input-group-text">Kč</span>
+            </div>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Celkový počet:</label>
