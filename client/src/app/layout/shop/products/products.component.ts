@@ -26,14 +26,10 @@ export class ProductsComponent implements OnInit {
   }
 
   getImage(product: Product) {
-
-      console.log('#:' + product.image + ':#');
-
       if (product.image === '') {
-          return this.domSanitizer.bypassSecurityTrustResourceUrl('https://placehold.it/150x80?text=IMAGE');
+          return;
       }
 
-      const image = this.domSanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + product.image);
-      return image;
+      return this.domSanitizer.bypassSecurityTrustUrl(atob(product.image));
   }
 }

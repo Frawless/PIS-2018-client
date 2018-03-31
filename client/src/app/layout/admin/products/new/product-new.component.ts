@@ -31,7 +31,6 @@ export class ProductNewComponent implements OnInit {
     }
 
     add(): void {
-        console.log(JSON.stringify(this.product));
         this.product.image = btoa(this.image.source);
 
         this.productsService.addProduct(this.product)

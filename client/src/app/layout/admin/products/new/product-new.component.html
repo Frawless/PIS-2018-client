@@ -3,19 +3,20 @@
     <div class="col-md-4">
         <fieldset class="form-group">
             <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="product.name" class="form-control" placeholder="Rohlík"/>
+            <input [(ngModel)]="product.name" class="form-control" placeholder="Rohlík" required/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Cena:</label>
-            <input [(ngModel)]="product.price" class="form-control" placeholder="3 kč"/>
+            <input [(ngModel)]="product.price" class="form-control" placeholder="3 kč" required/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Celkový počet:</label>
-            <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100"/>
+            <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100" required/>
         </fieldset>
 
         <fieldset class="form-group">
             <div class="custom-file">
+                <label class="form-control-label" >Obrázek produktu:</label>
                 <form (ngSubmit) = "submitPhoto()">
                     <image-preview> </image-preview>
                 </form>
