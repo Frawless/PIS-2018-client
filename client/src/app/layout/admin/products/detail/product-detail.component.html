@@ -1,5 +1,5 @@
-<h2>{{ product.name }} - Detail</h2>
 <div class="row" *ngIf="product">
+    <h2>{{ product.name }} - Detail</h2>
     <div class="col-md-4">
         <fieldset class="form-group">
             <label class="form-control-label" >Jméno:</label>
@@ -13,6 +13,25 @@
             <label class="form-control-label" >Celkový počet:</label>
             <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100"/>
         </fieldset>
+
+
+        <fieldset class="form-group">
+            <div class="panel-body">
+                <label class="form-control-label" >Stávající obrázek produktu:</label>
+                <form>
+                    <img [src]="getImage(product) || 'https://placehold.it/150x80?text=IMAGE'" class="img-responsive" style="width:100%" alt="Image">
+                </form>
+            </div>
+
+            <div class="custom-file">
+                <label class="form-control-label" >Nový obrázek produktu:</label>
+                <form (ngSubmit) = "submitPhoto()">
+                    <image-preview></image-preview>
+                </form>
+            </div>
+        </fieldset>
+
+
 
         <div class="mb-5">
             <label>Ingredience:</label>

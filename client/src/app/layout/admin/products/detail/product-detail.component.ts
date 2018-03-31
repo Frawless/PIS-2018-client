@@ -4,6 +4,7 @@ import { ProductsService } from '../../../shop/products/service/products.service
 import { Product } from '../../../shop/products/product';
 import {Ingredient} from '../../../shop/products/ingredients/ingredient';
 import {IngredientsService} from '../../../shop/products/service/ingredients.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,6 +14,7 @@ import {IngredientsService} from '../../../shop/products/service/ingredients.ser
 export class ProductDetailComponent implements OnInit {
   @Input() product: Product;
   ingredients: Ingredient[];
+    private domSanitizer: DomSanitizer;
 
   constructor(
     private router: Router,
@@ -48,4 +50,14 @@ export class ProductDetailComponent implements OnInit {
           .subscribe();
       this.router.navigate(['/shop/admin/products']);
   }
+
+    getImage(product: Product) {
+        if (product.image === '') {
+            return;
+        }
+
+        // @ TODO fix, melo by se overovat to trstURL ale haze to chybu
+        // return this.domSanitizer.bypassSecurityTrustUrl(atob(product.image));
+        return atob(product.image);
+    }
 }
