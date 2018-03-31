@@ -5,6 +5,7 @@ import { Product } from '../../../shop/products/product';
 import {Ingredient} from '../../../shop/products/ingredients/ingredient';
 import {IngredientsService} from '../../../shop/products/service/ingredients.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Globals} from '../../../../globals';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,7 +21,8 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private ingredientsService: IngredientsService
+    private ingredientsService: IngredientsService,
+    private globals: Globals
   ) {}
 
   ngOnInit() {
