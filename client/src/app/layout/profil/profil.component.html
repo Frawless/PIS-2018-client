@@ -3,21 +3,21 @@
     <div class="col-md-4">
         <fieldset class="form-group">
             <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="user.firstname" class="form-control"/>
+            <input [(ngModel)]="user.firstname" (ngModelChange)="user.firstname=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Příjmení:</label>
-            <input [(ngModel)]="user.lastname" class="form-control"/>
+            <input [(ngModel)]="user.lastname" (ngModelChange)="user.lastname=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Uživatelské jméno:</label>
-            <input [(ngModel)]="user.username" class="form-control"/>
+            <input [(ngModel)]="user.username" (ngModelChange)="user.username=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Heslo:</label>
-            <input type="password" [(ngModel)]="user.password" class="form-control"/>
+            <input type="password" [(ngModel)]="user.password" (ngModelChange)="user.password=$event" class="form-control"/>
         </fieldset>
-        <fieldset class="form-group">
+        <fieldset class="form-group" *ngIf="this.globals.currentRole > 1">
             <label class="form-control-label" >Rola:</label>
             <select [ngModel]="user.roles[0].name" (ngModelChange)="user.roles[0].name=$event">
                 <option [selected]="user.roles[0].name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
@@ -25,32 +25,32 @@
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >E-mail:</label>
-            <input [(ngModel)]="user.email" class="form-control"/>
+            <input [(ngModel)]="user.email" (ngModelChange)="user.email=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Telefon:</label>
-            <input [(ngModel)]="user.phoneNumber" class="form-control"/>
+            <input [(ngModel)]="user.phoneNumber" (ngModelChange)="user.phoneNumber=$event" class="form-control"/>
         </fieldset>
         <h3>Adresa:</h3>
         <fieldset class="form-group">
             <label class="form-control-label" >Mesto:</label>
-            <input [ngModel]="user.address?.city" class="form-control" (ngModelChange)="user.address.city=$event"/>
+            <input [ngModel]="user.address?.city" (ngModelChange)="user.address.city=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Ulica:</label>
-            <input [ngModel]="user.address?.streetName" class="form-control" (ngModelChange)="user.address.streetName=$event"/>
+            <input [ngModel]="user.address?.streetName" (ngModelChange)="user.address.streetName=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >Číslo:</label>
-            <input [ngModel]="user.address?.streetNumber" class="form-control" (ngModelChange)="user.address.streetNumber=$event"/>
+            <input [ngModel]="user.address?.streetNumber"(ngModelChange)="user.address.streetNumber=$event" class="form-control"/>
         </fieldset>
         <fieldset class="form-group">
             <label class="form-control-label" >PSČ:</label>
-            <input [ngModel]="user.address?.psc" class="form-control" (ngModelChange)="user.address.psc=$event"/>
+            <input [ngModel]="user.address?.psc" (ngModelChange)="user.address.psc=$event" class="form-control"/>
         </fieldset>
 
         <button class="btn btn-success" (click)="save()">Uložit změny</button>
-        <button *ngIf="user.roles[0].name != 'USER'" class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+        <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
     </div>
 
 

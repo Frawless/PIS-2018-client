@@ -23,7 +23,7 @@ export class UserService {
         return this.http.get('/api/users/' + id);
     }
 
-    getCurrentUser(username: string) {
+    getUser(username: string) {
         return this.http.get<User>(this.usersUrl + username);
     }
 
@@ -36,6 +36,6 @@ export class UserService {
     }
 
     delete(id: number) {
-        return this.http.delete('/api/users/' + id);
+        return this.http.delete(this.usersUrl + id);
     }
 }
