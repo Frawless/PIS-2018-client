@@ -4,20 +4,22 @@ import { AdminProductsComponent } from './admin.products.component';
 import { AdminProductsRoutingModule } from './admin.products-routing.module';
 import { ProductNewComponent } from './new/product-new.component';
 import { FormsModule } from '@angular/forms';
-import {ProductDetailComponent} from './detail/product-detail.component';
-import {MtImagePreviewComponent} from '../../components/image-preview/image-preview';
+import {ProductDetailModule} from './detail/product-detail.module';
+import {MtImagePreviewComponentModule} from '../../components/image-preview/image-preview.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminProductsRoutingModule,
-    FormsModule
+    FormsModule,
+      ProductDetailModule,
+      MtImagePreviewComponentModule
+
   ],
   declarations: [
       AdminProductsComponent,
       ProductNewComponent,
-      ProductDetailComponent,
-      MtImagePreviewComponent
+      // MtImagePreviewComponent
   ]
 })
 export class AdminProductsModule { }
