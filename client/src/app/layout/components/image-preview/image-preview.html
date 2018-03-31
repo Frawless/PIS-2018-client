@@ -1,7 +1,5 @@
-<!-- Icon as placeholder when no file picked -->
-<i class="material-icons"> cloud_upload</i>
     <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native
 (change) event listener -->
 <input type="file" accept="image/*" (change)="updateSource($event)">
     <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
-<img *ngIf= "source" [src]="source" src="">
+<img class="image-preview" *ngIf= "source" [src]="source" src="">
