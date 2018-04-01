@@ -36,9 +36,21 @@
                 </ul>
             </li>
         </div>
-        <a routerLink="/admin/cars" [routerLinkActive]="['router-link-active']" class="nav-link">
-            <i class="fa fa-fw fa-truck"></i>&nbsp;Cars
-        </a>
+        <div class="nested-menu">
+            <a routerLink="/admin/cars" class="nav-link" (click)="addExpandClass('cars')">
+                <i class="fa fa-fw fa-truck"></i>&nbsp;Cars
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'cars'">
+                <ul class="submenu">
+                    <li>
+                        <a class="nav-link" routerLink="/shop/admin/cars/new"><span>New</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLink="/shop/admin/cars"><span>All</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
         <a routerLink="/shop/admin/orders" [routerLinkActive]="['router-link-active']" class="nav-link">
             <i class="fa fa-fw fa-shopping-cart"></i>&nbsp;Orders
         </a>

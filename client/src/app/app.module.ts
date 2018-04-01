@@ -23,6 +23,7 @@ import { Globals } from './globals';
 import {IngredientsService} from './layout/shop/products/service/ingredients.service';
 import {OrderService} from './layout/admin/orders/service/order.service';
 import {OrderDetailModule} from './layout/admin/orders/detail/order-detail.module';
+import {CarsService} from "./layout/admin/cars/service/cars.service";
 
 
 
@@ -61,6 +62,7 @@ export function createTranslateLoader(http: HttpClient) {
         // provider used to create fake backend
         ProductsService,
         IngredientsService,
+        CarsService,
         OrderService,
         Globals,
     ],

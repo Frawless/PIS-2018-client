@@ -1,0 +1,21 @@
+<h2>Nové vozidlo</h2>
+<div class="row" *ngIf="car">
+    <div class="col-md-4">
+        <fieldset class="form-group">
+            <label class="form-control-label" >Typ:</label>
+            <input [(ngModel)]="car.type" class="form-control" placeholder="Dodávka"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Vyrobeno dne:</label>
+            <input
+                type="date" min="2018-01-01"
+                (input)="car.date_add = $event.target.valueAsDate"
+                class="form-control"
+            />
+        </fieldset>
+
+        <button class="btn btn-success" (click)="add();">
+            Přidat
+        </button>
+    </div>
+</div>
