@@ -44,6 +44,9 @@ export class UserComponent implements OnInit {
   save(): void {//console.log(this.user);
         this.userService.update(this.user)
             .subscribe();
+
+        this.userService.updateRole(this.user)
+            .subscribe();
     }
 
   delete(): void {

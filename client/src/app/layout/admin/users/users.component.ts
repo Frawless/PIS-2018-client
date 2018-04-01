@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  getUsers(): void { // TODO: hadze chybu - opravit
+  getUsers(): void {
     this.userService.getUsers()
             .subscribe((users:User[]) => this.users = users);
       }

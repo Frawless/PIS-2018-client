@@ -35,6 +35,10 @@ export class UserService {
         return this.http.put(this.usersUrl + user.username, JSON.stringify(user), httpOptions);
     }
 
+    updateRole(user: User) {
+        return this.http.put(this.usersUrl + user.username + '/grand/role', JSON.stringify(user.role), httpOptions);
+    }
+
     delete(id: number) {
         return this.http.delete(this.usersUrl + id);
     }

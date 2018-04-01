@@ -7,15 +7,15 @@
     email: string;
     phoneNumber: string;
     address: any;
-    roles: string;
+    role: any;
 
-    constructor(username, firstname, lastname, email, phoneNumber, address, roles){
+    constructor(username, firstname, lastname, email, phoneNumber, address, role){
       this.username = username;
       this.firstname = firstname;
       this.lastname = lastname;
       this.email = email;
       this.phoneNumber = phoneNumber;
       this.address = address;
-      this.roles = roles;
+      this.role = role;
     }
 }

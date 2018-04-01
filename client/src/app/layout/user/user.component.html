@@ -19,8 +19,8 @@
         </fieldset>
         <fieldset class="form-group" *ngIf="this.globals.currentRole > 1">
             <label class="form-control-label" >Rola:</label>
-            <select [ngModel]="user.roles[0].name" (ngModelChange)="user.roles[0].name=$event">
-                <option [selected]="user.roles[0].name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
+            <select [ngModel]="user.role.name" (ngModelChange)="user.role.name=$event">
+                <option [selected]="user.role.name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
             </select>
         </fieldset>
         <fieldset class="form-group">
