@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { routerTransition } from '../router.animations';
 
@@ -19,7 +19,7 @@ import * as jwtDecode from 'jwt-decode';
 
     moduleId: module.id.toString(),
 })
-export class LoginComponent implements OnInit, OnChanges {
+export class LoginComponent implements OnInit {
     @Input() showLogin = true;
 
     credentials: any = {};
@@ -79,15 +79,11 @@ export class LoginComponent implements OnInit, OnChanges {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
         // App testing
-        this.data.currentMessage.subscribe(message => this.message = message);
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        console.log('logi change');
-        if (changes.message) {
-            this.logout();
-        }
-        this.message = '';
+        this.data.currentMessage.subscribe(message => {
+            this.message = message;
+            if (this.message=="Timed out!"){
+                this.logout();}
+          });
     }
 
     getUserFromToken() {

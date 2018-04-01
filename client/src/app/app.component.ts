@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     idleState = 'Not started.';
     timedOut = false;
     lastPing?: Date = null;
+    message: string;
 
     constructor(private idle: Idle, private keepalive: Keepalive, private data: DataService, private globals: Globals) {
         // sets an idle timeout of 5 seconds, for testing purposes.
@@ -27,13 +28,13 @@ export class AppComponent implements OnInit {
 
         idle.onIdleEnd.subscribe(() => this.idleState = 'No longer idle.');
         idle.onTimeout.subscribe(() => {
-            this.idleState = 'Timed out!';
+            this.message = 'Timed out!';
             this.timedOut = true;
             console.log(this.globals.currentRole);
             if (this.globals.currentRole >= 1) {
                 // localStorage.removeItem('token');
                 // window.location.reload();
-                this.data.changeMessage(this.idleState);
+                this.data.changeMessage(this.message);
             }
         });
 
@@ -49,6 +50,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.data.currentMessage.subscribe(message => this.message = message);
     }
 
     reset() {
