@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     showLoginButton: boolean;
 
-    message = '';
+    iddleLogout = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -78,10 +78,10 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-        // App testing
-        this.data.currentMessage.subscribe(message => {
-            this.message = message;
-            if (this.message=="Timed out!"){
+        // Subscribe for iddleLogout messages
+        this.data.iddleLogout.subscribe(message => {
+            this.iddleLogout = message;
+            if (this.iddleLogout){
                 this.logout();}
           });
     }
@@ -190,11 +190,6 @@ export class LoginComponent implements OnInit {
       this.getUserFromToken();
       return this.currentUser;
 
-    }
-
-    getCurrentRole() {
-        this.getCurrentRoleFromToken();
-        return this.globals.currentRole;
     }
 
     logoutRedirect() {

@@ -21,14 +21,13 @@ export class Globals {
 @Injectable()
 export class DataService {
 
-    private messageSource = new BehaviorSubject<string>('default message');
-    currentMessage = this.messageSource.asObservable();
+    private iddleLogoutSource = new BehaviorSubject<boolean>(false);
+    iddleLogout = this.iddleLogoutSource.asObservable();
 
     constructor() {
     }
 
-    changeMessage(message: string) {
-        console.log('invoke message change');
-        this.messageSource.next(message);
+    changeMessage(state: boolean) {
+        this.iddleLogoutSource.next(state);
     }
 }

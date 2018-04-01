@@ -16,25 +16,22 @@ export class AppComponent implements OnInit {
     idleState = 'Not started.';
     timedOut = false;
     lastPing?: Date = null;
-    message: string;
+    arrivedMessage: boolean;
 
     constructor(private idle: Idle, private keepalive: Keepalive, private data: DataService, private globals: Globals) {
         // sets an idle timeout of 5 seconds, for testing purposes.
-        idle.setIdle(5);
+        idle.setIdle(30);
         // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
-        idle.setTimeout(5);
+        idle.setTimeout(1730);
         // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
         idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
         idle.onIdleEnd.subscribe(() => this.idleState = 'No longer idle.');
         idle.onTimeout.subscribe(() => {
-            this.message = 'Timed out!';
             this.timedOut = true;
-            console.log(this.globals.currentRole);
             if (this.globals.currentRole >= 1) {
-                // localStorage.removeItem('token');
-                // window.location.reload();
-                this.data.changeMessage(this.message);
+                this.data.changeMessage(this.timedOut);
+                this.reset();
             }
         });
 
@@ -50,7 +47,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.data.currentMessage.subscribe(message => this.message = message);
+      this.data.iddleLogout.subscribe(message => this.arrivedMessage = message);
     }
 
     reset() {
