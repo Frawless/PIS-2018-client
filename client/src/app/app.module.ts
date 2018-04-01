@@ -19,11 +19,11 @@ import { AuthenticationService, UserService } from './_authentication/_services/
 import { ProductsService } from './layout/shop/products/service/products.service';
 
 // used to create fake backend
-import { Globals } from './globals';
+import {DataService, Globals} from './globals';
 import {IngredientsService} from './layout/shop/products/service/ingredients.service';
 import {OrderService} from './layout/admin/orders/service/order.service';
-import {OrderDetailModule} from './layout/admin/orders/detail/order-detail.module';
 import {CarsService} from "./layout/admin/cars/service/cars.service";
+import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
 
 
 
@@ -45,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
+        NgIdleKeepaliveModule.forRoot()
     ],
     exports: [],
     declarations: [
@@ -65,6 +66,7 @@ export function createTranslateLoader(http: HttpClient) {
         CarsService,
         OrderService,
         Globals,
+        DataService,
     ],
     bootstrap: [AppComponent]
 })

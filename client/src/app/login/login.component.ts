@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { routerTransition } from '../router.animations';
 
@@ -6,7 +6,7 @@ import { routerTransition } from '../router.animations';
 import { AlertService, AuthenticationService } from '../_authentication/_services/index';
 import {UserService} from '../_authentication/_services/user.service';
 import {FormBuilder, Validators} from '@angular/forms';
-import {Globals} from '../globals';
+import {DataService, Globals} from '../globals';
 import {Roles} from '../globals';
 
 import * as jwtDecode from 'jwt-decode';
@@ -19,7 +19,7 @@ import * as jwtDecode from 'jwt-decode';
 
     moduleId: module.id.toString(),
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnChanges {
     @Input() showLogin = true;
 
     credentials: any = {};
@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
 
     showLoginButton: boolean;
 
+    message = '';
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -39,7 +41,8 @@ export class LoginComponent implements OnInit {
         private userService: UserService,
         private alertService: AlertService,
         private formBuilder: FormBuilder,
-        private globals: Globals) {
+        private globals: Globals,
+        private data: DataService) {
     }
 
     // @TODO check this
@@ -61,8 +64,7 @@ export class LoginComponent implements OnInit {
             email: ['', [Validators.email, Validators.required]],
             password: ['', Validators.required],
             phoneNumber: ['']
-            // @TODO jstejska: add min-length validator for password and regex validator for names
-
+            // @TODO jstejska: add min-length validator for password and regex validator for nam
         });
 
         // Loading current user
@@ -75,6 +77,17 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        // App testing
+        this.data.currentMessage.subscribe(message => this.message = message);
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log('logi change');
+        if (changes.message) {
+            this.logout();
+        }
+        this.message = '';
     }
 
     getUserFromToken() {
@@ -100,7 +113,6 @@ export class LoginComponent implements OnInit {
         } else {
             this.globals.currentRole = Roles.NOTLOGED;
         }
-
     }
 
     login() {

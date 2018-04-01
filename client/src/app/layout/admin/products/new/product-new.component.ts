@@ -16,7 +16,6 @@ export class ProductNewComponent implements OnInit {
     @Input() product = new Product('', null, null, [{}]);
 
     @ViewChild(MtImagePreviewComponent)
-
     private image: MtImagePreviewComponent;
 
     ingredients: Ingredient[];

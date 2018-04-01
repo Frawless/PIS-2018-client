@@ -25,10 +25,5 @@ export class LayoutComponent implements OnInit {
         if (token) {
             this.globals.currentRole = jwtDecode(token).roles[0].authority;
         }
-
-    }
-
-    onChange() {
-        this.getCurrentRoleFromToken();
     }
 }

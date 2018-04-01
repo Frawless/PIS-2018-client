@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 
 export enum Roles {
@@ -16,3 +17,18 @@ export class Globals {
     currentRole: any = Roles.NOTLOGED;
 }
 
+
+@Injectable()
+export class DataService {
+
+    private messageSource = new BehaviorSubject<string>('default message');
+    currentMessage = this.messageSource.asObservable();
+
+    constructor() {
+    }
+
+    changeMessage(message: string) {
+        console.log('invoke message change');
+        this.messageSource.next(message);
+    }
+}
