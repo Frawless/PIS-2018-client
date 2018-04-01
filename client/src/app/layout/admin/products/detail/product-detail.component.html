@@ -40,7 +40,7 @@
             <label>Ingredience:</label>
             <div class="input-group mt-2" *ngFor="let prodIng of product.ingredients; let i = index">
                 <select [(ngModel)]="product.ingredients[i].id" class="form-control">
-                    <option *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
+                    <option *ngFor="let dataIng of product.ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
                 </select>
                 <span class="input-group-addon" *ngIf="this.globals.currentRole > 1">
                    <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">

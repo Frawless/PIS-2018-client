@@ -27,18 +27,12 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getProduct();
-    this.getIngredients();
   }
 
   getProduct(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.productsService.getProduct(id)
       .subscribe(product => this.product = product);
-  }
-
-  getIngredients(): void {
-     this.ingredientsService.getIngredients()
-     .subscribe(ingredients => this.ingredients = ingredients);
   }
 
   save(): void {console.log(this.product.ingredients); console.log(JSON.stringify(this.product)); console.log('-----');
