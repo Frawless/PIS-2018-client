@@ -1,4 +1,4 @@
-import {Product} from '../../shop/products/product';
+import {Product} from '../../model/product';
 import {User} from '../../../_authentication/_models/user'
 
 export class Item {

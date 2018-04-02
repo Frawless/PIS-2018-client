@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {IngredientsService} from "../../../shop/products/service/ingredients.service";
-import {CarsService} from "../service/cars.service";
-import {Car} from "../car";
+import {CarsService} from "../../../service/cars.service";
+import {Car} from "../../../model/car";
 
 @Component({
   selector: 'app-detail',

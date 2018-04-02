@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { ProductsService } from '../../../shop/products/service/products.service';
-import { Product } from '../../../shop/products/product';
-import {Ingredient} from '../../../shop/products/ingredients/ingredient';
-import {IngredientsService} from '../../../shop/products/service/ingredients.service';
+import { ProductsService } from '../../../service/products.service';
+import { Product } from '../../../model/product';
+import {Ingredient} from '../../../model/ingredient';
+import {IngredientsService} from '../../../service/ingredients.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Globals} from '../../../../globals';
 

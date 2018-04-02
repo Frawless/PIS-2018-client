@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Ingredient} from '../../../shop/products/ingredients/ingredient';
+import {Ingredient} from '../../../model/ingredient';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IngredientsService} from '../../../shop/products/service/ingredients.service';
+import {IngredientsService} from '../../../service/ingredients.service';
 
 @Component({
   selector: 'app-ingredient-detail',

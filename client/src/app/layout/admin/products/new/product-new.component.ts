@@ -1,9 +1,9 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { Product } from '../../../shop/products/product';
+import { Product } from '../../../model/product';
 import { Router} from '@angular/router';
-import { ProductsService } from '../../../shop/products/service/products.service';
-import {IngredientsService} from '../../../shop/products/service/ingredients.service';
-import {Ingredient} from '../../../shop/products/ingredients/ingredient';
+import { ProductsService } from '../../../service/products.service';
+import {IngredientsService} from '../../../service/ingredients.service';
+import {Ingredient} from '../../../model/ingredient';
 
 import {MtImagePreviewComponent} from '../../../components/image-preview/image-preview';
 

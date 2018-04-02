@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from './product';
-import { ProductsService } from './service/products.service';
+import { Product } from '../../model/product';
+import { ProductsService } from '../../service/products.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({

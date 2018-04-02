@@ -16,13 +16,13 @@ import { AuthGuard } from './_authentication/_guards/index';
 import { JwtInterceptor } from './_authentication/_helpers/index';
 import { AuthenticationService, UserService } from './_authentication/_services/index';
 
-import { ProductsService } from './layout/shop/products/service/products.service';
+import { ProductsService } from './layout/service/products.service';
 
 // used to create fake backend
 import {DataService, Globals} from './globals';
-import {IngredientsService} from './layout/shop/products/service/ingredients.service';
+import {IngredientsService} from './layout/service/ingredients.service';
 import {OrderService} from './layout/admin/orders/service/order.service';
-import {CarsService} from "./layout/admin/cars/service/cars.service";
+import {CarsService} from "./layout/service/cars.service";
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
 
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Ingredient } from '../ingredients/ingredient';
+import { Ingredient } from '../model/ingredient';
+import {Observable} from "rxjs/Observable";
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -13,23 +14,23 @@ export class IngredientsService {
 
     constructor( private http: HttpClient ) { }
 
-    // GET ingredient from the server
-    getIngredients () {
+    // GET ingredients from the server
+    getIngredients (): Observable<Ingredient[]> {
         return this.http.get<Ingredient[]>(this.apiUrl);
     }
 
     // GET ingredient by id
-    getIngredient(id: number) {
+    getIngredient(id: number): Observable<Ingredient> {
         return this.http.get<Ingredient>(this.apiUrl + id);
     }
 
     // POST: add a new ingredient to the server
-    addIngredient (ingredient: Ingredient) {
+    addIngredient (ingredient: Ingredient): Observable<Ingredient> {
         return this.http.post<Ingredient>(this.apiUrl, JSON.stringify(ingredient), httpOptions);
     }
 
     // PUT: update the product on the server
-    update (ingredient: Ingredient) {
+    update (ingredient: Ingredient): Observable<any> {
         const id = typeof ingredient === 'number' ? ingredient : ingredient.id;
         const url = `${this.apiUrl}${id}`;
 
@@ -37,7 +38,7 @@ export class IngredientsService {
     }
 
     // DELETE: delete the product from the server
-    delete (ingredient: Ingredient | number) {
+    delete (ingredient: Ingredient | number): Observable<Ingredient> {
         const id = typeof ingredient === 'number' ? ingredient : ingredient.id;
         const url = `${this.apiUrl}${id}`;
 
