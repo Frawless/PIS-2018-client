@@ -1,6 +1,6 @@
 <div class="row" *ngIf="product">
-    <h2>{{ product.name }} - Detail</h2>
-    <div class="col-md-4">
+    <div class="col-md-12"><h2>{{ product.name }} - Detail</h2></div>
+    <div class="col-md-8">
         <fieldset class="form-group">
             <label class="form-control-label" >Jméno:</label>
             <input [(ngModel)]="product.name" class="form-control" placeholder="Rohlík"/>
@@ -13,7 +13,7 @@
                 <span class="input-group-text">Kč</span>
             </div>
         </div>
-        
+
         <fieldset class="form-group">
             <label class="form-control-label" >Celkový počet:</label>
             <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100"/>
