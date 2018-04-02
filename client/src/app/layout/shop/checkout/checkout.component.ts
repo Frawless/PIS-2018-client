@@ -5,6 +5,7 @@ import {Subscription} from "rxjs/Subscription";
 import {CartService} from "../../service/cart.service";
 import {Product} from "../../model/product";
 import {ProductsService} from "../../service/products.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 interface ICartItemWithProduct extends CartItem {
     product: Product;
@@ -24,7 +25,8 @@ export class CheckoutComponent implements OnInit,OnDestroy {
 
     private cartSubscription: Subscription;
     constructor( private cartService: CartService,
-                 private productsService: ProductsService) { }
+                 private productsService: ProductsService,
+                 private domSanitizer: DomSanitizer) { }
 
     ngOnInit() {
         this.cart = this.cartService.get();
@@ -50,5 +52,25 @@ export class CheckoutComponent implements OnInit,OnDestroy {
         if (this.cartSubscription) {
             this.cartSubscription.unsubscribe();
         }
+    }
+
+    addToCart(product: Product, quantity: number) {
+        this.cartService.set(product, quantity);
+    }
+
+    removeFromCart(product: Product) {
+        this.cartService.remove(product);
+    }
+
+    createOrder() {
+        alert("Vytvářím objednávku");
+    }
+
+    getImage(product: Product) {
+        if (product.image === '') {
+            return;
+        }
+
+        return this.domSanitizer.bypassSecurityTrustUrl(atob(product.image));
     }
 }

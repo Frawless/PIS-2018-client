@@ -46,6 +46,38 @@ export class CartService {
         this.dispatch(cart);
     }
 
+    set(product: Product, quantity: number) {
+        const cart = this.retrieve();
+        let item = cart.items.find((p)=> p.product_id === product.id );
+        if(item === undefined) {
+            item = new CartItem();
+            item.product_id = product.id;
+            cart.items.push(item);
+        }
+
+        item.quantity = quantity;
+
+        this.calculateCart(cart);
+        this.save(cart);
+        this.dispatch(cart);
+    }
+
+    remove(product: Product) {
+        const cart = this.retrieve();
+        let item = cart.items.find((p)=> p.product_id === product.id );
+        if(item === undefined) {
+            return;
+        }
+        else {
+            let itemId = cart.items.findIndex((p)=> p.product_id === product.id );
+            cart.items.splice(itemId,1);
+        }
+
+        this.calculateCart(cart);
+        this.save(cart);
+        this.dispatch(cart);
+    }
+
     private calculateCart(cart: ShoppingCart) {
         cart.itemsTotal = cart.items
             .map((item) => item.quantity * this.products.find((p) => p.id === item.product_id).price)

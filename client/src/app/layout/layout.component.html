@@ -3,10 +3,10 @@
 </div>
 
 <app-header></app-header>
-<div>
+<div class="container">
 
     <app-sidebar *ngIf="this.globals.currentRole > 1"></app-sidebar>
-    <section class="main-container">
+    <section>
         <router-outlet></router-outlet>
     </section>
 </div>
