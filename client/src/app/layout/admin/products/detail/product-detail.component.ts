@@ -21,12 +21,12 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private ingredientsService: IngredientsService,
-    private globals: Globals
+    private ingredientsService: IngredientsService
   ) {}
 
   ngOnInit() {
     this.getProduct();
+    this.getIngredients();
   }
 
   getProduct(): void {
@@ -34,6 +34,11 @@ export class ProductDetailComponent implements OnInit {
     this.productsService.getProduct(id)
       .subscribe(product => this.product = product);
   }
+
+    getIngredients(): void {
+         this.ingredientsService.getIngredients()
+         .subscribe(ingredients => this.ingredients = ingredients);
+    }
 
   save(): void {console.log(this.product.ingredients); console.log(JSON.stringify(this.product)); console.log('-----');
       this.productsService.update(this.product)

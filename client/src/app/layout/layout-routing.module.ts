@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import {AuthGuard} from '../_authentication/_guards/auth.guard';
+import {CheckoutComponent} from "./shop/checkout/checkout.component";
 
 const routes: Routes = [
     {
@@ -13,6 +14,7 @@ const routes: Routes = [
                 data: {expectedRole: ['ADMIN', 'EMPLOYEE', 'USER']}, canActivate: [AuthGuard],
             },
             { path: 'products', loadChildren: 'app/layout/shop/products/products.module#ProductsModule' },
+            { path: 'checkout', component: CheckoutComponent},
             { path: 'about', loadChildren: './shop/about/about.module#AboutModule'},
             { path: 'admin/products',
               loadChildren: './admin/products/admin.products.module#AdminProductsModule' ,

@@ -40,20 +40,20 @@
             <label>Ingredience:</label>
             <div class="input-group mt-2" *ngFor="let prodIng of product.ingredients; let i = index">
                 <select [(ngModel)]="product.ingredients[i].id" class="form-control">
-                    <option *ngFor="let dataIng of product.ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
+                    <option *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
                 </select>
-                <span class="input-group-addon" *ngIf="this.globals.currentRole > 1">
+                <span class="input-group-addon">
                    <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
                        <i class="fa fa-fw fa-minus-square"></i>
                    </button>
                 </span>
             </div>
-            <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})" *ngIf="this.globals.currentRole > 1">
+            <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})">
                 <i class="fa fa-fw fa-plus-square"></i>
             </button>
         </div>
 
-        <div *ngIf="this.globals.currentRole > 1">
+        <div>
             <button class="btn btn-success" (click)="save()">Uložit</button>
             <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
         </div>

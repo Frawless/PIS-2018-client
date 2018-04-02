@@ -13,6 +13,8 @@ import { LoginComponent} from '../login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertService} from '../_authentication/_services/alert.service';
 import {AlertComponent} from '../_authentication/_directives/alert.component';
+import {CartComponent} from "./shop/cart/cart.component";
+import {CheckoutComponent} from "./shop/checkout/checkout.component";
 
 @NgModule({
     imports: [
@@ -29,7 +31,9 @@ import {AlertComponent} from '../_authentication/_directives/alert.component';
         HeaderComponent,
         DialogComponent,
         LoginComponent,
-        AlertComponent
+        AlertComponent,
+        CartComponent,
+        CheckoutComponent
     ],
     exports: [
         DialogComponent,

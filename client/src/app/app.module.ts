@@ -24,6 +24,7 @@ import {IngredientsService} from './layout/service/ingredients.service';
 import {OrderService} from './layout/admin/orders/service/order.service';
 import {CarsService} from "./layout/service/cars.service";
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
+import {CartService} from "./layout/service/cart.service";
 
 
 
@@ -64,6 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
         ProductsService,
         IngredientsService,
         CarsService,
+        CartService,
         OrderService,
         Globals,
         DataService,
