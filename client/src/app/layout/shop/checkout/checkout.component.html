@@ -30,7 +30,7 @@
             <div class="text-center">Celkem: {{(cart | async).itemsTotal}} Kč</div>
         </div>
     </div>
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3 text-center">
         <h4 *ngIf="cartItems === undefined || cartItems.length < 1 ">Košík je prázdný</h4>
         <a routerLink="/shop/products" class="btn btn-info">Pokračovat v nákupu</a>
         <button *ngIf="cartItems && cartItems.length" (click)="createOrder();" class="btn btn-success">Koupit</button>
