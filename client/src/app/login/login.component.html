@@ -1,5 +1,5 @@
 <!--Login button-->
-<button type="button" class="btn btn-info btn-sm ml-auto" (click)="showLoginDialog()" *ngIf="showLoginButton">
+<button type="button" class="btn btn-dark btn-sm ml-auto" (click)="showLoginDialog()" *ngIf="showLoginButton">
     <i class="fa fa-user-circle-o mr-2"></i>Login/Registration
 </button>
 
@@ -88,10 +88,10 @@
 
 <!--Logout button-->
 <div *ngIf="!showLoginButton">
-    <button type="button" class="btn btn-info btn-sm ml-auto" routerLink="/shop/user/{{currentUser}}" routerLinkActive="active">
+    <button type="button" class="btn btn-dark btn-sm ml-auto" routerLink="/shop/user/{{currentUser}}" routerLinkActive="active">
         <i class="fa fa-user-circle-o mr-2"></i>{{currentUser}}
     </button>
-    <button type="button" class="btn btn-info btn-sm ml-auto" (click)="logout()">
-        <i class="fa fa-user-circle-o mr-2"></i>Logout
+    <button type="button" class="btn btn-dark btn-sm ml-auto" (click)="logout()">
+        <i class="fa fa-sign-out mr-2"></i>Logout
     </button>
 </div>

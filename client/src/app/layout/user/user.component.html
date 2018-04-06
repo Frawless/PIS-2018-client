@@ -11,7 +11,6 @@
                            appForbiddenName="bob"
                            [ngModel]="user.firstname" name="firstname"
                            (ngModelChange)="user.firstname=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="Josef"
                            #firstname="ngModel"/>
                 </div>
@@ -24,7 +23,6 @@
                            required
                            [ngModel]="user.lastname" name="lastname"
                            (ngModelChange)="user.lastname=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="Straka"
                            #lastname="ngModel"/>
                 </div>
@@ -38,7 +36,6 @@
                            email
                            [ngModel]="user.email" name="email"
                            (ngModelChange)="user.email=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="johndoe@gmail.com"
                            #email="ngModel"/>
                 </div>
@@ -51,7 +48,6 @@
                                 required
                                 [ngModel]="user.role.name"  name="role"
                                 (ngModelChange)="user.role.name=$event"
-                                [ngModelOptions]="{standalone: true}"
                                 #role="ngModel">
                         <option [selected]="user.role.name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
                     </select>
@@ -64,7 +60,6 @@
                     <input type="password" class="form-control" id="password"
                            [ngModel]="user.password" name="password"
                            (ngModelChange)="user.password=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="123456"
                            #password="ngModel"/>
                 </div>
@@ -79,7 +74,6 @@
                            required
                            [ngModel]="user.address?.city" name="city"
                            (ngModelChange)="user.address.city=$event"
-                           [ngModelOptions]="{standalone: true}"
                             placeholder="Brno"
                            #city="ngModel"/>
                 </div>
@@ -92,7 +86,6 @@
                            required
                            [ngModel]="user.address?.streetName" name="streetName"
                            (ngModelChange)="user.address.streetName=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="Jana Husa 1"
                            #streetName="ngModel"/>
                 </div>
@@ -105,8 +98,7 @@
                            required
                            [ngModel]="user.address?.streetNumber" name="streetNumber"
                            (ngModelChange)="user.address.streetNumber=$event"
-                           [ngModelOptions]="{standalone: true}"
-                           placeholder="666"
+                           placeholder="123"
                            #streetNumber="ngModel"/>
                 </div>
 
@@ -118,7 +110,6 @@
                            required
                            [ngModel]="user.address?.psc" name="psc"
                            (ngModelChange)="user.address.psc=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="60200"
                            #psc="ngModel"/>
                 </div>
@@ -129,21 +120,20 @@
                     </div>
                     <input type="text" class="form-control" id="phoneNumber"
                            required
-                           phone="CN"
+                           minlength="9"
                            [ngModel]="user.address?.phoneNumber" name="phoneNumber"
                            (ngModelChange)="user.address.phoneNumber=$event"
-                           [ngModelOptions]="{standalone: true}"
                            placeholder="567879876"
                            #phoneNumber="ngModel"/>
                 </div>
             </div>
     </div>
-
     <div class="buttons">
         <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
         <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
     </div>
 </form>
+
 
 <div class="card">
     <div class="card-header">
@@ -174,4 +164,3 @@
         </table>
     </div>
 </div>
-

@@ -6,6 +6,7 @@ import { User } from '../../_authentication/_models/user';
 import {Globals} from '../../globals';
 import { AlertService } from '../../_authentication/_services/index';
 import {FormBuilder, Validators} from '@angular/forms';
+import { parse, format, AsYouType } from 'libphonenumber-js';
 
 @Component({
   selector: 'app-user',

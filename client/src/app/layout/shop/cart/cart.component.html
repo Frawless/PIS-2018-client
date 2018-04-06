@@ -1,7 +1,7 @@
-<a routerLink="/shop/checkout" class="btn btn-info btn-lg">
+<button routerLink="/shop/checkout" class="btn btn-dark btn-sm ml-auto">
     <span *ngIf="itemCount > 0"  class="badge">
         {{(cart | async).itemsTotal}} Kč
     </span>
     <i class="fa fa-fw fa-shopping-cart"></i>
     Košík
-</a>
+</button>
