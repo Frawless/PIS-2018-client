@@ -22,9 +22,10 @@ import { ProductsService } from './layout/service/products.service';
 import {DataService, Globals} from './globals';
 import {IngredientsService} from './layout/service/ingredients.service';
 import {OrderService} from './layout/admin/orders/service/order.service';
-import {CarsService} from "./layout/service/cars.service";
+import {CarsService} from './layout/service/cars.service';
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
-import {CartService} from "./layout/service/cart.service";
+import {CartService} from './layout/service/cart.service';
+import { CustomFormsModule } from 'ng2-validation';
 
 
 
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        CustomFormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,

@@ -1,87 +1,177 @@
-<h2>Profil - {{this.username}}</h2>
-<div class="row" *ngIf="user">
-    <div class="col-md-4">
-        <fieldset class="form-group">
-            <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="user.firstname" (ngModelChange)="user.firstname=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Příjmení:</label>
-            <input [(ngModel)]="user.lastname" (ngModelChange)="user.lastname=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Uživatelské jméno:</label>
-            <input [(ngModel)]="user.username" (ngModelChange)="user.username=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Heslo:</label>
-            <input type="password" [(ngModel)]="user.password" (ngModelChange)="user.password=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group" *ngIf="this.globals.currentRole > 1">
-            <label class="form-control-label" >Rola:</label>
-            <select [ngModel]="user.role.name" (ngModelChange)="user.role.name=$event">
-                <option [selected]="user.role.name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
-            </select>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >E-mail:</label>
-            <input [(ngModel)]="user.email" (ngModelChange)="user.email=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Telefon:</label>
-            <input [(ngModel)]="user.phoneNumber" (ngModelChange)="user.phoneNumber=$event" class="form-control"/>
-        </fieldset>
-        <h3>Adresa:</h3>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Mesto:</label>
-            <input [ngModel]="user.address?.city" (ngModelChange)="user.address.city=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Ulica:</label>
-            <input [ngModel]="user.address?.streetName" (ngModelChange)="user.address.streetName=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Číslo:</label>
-            <input [ngModel]="user.address?.streetNumber"(ngModelChange)="user.address.streetNumber=$event" class="form-control"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >PSČ:</label>
-            <input [ngModel]="user.address?.psc" (ngModelChange)="user.address.psc=$event" class="form-control"/>
-        </fieldset>
+<h2 style="text-align: center"><span style="font-weight: bold">Profil uživatele:</span> {{this.username}}</h2>
+<form (ngSubmit)="save()" #userForm="ngForm">
+    <div class="row" *ngIf="user">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Jméno:</span>
+                    </div>
+                    <input type="text" class="form-control" id="firstname"
+                           required
+                           appForbiddenName="bob"
+                           [ngModel]="user.firstname" name="firstname"
+                           (ngModelChange)="user.firstname=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="Josef"
+                           #firstname="ngModel"/>
+                </div>
 
-        <button class="btn btn-success" (click)="save()">Uložit změny</button>
-        <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Příjmení:</span>
+                    </div>
+                    <input type="text" class="form-control" id="lastname"
+                           required
+                           [ngModel]="user.lastname" name="lastname"
+                           (ngModelChange)="user.lastname=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="Straka"
+                           #lastname="ngModel"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Email:</span>
+                    </div>
+                    <input type="email" class="form-control" id="email"
+                           required
+                           email
+                           [ngModel]="user.email" name="email"
+                           (ngModelChange)="user.email=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="johndoe@gmail.com"
+                           #email="ngModel"/>
+                </div>
+
+                <div class="form-group" *ngIf="this.globals.currentRole > 1">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Role:</span>
+                    </div>
+                        <select class="form-control" id="role"
+                                required
+                                [ngModel]="user.role.name"  name="role"
+                                (ngModelChange)="user.role.name=$event"
+                                [ngModelOptions]="{standalone: true}"
+                                #role="ngModel">
+                        <option [selected]="user.role.name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Nové heslo:</span>
+                    </div>
+                    <input type="password" class="form-control" id="password"
+                           [ngModel]="user.password" name="password"
+                           (ngModelChange)="user.password=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="123456"
+                           #password="ngModel"/>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Město:</span>
+                    </div>
+                    <input type="text" class="form-control" id="city"
+                           required
+                           [ngModel]="user.address?.city" name="city"
+                           (ngModelChange)="user.address.city=$event"
+                           [ngModelOptions]="{standalone: true}"
+                            placeholder="Brno"
+                           #city="ngModel"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Ulice:</span>
+                    </div>
+                    <input type="text" class="form-control" id="streetName"
+                           required
+                           [ngModel]="user.address?.streetName" name="streetName"
+                           (ngModelChange)="user.address.streetName=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="Jana Husa 1"
+                           #streetName="ngModel"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Číslo:</span>
+                    </div>
+                    <input type="number" class="form-control" id="streetNumber"
+                           required
+                           [ngModel]="user.address?.streetNumber" name="streetNumber"
+                           (ngModelChange)="user.address.streetNumber=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="666"
+                           #streetNumber="ngModel"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">PSČ:</span>
+                    </div>
+                    <input type="number" class="form-control" id="psc"
+                           required
+                           [ngModel]="user.address?.psc" name="psc"
+                           (ngModelChange)="user.address.psc=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="60200"
+                           #psc="ngModel"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-prepend">
+                        <span class="form-group-text">Telefon:</span>
+                    </div>
+                    <input type="text" class="form-control" id="phoneNumber"
+                           required
+                           phone="CN"
+                           [ngModel]="user.address?.phoneNumber" name="phoneNumber"
+                           (ngModelChange)="user.address.phoneNumber=$event"
+                           [ngModelOptions]="{standalone: true}"
+                           placeholder="567879876"
+                           #phoneNumber="ngModel"/>
+                </div>
+            </div>
     </div>
 
+    <div class="buttons">
+        <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+        <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+    </div>
+</form>
 
-
-    <div class="card">
-        <div class="card-header">
-            Objednávky:
-        </div>
-        <div class="card-body table-responsive">
-            <table class="table table-hover table-striped">
-                <thead>
-                <tr>
-                    <th>Číslo objednávky</th>
-                    <th>Vytvořeno</th>
-                    <th>Odesláno</th>
-                    <th>Stav</th>
-                    <th>Cena</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let order of user.orders">
-                    <td>
-                        <a routerLink="/shop/user/{{this.username}}/order/{{order.id}}">{{order.id}}</a>
-                    </td>
-                    <td>{{order.createDate | date: 'yyyy-MM-dd'}}</td>
-                    <td>{{order.exportDate| date: 'yyyy-MM-dd'}}</td>
-                    <td>{{order.state}}</td>
-                    <td>{{getOrderPrice(order)}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="card">
+    <div class="card-header">
+        Objednávky:
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Číslo objednávky</th>
+                <th>Vytvořeno</th>
+                <th>Odesláno</th>
+                <th>Stav</th>
+                <th>Cena</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let order of user?.orders">
+                <td>
+                    <a routerLink="/shop/user/{{this.username}}/order/{{order.id}}">{{order.id}}</a>
+                </td>
+                <td>{{order?.createDate | date: 'yyyy-MM-dd'}}</td>
+                <td>{{order?.exportDate| date: 'yyyy-MM-dd'}}</td>
+                <td>{{order?.state}}</td>
+                <td>{{getOrderPrice(order)}} Kč</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+

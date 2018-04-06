@@ -4,7 +4,7 @@ import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from '../../login/login.component';
 import { UserService } from '../../_authentication/_services/user.service';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {OrderDetailModule} from '../admin/orders/detail/order-detail.module';
 
 @NgModule({
@@ -12,7 +12,8 @@ import {OrderDetailModule} from '../admin/orders/detail/order-detail.module';
     CommonModule,
     UserRoutingModule,
     FormsModule,
-      OrderDetailModule
+      OrderDetailModule,
+      ReactiveFormsModule
   ],
   declarations: [
       UserComponent,
