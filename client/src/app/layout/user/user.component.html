@@ -2,22 +2,23 @@
 <form (ngSubmit)="save()" #userForm="ngForm">
     <div class="row" *ngIf="user">
             <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Jméno:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Jméno:</span>
                     </div>
-                    <input type="text" class="form-control" id="firstname"
-                           required
-                           appForbiddenName="bob"
-                           [ngModel]="user.firstname" name="firstname"
-                           (ngModelChange)="user.firstname=$event"
-                           placeholder="Josef"
-                           #firstname="ngModel"/>
+                      <input type="text" class="form-control" id="firstname"
+                             required
+                             appForbiddenName="bob"
+                             [ngModel]="user.firstname" name="firstname"
+                             (ngModelChange)="user.firstname=$event"
+                             placeholder="Josef"
+                             #firstname="ngModel"/>
+
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Příjmení:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Příjmení:</span>
                     </div>
                     <input type="text" class="form-control" id="lastname"
                            required
@@ -27,9 +28,9 @@
                            #lastname="ngModel"/>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Email:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email:</span>
                     </div>
                     <input type="email" class="form-control" id="email"
                            required
@@ -40,9 +41,9 @@
                            #email="ngModel"/>
                 </div>
 
-                <div class="form-group" *ngIf="this.globals.currentRole > 1">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Role:</span>
+                <div class="form-group input-group" *ngIf="this.globals.currentRole > 1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Role:</span>
                     </div>
                         <select class="form-control" id="role"
                                 required
@@ -53,9 +54,9 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Nové heslo:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Nové heslo:</span>
                     </div>
                     <input type="password" class="form-control" id="password"
                            [ngModel]="user.password" name="password"
@@ -66,9 +67,9 @@
             </div>
 
             <div class="col-md-6">
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Město:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Město:</span>
                     </div>
                     <input type="text" class="form-control" id="city"
                            required
@@ -78,9 +79,9 @@
                            #city="ngModel"/>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Ulice:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Ulice:</span>
                     </div>
                     <input type="text" class="form-control" id="streetName"
                            required
@@ -90,9 +91,9 @@
                            #streetName="ngModel"/>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Číslo:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Číslo:</span>
                     </div>
                     <input type="number" class="form-control" id="streetNumber"
                            required
@@ -102,9 +103,9 @@
                            #streetNumber="ngModel"/>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">PSČ:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">PSČ:</span>
                     </div>
                     <input type="number" class="form-control" id="psc"
                            required
@@ -114,9 +115,9 @@
                            #psc="ngModel"/>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group-prepend">
-                        <span class="form-group-text">Telefon:</span>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Telefon:</span>
                     </div>
                     <input type="text" class="form-control" id="phoneNumber"
                            required
