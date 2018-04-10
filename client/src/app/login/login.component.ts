@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit {
 
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Username or password is not correct!');
                     this.loginLoading = false;
                 });
                 console.log(this.credentials.controls.username.value);
@@ -155,12 +155,13 @@ export class LoginComponent implements OnInit {
                     this.alertService.success('Registration successful', true);
                     this.router.navigate([this.router.url]);
                     this.registrationLoading = false;
-                    this.registration.reset();
+
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Username \'' + this.registration.username + '\' is already taken!');
                     this.registrationLoading = false;
                 });
+        this.registration.reset();
     }
 
     logout() {
@@ -171,8 +172,6 @@ export class LoginComponent implements OnInit {
         this.loginLoading = false;
         this.credentials.reset();
         this.registration.reset();
-
-        console.log('Logged out, storage is: ' + localStorage.getItem('token'));
     }
 
     showLoginDialog() {

@@ -1,25 +1,48 @@
 <div class="row" *ngIf="product">
     <div class="col-md-12"><h2>{{ product.name }} - Detail</h2></div>
     <div class="col-md-8">
-        <fieldset class="form-group">
-            <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="product.name" class="form-control" placeholder="Rohlík"/>
-        </fieldset>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Název:</span>
+            </div>
+            <input type="text" class="form-control" id="name"
+                   required
+                   [ngModel]="product.name" name="name"
+                   (ngModelChange)="product.name=$event"
+                   placeholder="Chleba"
+                   #firstname="ngModel"/>
 
-        <label>Cena:</label>
-        <div class="input-group mb-3">
-            <input [(ngModel)]="product.price" class="form-control" placeholder="3"/>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Cena:</span>
+            </div>
+            <input type="text" class="form-control" id="price"
+                   required
+                   [ngModel]="product.price" name="price"
+                   (ngModelChange)="product.price=$event"
+                   placeholder="25"
+                   #firstname="ngModel"/>
             <div class="input-group-append">
                 <span class="input-group-text">Kč</span>
             </div>
         </div>
 
-        <fieldset class="form-group">
-            <label class="form-control-label" >Celkový počet:</label>
-            <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100"/>
-        </fieldset>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Celkový počet:</span>
+            </div>
+            <input type="text" class="form-control" id="totalAmmount"
+                   required
+                   [ngModel]="product.totalAmount" name="totalAmmount"
+                   (ngModelChange)="product.totalAmmount=$event"
+                   placeholder="10"
+                   #firstname="ngModel"/>
 
-        <fieldset class="form-group">
+        </div>
+
+        <div class="form-group">
             <div class="panel-body">
                 <label class="form-control-label" >Stávající obrázek produktu:</label>
                 <form>
@@ -33,15 +56,14 @@
                     <image-preview></image-preview>
                 </form>
             </div>
-        </fieldset>
-
+        </div>
 
 
         <div class="mb-5">
             <label>Ingredience:</label>
             <div class="input-group mt-2" *ngFor="let prodIng of product.ingredients; let i = index">
                 <select [(ngModel)]="product.ingredients[i].id" class="form-control">
-                    <option *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
+                    <option class="form-control" *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
                 </select>
                 <span class="input-group-addon">
                    <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
@@ -54,9 +76,10 @@
             </button>
         </div>
 
-        <div>
-            <button class="btn btn-success" (click)="save()">Uložit</button>
-            <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>
+
+        <div class="buttons">
+            <button class="btn btn-success" (click)="save()" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+            <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
         </div>
 
     </div>

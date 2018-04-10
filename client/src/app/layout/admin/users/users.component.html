@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header" style="font-weight:bold">
         Profily:
     </div>
     <div class="card-body table-responsive">
@@ -13,10 +13,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let user of users">
-                <td>
-                  <a routerLink="/shop/user/{{user.username}}">{{user.username}}</a>
-                </td>
+            <tr *ngFor="let user of users" routerLink="/shop/user/{{user.username}}" class="clickable">
+                <td style="font-weight:bold">{{user.username}}</td>
                 <td>{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.role.name}}</td>

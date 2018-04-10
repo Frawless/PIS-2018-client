@@ -122,8 +122,8 @@
                     <input type="text" class="form-control" id="phoneNumber"
                            required
                            minlength="9"
-                           [ngModel]="user.address?.phoneNumber" name="phoneNumber"
-                           (ngModelChange)="user.address.phoneNumber=$event"
+                           [ngModel]="user.phoneNumber" name="phoneNumber"
+                           (ngModelChange)="user.phoneNumber=$event"
                            placeholder="567879876"
                            #phoneNumber="ngModel"/>
                 </div>
@@ -152,10 +152,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let order of user?.orders">
-                <td>
-                    <a routerLink="/shop/user/{{this.username}}/order/{{order.id}}">{{order.id}}</a>
-                </td>
+            <tr *ngFor="let order of user?.orders" routerLink="/shop/user/{{this.username}}/order/{{order.id}}" class="clickable">
+                <td style="font-weight:bold">{{order.id}}</td>
                 <td>{{order?.createDate | date: 'yyyy-MM-dd'}}</td>
                 <td>{{order?.exportDate| date: 'yyyy-MM-dd'}}</td>
                 <td>{{order?.state}}</td>
