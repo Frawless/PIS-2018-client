@@ -1,31 +1,47 @@
 <h2>Nový produkt</h2>
 <div class="row" *ngIf="product">
-    <div class="col-md-4">
-        <fieldset class="form-group">
-            <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="product.name" class="form-control" placeholder="Rohlík" required/>
-        </fieldset>
-
-        <label>Cena:</label>
-        <fieldset class="input-group">
-            <input [(ngModel)]="product.price" class="form-control" placeholder="3" required/>
-            <div class="input-group-append">
-                <span class="input-group-text">Kč</span>
+    <div class="col-md-6">
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Jméno:</span>
             </div>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Celkový počet:</label>
-            <input [(ngModel)]="product.totalAmount" class="form-control" placeholder="100" required/>
-        </fieldset>
+              <input type="text" class="form-control" id="name"
+                     required
+                     appForbiddenName="Rohlík"
+                     [ngModel]="product.name" name="name"
+                     (ngModelChange)="product.name=$event"
+                     placeholder="Rohlík"
+                     #firstname="ngModel"/>
 
-        <fieldset class="form-group">
-            <div class="custom-file">
-                <label class="form-control-label" >Obrázek produktu:</label>
-                <form (ngSubmit) = "submitPhoto()">
-                    <image-preview> </image-preview>
-                </form>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Cena:</span>
             </div>
-        </fieldset>
+            <input type="number" class="form-control" id="price"
+                   required
+                   [ngModel]="product.price" name="price"
+                   (ngModelChange)="product.price=$event"
+                   placeholder="3"
+                   #firstname="ngModel"/>
+             <div class="input-group-append">
+                 <span class="input-group-text">Kč</span>
+             </div>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Celkový počet:</span>
+            </div>
+            <input type="number" class="form-control" id="totalAmount"
+                   required
+                   [ngModel]="product.totalAmount" name="totalAmount"
+                   (ngModelChange)="product.totalAmount=$event"
+                   placeholder="10"
+                   #lastname="ngModel"/>
+        </div>
+
 
         <div>
             <label>Ingredience:</label>
@@ -43,7 +59,18 @@
                 <i class="fa fa-fw fa-plus-square"></i>
             </button>
         </div>
+      </div>
 
-        <button class="btn btn-success mt-5" (click)="add();">Přidat</button>
+      <div class="col-md-6">
+        <fieldset class="form-group">
+            <div class="custom-file">
+                <label class="form-control-label" >Obrázek produktu:</label>
+                <form (ngSubmit) = "submitPhoto()">
+                    <image-preview> </image-preview>
+                </form>
+            </div>
+        </fieldset>
     </div>
+
+    <button class="btn btn-success ml-3 mt-4" (click)="add();">Přidat</button>
 </div>

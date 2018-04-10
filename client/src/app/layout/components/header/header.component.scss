@@ -19,7 +19,12 @@
 
     /* Remove the jumbotron's default bottom margin */
     .jumbotron {
-        margin-bottom: 0;
+        border-radius: 0;
+        margin: auto;
         background-color: #FFCC01;
+        padding: 0;
+        text-align: center;
+        padding-top: 3em;
+        padding-bottom: 1em;
     }
 }

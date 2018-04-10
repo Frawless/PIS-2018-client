@@ -1,46 +1,46 @@
-<div class="row" *ngIf="order">
-    <div class="col-md-4">
-        <h2>Detail: číslo objednávky - {{ order.id }}</h2>
-        <button class="btn btn-danger pull-right" (click)="backClicked()">Zpět</button>
-        <div *ngIf="this.isAdminDetail">
-            <fieldset class="form-group">
-                <label class="form-control-label" >Username</label>
-                <input [ngModel]="order.user?.username" (ngModelChange)="order.user.username=$event" class="form-control" disabled/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Jméno</label>
-                <input [ngModel]="order.user?.firstname" (ngModelChange)="order.user.firstname=$event" class="form-control" disabled/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Příjmení</label>
-                <input [ngModel]="order.user?.lastname" (ngModelChange)="order.user.lastname=$event" class="form-control" disabled/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Telefoní číslo</label>
-                <input [ngModel]="order.user?.phoneNumber" (ngModelChange)="order.user.phoneNumber=$event" class="form-control" disabled/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Email</label>
-                <input [ngModel]="order.user?.email" (ngModelChange)="order.user.email=$event" class="form-control" disabled/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Datum vytvoření:</label>
-                <input [ngModel]="order.createDate | date: 'yyyy-MM-dd'" (ngModelChange)="order.createDate=$event" class="form-control" type="date"/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Datum expedice:</label>
-                <input [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" (ngModelChange)="order.exportDate=$event" class="form-control" type="date"/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label class="form-control-label" >Stav:</label>
-                <select [ngModel]="order.state" (ngModelChange)="order.state=$event">
-                    <option [selected]="order.state == state"  *ngFor="let state of this.states" [ngValue]="state">{{state}}</option>
-                </select>
-            </fieldset>
-        </div>
+<div *ngIf="order">
+  <h2>Detail: číslo objednávky - {{ order.id }}</h2>
+  <button style="" class="btn btn-danger pull-right" (click)="backClicked()">Zpět</button>
+
+  <div class="row">
+    <div *ngIf="this.isAdminDetail" class="col-md-6">
+        <fieldset class="form-group">
+            <label class="form-control-label" >Username</label>
+            <input [ngModel]="order.user?.username" (ngModelChange)="order.user.username=$event" class="form-control" disabled/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Jméno</label>
+            <input [ngModel]="order.user?.firstname" (ngModelChange)="order.user.firstname=$event" class="form-control" disabled/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Příjmení</label>
+            <input [ngModel]="order.user?.lastname" (ngModelChange)="order.user.lastname=$event" class="form-control" disabled/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Telefoní číslo</label>
+            <input [ngModel]="order.user?.phoneNumber" (ngModelChange)="order.user.phoneNumber=$event" class="form-control" disabled/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Email</label>
+            <input [ngModel]="order.user?.email" (ngModelChange)="order.user.email=$event" class="form-control" disabled/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Datum vytvoření:</label>
+            <input [ngModel]="order.createDate | date: 'yyyy-MM-dd'" (ngModelChange)="order.createDate=$event" class="form-control" type="date"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Datum expedice:</label>
+            <input [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" (ngModelChange)="order.exportDate=$event" class="form-control" type="date"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label class="form-control-label" >Stav:</label>
+            <select [ngModel]="order.state" (ngModelChange)="order.state=$event">
+                <option [selected]="order.state == state"  *ngFor="let state of this.states" [ngValue]="state">{{state}}</option>
+            </select>
+        </fieldset>
     </div>
 
-    <div class="card">
+    <div class="col-md-6 card">
         <div class="card-header">
             Detail objednaných produktů:
         </div>
@@ -67,7 +67,9 @@
             </table>
         </div>
     </div>
+  </div>
 </div>
+
 <div *ngIf="this.globals.currentRole > 1">
     <button class="btn btn-success" (click)="save()">Uložit</button>
     <button class="btn btn-danger pull-right" (click)="delete()">Smazat</button>

@@ -1,29 +1,23 @@
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                Ingredience:
-            </div>
-            <div class="card-body table-responsive">
-                <table class="table table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>Název</th>
-                        <th>Dodavatel</th>
-                        <th>Na skladě</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let ingredient of ingredients" class="">
-                        <td>
-                            <a routerLink="/shop/admin/ingredients/detail/{{ingredient.id}}">{{ingredient.name}}</a>
-                        </td>
-                        <td>{{ingredient.supplier}}</td>
-                        <td>{{ingredient.unit}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-header">
+        Ingredience:
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Název</th>
+                <th>Dodavatel</th>
+                <th>Na skladě</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ingredient of ingredients" routerLink="/shop/admin/ingredients/detail/{{ingredient.id}}" class="clickable">
+                <td>{{ingredient.name}}</td>
+                <td>{{ingredient.supplier}}</td>
+                <td>{{ingredient.unit}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -42,6 +42,27 @@
 
         </div>
 
+        <div class="mb-5">
+          <div class="form-group input-group" *ngFor="let prodIng of product.ingredients; let i = index">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Ingredience:</span>
+            </div>
+            <select [(ngModel)]="product.ingredients[i].id" class="form-control">
+                <option class="form-control" *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
+            </select>
+            <span class="input-group-addon">
+               <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
+                   <i class="fa fa-minus-square"></i>
+               </button>
+            </span>
+          </div>
+          <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})">
+              <i class="fa fa-fw fa-plus-square"></i>
+          </button>
+        </div>
+    </div>
+
+    <div class="col-md-4">
         <div class="form-group">
             <div class="panel-body">
                 <label class="form-control-label" >Stávající obrázek produktu:</label>
@@ -57,31 +78,10 @@
                 </form>
             </div>
         </div>
-
-
-        <div class="mb-5">
-            <label>Ingredience:</label>
-            <div class="input-group mt-2" *ngFor="let prodIng of product.ingredients; let i = index">
-                <select [(ngModel)]="product.ingredients[i].id" class="form-control">
-                    <option class="form-control" *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
-                </select>
-                <span class="input-group-addon">
-                   <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
-                       <i class="fa fa-fw fa-minus-square"></i>
-                   </button>
-                </span>
-            </div>
-            <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})">
-                <i class="fa fa-fw fa-plus-square"></i>
-            </button>
-        </div>
-
-
-        <div class="buttons">
-            <button class="btn btn-success" (click)="save()" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
-            <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-        </div>
-
     </div>
 
+<div class="buttons ml-2">
+    <button class="btn btn-success" (click)="save()" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+    <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+</div>
 </div>

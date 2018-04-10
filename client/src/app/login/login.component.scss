@@ -109,5 +109,17 @@ $topnav-background-color: #222;
     }
 }
 
-button{
-  border-radius: 25px;}
+button {
+  float: left;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left-color: black;
+}
+
+.profil{
+  border-radius: 0px;
+  border-left-color: black;
+  border-right-color: black;
+}
