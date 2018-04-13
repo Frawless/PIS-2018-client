@@ -1,0 +1,47 @@
+.input-group-prepend .input-group-text{
+
+    width: 130px;
+    font-weight: bold;
+}
+
+.input-group-append .input-group-text{
+    font-weight: bold;
+
+}
+
+#input-image{
+
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    text-align: center;
+}
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-valid[email], .ng-valid.email {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-valid[appForbiddenName], .ng-valid.appForbiddenName {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-valid[phone], .ng-valid.phone {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+
+}
+
+.buttons{
+    float: right;
+}

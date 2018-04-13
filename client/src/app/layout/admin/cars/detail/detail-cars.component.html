@@ -1,21 +1,36 @@
 <h2>Nové vozidlo</h2>
 <div class="row" *ngIf="car">
-    <div class="col-md-4">
-        <fieldset class="form-group">
-            <label class="form-control-label" >Typ:</label>
-            <input [(ngModel)]="car.type" class="form-control" placeholder="Dodávka"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Vyrobeno dne:</label>
-            <input
-                type="date" min="2018-01-01"
-                (input)="car.date_add = $event.target.valueAsDate"
-                class="form-control"
-            />
-        </fieldset>
+    <div class="col-md-6">
+        <form (ngSubmit)="save()" #userForm="ngForm">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Typ:</span>
+                </div>
+                <input type="text" class="form-control" id="city"
+                       required
+                       [ngModel]="car.type" name="city"
+                       (ngModelChange)="car.type=$event"
+                       placeholder="Dodávka"
+                       #type="ngModel"/>
+            </div>
 
-        <button class="btn btn-success" (click)="save()">Uložit</button>
-        <button class="btn btn-danger" (click)="delete()">Smazat</button>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Město:</span>
+                </div>
+                <input type="date" class="form-control" id="date_add"
+                       required
+                       [ngModel]="car.date_add" name="date_add"
+                       (ngModelChange)="car.date_add=$event.target.valueAsDate"
+                       placeholder="Brno"
+                       #date_add="ngModel"/>
+            </div>
 
+
+            <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+            <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+        </form>
+
+        <button class="btn btn-info" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i></button>
     </div>
 </div>

@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Ingredient} from '../../../model/ingredient';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IngredientsService} from '../../../service/ingredients.service';
+import {AlertService} from '../../../../_authentication/_services';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-ingredient-detail',
@@ -14,7 +16,9 @@ export class IngredientDetailComponent implements OnInit {
   constructor(
       private router: Router,
       private route: ActivatedRoute,
-      private ingredientsService: IngredientsService
+      private ingredientsService: IngredientsService,
+      private alertService: AlertService,
+      private _location: Location
   ) { }
 
   ngOnInit() {
@@ -29,14 +33,29 @@ export class IngredientDetailComponent implements OnInit {
 
   save(): void {
       this.ingredientsService.update(this.ingredient)
-          .subscribe();
-      this.router.navigate(['/shop/admin/ingredients']);
+          .subscribe(
+              data => {
+                  this.alertService.success('Ingredience \'' + this.ingredient.name + '\' upravena!');
+              },
+              error => {
+                  this.alertService.error('Ingredienci \'' + this.ingredient.name + '\' nelze upravit!');
+              });
   }
 
   delete(): void {
       this.ingredientsService.delete(this.ingredient)
-          .subscribe();
+          .subscribe(
+              data => {
+                  this.alertService.success('Ingredience \'' + this.ingredient.name + '\' smazána!');
+              },
+              error => {
+                  this.alertService.error('Ingredienci \'' + this.ingredient.name + '\' nelze smazat!');
+              });
       this.router.navigate(['/shop/admin/ingredients']);
   }
+
+    backClicked() {
+        this._location.back();
+    }
 
 }

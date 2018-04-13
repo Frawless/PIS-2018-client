@@ -1,87 +1,86 @@
 <div class="row" *ngIf="product">
-    <div class="col-md-12"><h2>{{ product.name }} - Detail</h2></div>
-    <div class="col-md-8">
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Název:</span>
-            </div>
-            <input type="text" class="form-control" id="name"
-                   required
-                   [ngModel]="product.name" name="name"
-                   (ngModelChange)="product.name=$event"
-                   placeholder="Chleba"
-                   #firstname="ngModel"/>
+    <div class="col-md-12">
+        <h2>Detail: <span class="current-name">{{ product.name }}</span></h2>
+    </div>
+    <div class="col-md-6">
+        <form  #productForm="ngForm">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Název:</span>
+                </div>
+                <input type="text" class="form-control" id="name"
+                       required
+                       [ngModel]="product.name" name="name"
+                       (ngModelChange)="product.name=$event"
+                       placeholder="Chleba"
+                       #firstname="ngModel"/>
 
-        </div>
-
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Cena:</span>
             </div>
-            <input type="text" class="form-control" id="price"
-                   required
-                   [ngModel]="product.price" name="price"
-                   (ngModelChange)="product.price=$event"
-                   placeholder="25"
-                   #firstname="ngModel"/>
-            <div class="input-group-append">
-                <span class="input-group-text">Kč</span>
-            </div>
-        </div>
 
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Celkový počet:</span>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Cena:</span>
+                </div>
+                <input type="number" class="form-control" id="price"
+                       required
+                       [ngModel]="product.price" name="price"
+                       (ngModelChange)="product.price=$event"
+                       placeholder="25"
+                       #firstname="ngModel"/>
+                <div class="input-group-append">
+                    <span class="input-group-text">Kč</span>
+                </div>
             </div>
-            <input type="text" class="form-control" id="totalAmmount"
-                   required
-                   [ngModel]="product.totalAmount" name="totalAmmount"
-                   (ngModelChange)="product.totalAmmount=$event"
-                   placeholder="10"
-                   #firstname="ngModel"/>
 
-        </div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Celkový počet:</span>
+                </div>
+                <input type="number" class="form-control" id="totalAmmount"
+                       required
+                       [ngModel]="product.totalAmount" name="totalAmmount"
+                       (ngModelChange)="product.totalAmmount=$event"
+                       placeholder="10"
+                       #firstname="ngModel"/>
 
-        <div class="mb-5">
-          <div class="form-group input-group" *ngFor="let prodIng of product.ingredients; let i = index">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Ingredience:</span>
             </div>
-            <select [(ngModel)]="product.ingredients[i].id" class="form-control">
-                <option class="form-control" *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
-            </select>
-            <span class="input-group-addon">
-               <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
-                   <i class="fa fa-minus-square"></i>
-               </button>
-            </span>
-          </div>
-          <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})">
-              <i class="fa fa-fw fa-plus-square"></i>
-          </button>
-        </div>
+
+            <div class="mb-5">
+              <div class="form-group input-group" *ngFor="let prodIng of product.ingredients; let i = index">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Ingredience:</span>
+                </div>
+                  <select required [(ngModel)]="product.ingredients[i].id" [ngModelOptions]="{standalone: true}" id="ingredients" name="ingredients" class="form-control">
+                    <option class="form-control" *ngFor="let dataIng of ingredients" value="{{dataIng.id}}" [selected]="prodIng.id === dataIng.id">{{dataIng.name}}</option>
+                </select>
+                <span class="input-group-addon">
+                   <button class="btn btn-secondary btn-danger" (click)="product.ingredients.splice(i, 1);">
+                       <i class="fa fa-minus-square"></i>
+                   </button>
+                </span>
+              </div>
+              <button class="btn btn-primary btn-block mt-3" (click)="product.ingredients.push({})">
+                  <i class="fa fa-fw fa-plus-square"></i>
+              </button>
+            </div>
+
+            <div class="buttons ml-2">
+                <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid || !this.validIngredients(product.ingredients)" (click)="add()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+                <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+            </div>
+        </form>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6" align="center">
         <div class="form-group">
-            <div class="panel-body">
-                <label class="form-control-label" >Stávající obrázek produktu:</label>
-                <form>
-                    <img [src]="getImage(product) || 'https://placehold.it/150x80?text=IMAGE'" class="img-responsive" style="width:100%" alt="Image">
-                </form>
-            </div>
-
             <div class="custom-file">
-                <label class="form-control-label" >Nový obrázek produktu:</label>
                 <form (ngSubmit) = "submitPhoto()">
-                    <image-preview></image-preview>
+                    <image-preview [source]="getImage(product) || 'https://placehold.it/150x80?text=IMAGE'"></image-preview>
                 </form>
             </div>
         </div>
     </div>
 
-<div class="buttons ml-2">
-    <button class="btn btn-success" (click)="save()" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
-    <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-</div>
+    <button class="btn btn-info" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i></button>
+
 </div>

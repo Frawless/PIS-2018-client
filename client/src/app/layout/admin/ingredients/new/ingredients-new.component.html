@@ -1,38 +1,49 @@
 <h2>Nová ingredience</h2>
+<form (ngSubmit)="add()" #ingredientsForm="ngForm">
 <div class="row" *ngIf="ingredient">
-    <div class="col-md-4">
-        <fieldset class="form-group">
-            <label class="form-control-label" >Jméno:</label>
-            <input [(ngModel)]="ingredient.name" class="form-control" placeholder="Mouka"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Dodavatel:</label>
-            <input [(ngModel)]="ingredient.supplier" class="form-control" placeholder="Babičina mouka"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label class="form-control-label" >Skladem:</label>
-            <input [(ngModel)]="ingredient.unit" class="form-control" placeholder="50"/>
-        </fieldset>
-        <!--<fieldset class="form-group">-->
-            <!--<label class="form-control-label" >Vyrobeno dne:</label>-->
-            <!--<input-->
-                <!--type="date" min="2018-01-01"-->
-                <!--(input)="ingredient.dateOfManufacture = $event.target.valueAsDate"-->
-                <!--value="{{ingredient.dateOfManufacture | date: 'yyy-MM-dd'}}"-->
-                <!--class="form-control"-->
-            <!--/>-->
-        <!--</fieldset>-->
-        <!--<fieldset class="form-group">-->
-            <!--<label class="form-control-label" >Expirace:</label>-->
-            <!--<input type="date"-->
-                   <!--(input)="ingredient.bestBefore = $event.target.valueAsDate"-->
-                   <!--value="{{ingredient.bestBefore | date: 'yyyy-MM-dd'}}"-->
-                   <!--class="form-control"-->
-            <!--/>-->
-        <!--</fieldset>-->
+            <div class="col-md-6">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Jméno:</span>
+                    </div>
+                    <input type="text" class="form-control" id="name"
+                           required
+                           [ngModel]="ingredient.name" name="name"
+                           (ngModelChange)="ingredient.name=$event"
+                           placeholder="Mouka"
+                           #name="ngModel"/>
 
-        <button class="btn btn-success" (click)="add();">
-            Přidat
-        </button>
-    </div>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Dodavatel:</span>
+                    </div>
+                    <input type="text" class="form-control" id="supplier"
+                           required
+                           [ngModel]="ingredient.supplier" name="supplier"
+                           (ngModelChange)="ingredient.supplier=$event"
+                           placeholder="Babičina pekárnička"
+                           #supplier="ngModel"/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Skladem:</span>
+                    </div>
+                    <input type="number" class="form-control" id="unit"
+                           required
+                           [ngModel]="ingredient.unit" name="unit"
+                           (ngModelChange)="ingredient.unit=$event"
+                           placeholder="50"
+                           #unit="ngModel"/>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="btn btn-success" [disabled]="!ingredientsForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="col-md-6"></div>
 </div>
+</form>
+
+<button class="btn btn-info" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i></button>

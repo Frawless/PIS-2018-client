@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter } from '@angular/core';
+import {Component, Output, EventEmitter, Input} from '@angular/core';
 
 @Component( {
     selector: 'image-preview',
@@ -7,10 +7,9 @@ import {Component, Output, EventEmitter } from '@angular/core';
 } )
 
 export class MtImagePreviewComponent {
+    @Input() source = 'https://placehold.it/150x80?text=IMAGE';
     // Emit an event when a file has been picked. Here we return the file itself
     @Output() onChange: EventEmitter<File> = new EventEmitter<File>();
-
-    source = '';
 
     constructor() {}
 

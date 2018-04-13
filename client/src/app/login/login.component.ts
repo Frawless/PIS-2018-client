@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
     register() {
         // Form validity check
         if (!this.registration.valid) {
-            this.alertService.error('Registration form is not valid');
+            this.alertService.error('Registrační formulář není validní!');
             return;
         }
 
@@ -152,16 +152,16 @@ export class LoginComponent implements OnInit {
         this.userService.create(this.registration.value)
             .subscribe(
                 data => {
-                    this.alertService.success('Registration successful', true);
+                    this.alertService.success('Registrace proběhla úspěšně!', true);
                     this.router.navigate([this.router.url]);
                     this.registrationLoading = false;
+                    this.registration.reset();
 
                 },
                 error => {
-                    this.alertService.error('Username \'' + this.registration.username + '\' is already taken!');
+                    this.alertService.error('Uživatelské jméno \'' + this.registration.value.username + '\' je již obsazeno!');
                     this.registrationLoading = false;
                 });
-        this.registration.reset();
     }
 
     logout() {

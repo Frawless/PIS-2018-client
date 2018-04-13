@@ -6,7 +6,7 @@ import { User } from '../../_authentication/_models/user';
 import {Globals} from '../../globals';
 import { AlertService } from '../../_authentication/_services/index';
 import {FormBuilder, Validators} from '@angular/forms';
-import { parse, format, AsYouType } from 'libphonenumber-js';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user',
@@ -28,7 +28,8 @@ export class UserComponent implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _location: Location
   ) {}
 
   ngOnInit() {
@@ -54,7 +55,6 @@ export class UserComponent implements OnInit {
 
 
   save(): void {
-      console.log(this.user);
         this.userService.update(this.user)
             .subscribe(
                 result => {
@@ -97,4 +97,7 @@ export class UserComponent implements OnInit {
         return items.countOrdered * items.product.price;
     }
 
+    backClicked() {
+        this._location.back();
+    }
 }

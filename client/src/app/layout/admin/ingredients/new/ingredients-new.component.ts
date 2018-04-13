@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Ingredient} from '../../../model/ingredient';
 import {IngredientsService} from '../../../service/ingredients.service';
 import {Router} from '@angular/router';
+import {AlertService} from '../../../../_authentication/_services';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-new-ingredient',
@@ -13,7 +15,9 @@ export class IngredientsNewComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private ingredientService: IngredientsService
+      private ingredientService: IngredientsService,
+      private alertService: AlertService,
+      private _location: Location
   ) { }
 
   ngOnInit() {
@@ -21,7 +25,21 @@ export class IngredientsNewComponent implements OnInit {
 
   add(): void {console.log(this.ingredient);
       this.ingredientService.addIngredient(this.ingredient)
-          .subscribe();
-      this.router.navigate(['/shop/admin/ingredients']);
+          .subscribe(
+              data => {
+                  this.alertService.success('Ingredience \'' + this.ingredient.name + '\' přidán!');
+                  this.reset();
+              },
+              error => {
+                  this.alertService.error('Ingredience \'' + this.ingredient.name + '\' nelze přidat!');
+              });
   }
+
+  reset(): void {
+      this.ingredient = new Ingredient();
+  }
+
+    backClicked() {
+        this._location.back();
+    }
 }
