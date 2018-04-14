@@ -1,134 +1,181 @@
 <div *ngIf="order">
-  <h2>Detail: číslo objednávky - {{ order.id }}</h2>
   <div class="row">
-    <div *ngIf="this.isAdminDetail" class="col-md-6">
-        <form  #orderForm="ngForm">
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Username:</span>
-                </div>
-                <input type="text" class="form-control" id="username"
-                       required
-                       disabled
-                       [ngModel]="order.user?.username" name="username"
-                       #username="ngModel"/>
-            </div>
-
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Jméno:</span>
-                </div>
-                <input type="text" class="form-control" id="firstname"
-                       required
-                       disabled
-                       [ngModel]="order.user?.firstname" name="firstname"
-                       #firstname="ngModel"/>
-            </div>
-
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Příjmení:</span>
-                </div>
-                <input type="text" class="form-control" id="lastname"
-                       required
-                       disabled
-                       [ngModel]="order.user?.lastname" name="lastname"
-                       #lastname="ngModel"/>
-            </div>
-
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Telefoní číslo:</span>
-                </div>
-                <input type="text" class="form-control" id="phoneNumber"
-                       required
-                       disabled
-                       [ngModel]="order.user?.phoneNumber" name="phoneNumber"
-                       #phoneNumber="ngModel"/>
-            </div>
-
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Email:</span>
-                </div>
-                <input type="text" class="form-control" id="email"
-                       required
-                       disabled
-                       [ngModel]="order.user?.email" name="email"
-                       #email="ngModel"/>
-            </div>
-
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Datum vytvoření:</span>
-                </div>
-                <input type="date" class="form-control" id="createDate"
-                       required
-                       [ngModel]="order.createDate | date: 'yyyy-MM-dd'" name="createDate"
-                       (ngModelChange)="order.createDate=$event"
-                       #createDate="ngModel"/>
-            </div>
-
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Datum expedice:</span>
-                </div>
-                <input type="date" class="form-control" id="exportDate"
-                       required
-                       [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" name="exportDate"
-                       (ngModelChange)="order.exportDate=$event"
-                       #exportDate="ngModel"/>
-            </div>
-
-            <div class="form-group input-group" >
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Stav:</span>
-                </div>
-                <select class="form-control" id="role"
-                        required
-                        [ngModel]="order.state"  name="state"
-                        (ngModelChange)="order.state=$event"
-                        #state="ngModel">
-                    <option [selected]="order.state == state" *ngFor="let state of this.states" [ngValue]="state">{{state}}</option>
-                </select>
-            </div>
-
-            <div *ngIf="this.globals.currentRole > 1">
-                <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-            </div>
-
-        </form>
-    </div>
-
-    <div class="col-md-6 card">
-        <div class="card-header">
-            Detail objednaných produktů:
-        </div>
-        <div class="card-body table-responsive">
-            <table class="table table-hover table-striped">
-                <thead>
-                <tr>
-                    <th>Název zboží</th>
-                    <th>Počet</th>
-                    <th>Cena</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of order.items;">
-                    <td>{{item.product.name}}</td>
-                    <td>{{item.countOrdered}}</td>
-                    <td>{{getItemsPrice(item)}} ({{item.product.price}})</td>
-                </tr>
-                <tr>
-                    <td colspan="2">Celková cena</td>
-                    <td>{{getOrderPrice(order)}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="col-md-12">
+      <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+      <h2>Detail: číslo objednávky - {{ order.id }}</h2>
     </div>
   </div>
-</div>
 
-<button class="btn btn-info" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i></button>
+  <form *ngIf="this.isAdminDetail" #orderForm="ngForm" class="row">
+    <div class="col-md-6">
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Username:</span>
+          </div>
+          <input type="text" class="form-control" id="username"
+                 required
+                 disabled
+                 [ngModel]="order.user?.username" name="username"
+                 #username="ngModel"/>
+      </div>
+
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Jméno:</span>
+          </div>
+          <input type="text" class="form-control" id="firstname"
+                 required
+                 disabled
+                 [ngModel]="order.user?.firstname" name="firstname"
+                 #firstname="ngModel"/>
+      </div>
+
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Příjmení:</span>
+          </div>
+          <input type="text" class="form-control" id="lastname"
+                 required
+                 disabled
+                 [ngModel]="order.user?.lastname" name="lastname"
+                 #lastname="ngModel"/>
+      </div>
+
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Telefoní číslo:</span>
+          </div>
+          <input type="text" class="form-control" id="phoneNumber"
+                 required
+                 disabled
+                 [ngModel]="order.user?.phoneNumber" name="phoneNumber"
+                 #phoneNumber="ngModel"/>
+      </div>
+
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Email:</span>
+          </div>
+          <input type="text" class="form-control" id="email"
+                 required
+                 disabled
+                 [ngModel]="order.user?.email" name="email"
+                 #email="ngModel"/>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Město:</span>
+            </div>
+            <input type="text" class="form-control" id="city"
+                   required
+                   [ngModel]="order.user?.address.city" name="city"
+                   #city="ngModel"/>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Ulice:</span>
+            </div>
+            <input type="text" class="form-control" id="streetName"
+                   required
+                   [ngModel]="order.user?.address.streetName" name="streetName"
+                   #streetName="ngModel"/>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Číslo:</span>
+            </div>
+            <input type="number" class="form-control" id="streetNumber"
+                   required
+                   [ngModel]="order.user?.address?.streetNumber" name="streetNumber"
+                   #streetNumber="ngModel"/>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">PSČ:</span>
+            </div>
+            <input type="number" class="form-control" id="psc"
+                   required
+                   [ngModel]="order.user?.address.psc" name="psc"
+                   #psc="ngModel"/>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Datum vytvoření:</span>
+          </div>
+          <input type="date" class="form-control" id="createDate"
+                 required
+                 [ngModel]="order.createDate | date: 'yyyy-MM-dd'" name="createDate"
+                 (ngModelChange)="order.createDate=$event"
+                 #createDate="ngModel"/>
+      </div>
+
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Datum expedice:</span>
+          </div>
+          <input type="date" class="form-control" id="exportDate"
+                 required
+                 [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" name="exportDate"
+                 (ngModelChange)="order.exportDate=$event"
+                 #exportDate="ngModel"/>
+      </div>
+
+      <div class="form-group input-group" >
+          <div class="input-group-prepend">
+              <span class="input-group-text">Stav:</span>
+          </div>
+          <select class="form-control" id="role"
+                  required
+                  [ngModel]="order.state"  name="state"
+                  (ngModelChange)="order.state=$event"
+                  #state="ngModel">
+              <option [selected]="order.state == state" *ngFor="let state of this.states" [ngValue]="state">{{state}}</option>
+          </select>
+      </div>
+
+      <div class="buttons" *ngIf="this.globals.currentRole > 1">
+          <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+          <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+
+  </form>
+
+  <h2 *ngIf="this.isAdminDetail">Detail objednaných produktů</h2>
+  <div class="card">
+      <div class="card-body table-responsive">
+          <table class="table table-hover table-striped">
+              <thead>
+              <tr>
+                  <th>Název zboží</th>
+                  <th>Počet</th>
+                  <th>Cena</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of order.items;">
+                  <td>{{item.product.name}}</td>
+                  <td>{{item.countOrdered}}</td>
+                  <td>{{getItemsPrice(item)}} ({{item.product.price}})</td>
+              </tr>
+              <tr>
+                  <td colspan="2">Celková cena</td>
+                  <td>{{getOrderPrice(order)}}</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+
+</div>

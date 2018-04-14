@@ -45,3 +45,27 @@ h2 {
 .buttons{
     float: right;
 }
+
+.btn-warning{
+  float:left;
+  margin-top: 15px;
+}
+
+.btn-warning + h2{
+    left: -34px;
+    position: relative;
+    }
+
+.buttons{
+    text-align: right;
+}
+
+.buttons button {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
+
+form{
+    margin-bottom: 30px;
+}
