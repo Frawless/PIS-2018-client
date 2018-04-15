@@ -1,8 +1,7 @@
-button{
- margin-right: 0px;
- border-right-color: black;
- border-top-left-radius: 25px;
- border-bottom-left-radius: 25px;
- border-top-right-radius: 0px;
- border-bottom-right-radius: 0px;
+#productsTable {
+    margin: auto;
+
+    td:nth-child(2) {
+        width: 100px;
+    }
 }

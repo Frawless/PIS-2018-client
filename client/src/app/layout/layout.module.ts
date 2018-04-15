@@ -9,12 +9,12 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { DialogComponent } from '../dialog/dialog.component';
-import { LoginComponent} from '../login/login.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AlertService} from '../_authentication/_services/alert.service';
-import {AlertComponent} from '../_authentication/_directives/alert.component';
-import {CartComponent} from "./shop/cart/cart.component";
-import {CheckoutComponent} from "./shop/checkout/checkout.component";
+import { LoginComponent } from '../login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertService } from '../_authentication/_services/alert.service';
+import { AlertComponent } from '../_authentication/_directives/alert.component';
+import { CartWidgetComponent } from "./shop/cart-widget/cart-widget.component";
+import { CartComponent } from "./shop/cart/cart.component";
 
 @NgModule({
     imports: [
@@ -32,8 +32,8 @@ import {CheckoutComponent} from "./shop/checkout/checkout.component";
         DialogComponent,
         LoginComponent,
         AlertComponent,
-        CartComponent,
-        CheckoutComponent
+        CartWidgetComponent,
+        CartComponent
     ],
     exports: [
         DialogComponent,
