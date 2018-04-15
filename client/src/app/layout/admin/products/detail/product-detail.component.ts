@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { ProductsService } from '../../../service/products.service';
 import { Product } from '../../../model/product';
@@ -6,6 +6,7 @@ import {Ingredient} from '../../../model/ingredient';
 import {IngredientsService} from '../../../service/ingredients.service';
 import {AlertService} from '../../../../_authentication/_services';
 import {Location} from '@angular/common';
+import {MtImagePreviewComponent} from '../../../components/image-preview/image-preview';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,17 +14,20 @@ import {Location} from '@angular/common';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() product: Product;
-  ingredients: Ingredient[];
+    @Input() product: Product;
+    ingredients: Ingredient[];
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private productsService: ProductsService,
-    private ingredientsService: IngredientsService,
-    private alertService: AlertService,
-    private _location: Location
-  ) {}
+    @ViewChild(MtImagePreviewComponent)
+    private image: MtImagePreviewComponent;
+
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private productsService: ProductsService,
+        private ingredientsService: IngredientsService,
+        private alertService: AlertService,
+        private _location: Location
+    ) {}
 
   ngOnInit() {
     this.getProduct();
@@ -42,6 +46,8 @@ export class ProductDetailComponent implements OnInit {
     }
 
   save(): void {console.log(this.product.ingredients);
+      this.product.image = btoa(this.image.source);
+
       this.productsService.update(this.product)
           .subscribe(
               data => {
