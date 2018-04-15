@@ -37,9 +37,6 @@ export class UserComponent implements OnInit {
       this.username = this.route.snapshot.paramMap.get('username');
       this.getUser(this.username);
 
-      this.userForm = this.formBuilder.group({
-          city: ['', [Validators.required]],
-      });
   }
 
   getUser(username: string) {
@@ -47,6 +44,14 @@ export class UserComponent implements OnInit {
           .subscribe(user => {
             this.user = user;
             this.user.password = '';
+
+            if (this.user.address === null) {
+                this.user.address = new Object();
+                this.user.address.city = '';
+                this.user.address.streetName = '';
+                this.user.address.psc = '';
+            }
+
           },
           error => {
               this.alertService.error(error);
