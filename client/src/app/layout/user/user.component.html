@@ -1,6 +1,12 @@
-<h2>Profil uživatele: <span class="current-name">{{this.username}}</span></h2>
-<form (ngSubmit)="save()" #userForm="ngForm">
-    <div class="row" *ngIf="user">
+<div *ngIf="user">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+      <h2>Profil uživatele: <span class="current-name">{{this.username}}</span></h2>
+    </div>
+  </div>
+
+  <form (ngSubmit)="save()" #userForm="ngForm" class="row">
             <div class="col-md-6">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -128,39 +134,36 @@
                            #phoneNumber="ngModel"/>
                 </div>
             </div>
-    </div>
-    <div class="buttons">
+
+    <div class="buttons col-md-12">
         <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
         <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
     </div>
-</form>
+  </form>
 
-<button class="btn btn-info" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i></button>
-
-<div class="card">
-    <div class="card-header">
-        Objednávky:
-    </div>
-    <div class="card-body table-responsive">
-        <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <th>Číslo objednávky</th>
-                <th>Vytvořeno</th>
-                <th>Odesláno</th>
-                <th>Stav</th>
-                <th>Cena</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let order of user?.orders" routerLink="/shop/user/{{this.username}}/order/{{order.id}}" class="clickable">
-                <td style="font-weight:bold">{{order.id}}</td>
-                <td>{{order?.createDate | date: 'yyyy-MM-dd'}}</td>
-                <td>{{order?.exportDate| date: 'yyyy-MM-dd'}}</td>
-                <td>{{order?.state}}</td>
-                <td>{{getOrderPrice(order)}} Kč</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+  <h2>Objednávky</h2>
+  <div class="card">
+      <div class="card-body table-responsive">
+          <table class="table table-hover table-striped">
+              <thead>
+              <tr>
+                  <th>Číslo objednávky</th>
+                  <th>Vytvořeno</th>
+                  <th>Odesláno</th>
+                  <th>Stav</th>
+                  <th>Cena</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of user?.orders" routerLink="/shop/user/{{this.username}}/order/{{order.id}}" class="clickable">
+                  <td style="font-weight:bold">{{order.id}}</td>
+                  <td>{{order?.createDate | date: 'yyyy-MM-dd'}}</td>
+                  <td>{{order?.exportDate| date: 'yyyy-MM-dd'}}</td>
+                  <td>{{order?.state}}</td>
+                  <td>{{getOrderPrice(order)}} Kč</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
 </div>
