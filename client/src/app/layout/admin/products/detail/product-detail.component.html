@@ -65,7 +65,7 @@
             </div>
 
             <div class="buttons ml-2">
-                <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid || !this.validIngredients(product.ingredients)" (click)="add()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+                <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid || !this.validIngredients(product.ingredients)" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
                 <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
             </div>
         </form>
