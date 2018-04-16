@@ -5,3 +5,25 @@
         width: 100px;
     }
 }
+
+h2 {
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    text-align: center;
+}
+
+.btn-warning{
+    float:left;
+    margin-top: 15px;
+    position:absolute;}
+
+
+img {
+    max-height: 50px;
+    width: auto;
+}
+.input-group .form-control{
+    width: 100px;
+    flex-grow: 0;
+
+}

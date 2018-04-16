@@ -3,7 +3,7 @@
     <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
     <h2>Nové vozidlo</h2>
   </div>
-  
+
   <form (ngSubmit)="save()" #userForm="ngForm" class="col-md-6">
       <div class="form-group input-group">
           <div class="input-group-prepend">
@@ -29,8 +29,10 @@
                  #date_add="ngModel"/>
       </div>
 
+      <div class="buttons">
+          <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+          <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+      </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
-      <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
   </form>
 </div>

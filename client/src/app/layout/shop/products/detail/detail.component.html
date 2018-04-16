@@ -1,19 +1,27 @@
 <div class="row" *ngIf="product">
-    <div class="col-4">
-        <img [src]="getImage(product) || 'https://placehold.it/150x80?text=IMAGE'" class="img-responsive" style="width:100%" alt="Image">
+    <div class="col-md-12">
+        <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+        <h2><span class="current-name">{{ product.name }}</span></h2>
     </div>
-    <div class="col-8">
-        <h2>{{product.name}}</h2>
-        <div>{{product.price}} Kč</div>
-        <div>
-            Složení:
+    <div class="col-6">
+        <div class="img">
+            <img [src]="getImage(product) || 'https://placehold.it/150x80?text=IMAGE'" class="img-responsive" style="width:100%" alt="Image">
+        </div>
+    </div>
+    <div class="col-6 mt-3">
+        <h4>{{product.price}} Kč</h4>
+        <div class="mb-4 mt-3">
+            <span style="font-weight: bold">Složení:</span>
             <ul *ngFor="let ingredient of product.ingredients">
                 <li>{{ingredient.name}}</li>
             </ul>
         </div>
-        <div>
-            <input [(ngModel)]="quantity" type="number" min="1">
-            <button class="btn" (click)="addToCart();">Přidat do košíku</button>
+        <div class="form-group input-group">
+            <input type="number" class="form-control" id="quantity"
+                   required
+                   [ngModel]="quantity" name="quantity"
+                   placeholder="1"/>
+            <button class="btn btn-success" (click)="addToCart();">Přidat do košíku</button>
         </div>
     </div>
 </div>

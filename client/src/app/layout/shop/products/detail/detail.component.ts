@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ProductsService} from "../../../service/products.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Product} from "../../../model/product";
-import {CartService} from "../../../service/cart.service";
+import {ProductsService} from '../../../service/products.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Product} from '../../../model/product';
+import {CartService} from '../../../service/cart.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-detail',
@@ -11,13 +12,14 @@ import {CartService} from "../../../service/cart.service";
 })
 export class DetailComponent implements OnInit {
   product: Product;
-  @Input() quantity: number = 1;
+  @Input() quantity = 1;
 
   constructor(
       private router: Router,
       private route: ActivatedRoute,
       private productsService: ProductsService,
-      private cartService: CartService
+      private cartService: CartService,
+      private _location: Location,
   ) { }
 
   ngOnInit() {
@@ -34,12 +36,14 @@ export class DetailComponent implements OnInit {
     if (product && product.image === '') {
         return;
     }
-      // @ TODO fix, melo by se overovat to trstURL ale haze to chybu
-      // return this.domSanitizer.bypassSecurityTrustUrl(atob(product.image));
       return atob(product.image);
   }
 
   addToCart() {
       this.cartService.add(this.product, this.quantity);
   }
+
+    backClicked() {
+        this._location.back();
+    }
 }

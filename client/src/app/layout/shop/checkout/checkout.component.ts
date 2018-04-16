@@ -1,16 +1,17 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Order} from "../../admin/orders/order";
-import {ProductsService} from "../../service/products.service";
-import {CartService} from "../../service/cart.service";
-import {Observable} from "rxjs/Observable";
-import {CartItem, ShoppingCart} from "../../model/shopping-cat.model";
-import {Product} from "../../model/product";
-import {Subscription} from "rxjs/Subscription";
-import {AlertService, UserService} from "../../../_authentication/_services";
+import {Order} from '../../admin/orders/order';
+import {ProductsService} from '../../service/products.service';
+import {CartService} from '../../service/cart.service';
+import {Observable} from 'rxjs/Observable';
+import {CartItem, ShoppingCart} from '../../model/shopping-cat.model';
+import {Product} from '../../model/product';
+import {Subscription} from 'rxjs/Subscription';
+import {AlertService, UserService} from '../../../_authentication/_services';
 
 import * as jwtDecode from 'jwt-decode';
-import {OrderService} from "../../admin/orders/service/order.service";
-import {Router} from "@angular/router";
+import {OrderService} from '../../admin/orders/service/order.service';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 interface ICartItemWithProduct extends CartItem {
     product: Product;
@@ -23,7 +24,7 @@ interface ICartItemWithProduct extends CartItem {
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
-    @Input() order: Order = new Order();// = new Order(null,null,null,null,null,null,null,null,null,null);
+    @Input() order: Order = new Order(null, null, null, null, null, null); // = new Order(null,null,null,null,null,null,null,null,null,null);
 
     public cart: Observable<ShoppingCart>;
     public itemCount;
@@ -38,7 +39,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       private userService: UserService,
       private alertService: AlertService,
       private orderService: OrderService,
-      private router: Router
+      private router: Router,
+      private _location: Location,
     ) { }
 
     ngOnInit() {
@@ -64,7 +66,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                               id: null,
                               countOrdered: item.quantity,
                               product: product,
-                          }
+                          };
                       });
               });
       });
@@ -80,7 +82,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
     private getOrder() {
         const token = localStorage.getItem('token');
-        var userName = jwtDecode(token).sub;
+        const userName = jwtDecode(token).sub;
 
         this.userService.getUser(userName)
             .subscribe(user => {
@@ -101,7 +103,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     getOrderPrice(order): number {
-        var totalPrice = 0;
+        let totalPrice = 0;
 
         order.items.forEach(element => {
             totalPrice += this.getItemsPrice(element);
@@ -125,7 +127,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         delete minimalOrder.user.email;
         delete minimalOrder.user.address;
         delete minimalOrder.user.role;
-        delete minimalOrder.user.password
+        delete minimalOrder.user.password;
 
         // product
         minimalOrder.items = minimalOrder.items
@@ -140,7 +142,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                     id: null,
                     countOrdered: item.countOrdered,
                     product: product
-                }
+                };
             });
 
         minimalOrder.items.forEach((s) => {
@@ -163,6 +165,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                     console.log(error);
                 }
             );
+    }
+
+    backClicked() {
+        this._location.back();
     }
 
 }

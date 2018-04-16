@@ -49,12 +49,9 @@ h2 {
 .btn-warning{
   float:left;
   margin-top: 15px;
-}
+ position:absolute;}
 
-.btn-warning + h2{
-    left: -34px;
-    position: relative;
-    }
+
 
 .buttons{
     text-align: right;

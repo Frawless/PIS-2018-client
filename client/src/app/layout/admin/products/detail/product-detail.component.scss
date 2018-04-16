@@ -41,14 +41,11 @@ h2 {
 .btn-warning{
   float:left;
   //background-color: white;
-  //border-color: black;
+ position:absolute;  //border-color: black;
   margin-top: 15px;
 }
 
-.btn-warning + h2{
-    left: -34px;
-    position: relative;
-    }
+
 
 .input-group-text{
     font-weight: bold;

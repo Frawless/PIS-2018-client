@@ -1,0 +1,52 @@
+h2 {
+    margin: 20px 0px 10px 0px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.btn-warning{
+    float:left;
+    position:absolute;
+    margin-top: 15px;
+}
+
+img{
+    max-height: 400px;
+    margin: 10px auto;
+    display: block;
+    width: auto !important;
+    max-width: 500px;
+    border-radius: 15px;
+
+}
+
+.img{
+    border: 1px solid black;
+}
+
+.input-group-text{
+    font-weight: bold;
+    width: 140px;
+}
+
+.input-group-append .input-group-text{
+    width: 50px;
+}
+
+.input-group .form-control{
+    width: 75px;
+    flex-grow: 0;
+
+}
+
+ul, li{
+    line-height: normal;
+    margin: 0;
+}
+
+button{
+    color: white;
+    font-weight: bold;
+
+}

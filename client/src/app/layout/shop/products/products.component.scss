@@ -2,8 +2,24 @@
     border: 1px solid #ccc;
     img {
         display: block;
-        height: 180px;
+        max-height: 180px;
+        max-width: 300px;
         width: auto !important;
-        margin: auto;
+        margin: 10px auto;
+        border-radius: 15px;
     }
+}
+.panel-body{
+    height: 200px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+button{
+    display: block;
+    margin: 10px auto;
+    font-weight: bold;
 }

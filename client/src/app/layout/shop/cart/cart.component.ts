@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from "rxjs/Observable";
-import {CartItem, ShoppingCart} from "../../model/shopping-cat.model";
-import {Subscription} from "rxjs/Subscription";
-import {CartService} from "../../service/cart.service";
-import {Product} from "../../model/product";
-import {ProductsService} from "../../service/products.service";
-import {DomSanitizer} from "@angular/platform-browser";
-import {Globals} from "../../../globals";
+import {Observable} from 'rxjs/Observable';
+import {CartItem, ShoppingCart} from '../../model/shopping-cat.model';
+import {Subscription} from 'rxjs/Subscription';
+import {CartService} from '../../service/cart.service';
+import {Product} from '../../model/product';
+import {ProductsService} from '../../service/products.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Globals} from '../../../globals';
+import {Location} from '@angular/common';
 
 interface ICartItemWithProduct extends CartItem {
     product: Product;
@@ -18,7 +19,7 @@ interface ICartItemWithProduct extends CartItem {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit,OnDestroy {
+export class CartComponent implements OnInit, OnDestroy {
     public cart: Observable<ShoppingCart>;
     public itemCount;
     public cartItems: ICartItemWithProduct[];
@@ -28,7 +29,8 @@ export class CartComponent implements OnInit,OnDestroy {
     constructor( private cartService: CartService,
                  private productsService: ProductsService,
                  private domSanitizer: DomSanitizer,
-                 private globals: Globals) { }
+                 private globals: Globals,
+                 private _location: Location) { }
 
     ngOnInit() {
         this.cart = this.cartService.get();
@@ -70,5 +72,9 @@ export class CartComponent implements OnInit,OnDestroy {
         }
 
         return this.domSanitizer.bypassSecurityTrustUrl(atob(product.image));
+    }
+
+    backClicked() {
+        this._location.back();
     }
 }

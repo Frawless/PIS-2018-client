@@ -11,9 +11,9 @@
             </thead>
             <tbody>
             <tr *ngFor="let product of products" routerLink="/shop/admin/products/detail/{{product.id}}" class="clickable">
-                <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
+                <td class="font-weight-bold">{{product.name}}</td>
                 <td>{{product.totalAmount}}</td>
+                <td>{{product.price}} Kč</td>
             </tr>
             </tbody>
         </table>

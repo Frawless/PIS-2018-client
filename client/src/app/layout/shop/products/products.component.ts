@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/product';
 import { ProductsService } from '../../service/products.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-shop-products',
@@ -13,7 +14,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
       private productsService: ProductsService,
-      private domSanitizer: DomSanitizer
+      private domSanitizer: DomSanitizer,
+      private cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -32,4 +34,8 @@ export class ProductsComponent implements OnInit {
 
       return this.domSanitizer.bypassSecurityTrustUrl(atob(product.image));
   }
+
+    addToCart(product: Product) {
+        this.cartService.add(product, 1);
+    }
 }

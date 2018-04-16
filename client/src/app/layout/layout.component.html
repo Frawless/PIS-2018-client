@@ -1,11 +1,13 @@
 <app-header></app-header>
 <app-sidebar *ngIf="this.globals.currentRole > 1"></app-sidebar>
 
-<div *ngIf="this.globals.alertLogin === false">
-    <alert></alert>
-</div>
 
 <div class="container">
+
+    <div *ngIf="this.globals.alertLogin === false">
+        <alert></alert>
+    </div>
+
     <section>
         <router-outlet></router-outlet>
     </section>
