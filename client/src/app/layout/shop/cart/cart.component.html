@@ -33,7 +33,11 @@
     <div class="col-md-6 offset-md-3 text-center">
         <h4 *ngIf="cartItems === undefined || cartItems.length < 1 ">Košík je prázdný</h4>
         <a routerLink="/shop/products" class="btn btn-info">Pokračovat v nákupu</a>
-        <button *ngIf="cartItems && cartItems.length" (click)="createOrder();" class="btn btn-success">Koupit</button>
+        <div class="d-inline" *ngIf="cartItems && cartItems.length">
+            <button *ngIf="this.globals.currentRole >= 1 " routerLink="/shop/checkout" class="btn btn-success">Koupit</button>
+
+            <button *ngIf="this.globals.currentRole < 1" (click)="globals.showLoginDialog = true" class="btn btn-success">Koupit</button>
+        </div>
     </div>
 
 </div>

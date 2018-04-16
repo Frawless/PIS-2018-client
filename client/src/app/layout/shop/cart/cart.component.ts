@@ -6,6 +6,7 @@ import {CartService} from "../../service/cart.service";
 import {Product} from "../../model/product";
 import {ProductsService} from "../../service/products.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Globals} from "../../../globals";
 
 interface ICartItemWithProduct extends CartItem {
     product: Product;
@@ -26,7 +27,8 @@ export class CartComponent implements OnInit,OnDestroy {
     private cartSubscription: Subscription;
     constructor( private cartService: CartService,
                  private productsService: ProductsService,
-                 private domSanitizer: DomSanitizer) { }
+                 private domSanitizer: DomSanitizer,
+                 private globals: Globals) { }
 
     ngOnInit() {
         this.cart = this.cartService.get();
@@ -60,10 +62,6 @@ export class CartComponent implements OnInit,OnDestroy {
 
     removeFromCart(product: Product) {
         this.cartService.remove(product);
-    }
-
-    createOrder() {
-        alert("Vytvářím objednávku");
     }
 
     getImage(product: Product) {

@@ -7,6 +7,13 @@ export class Item {
     product: Product;
 }
 
+export class Address {
+    city: string;
+    psc: number;
+    streetName: string;
+    streetNumber: number;
+}
+
 export class Order {
     id: number;
     car: number;
@@ -15,8 +22,9 @@ export class Order {
     state: string;
     items: Item[];
     user: User;
+    address: Address;
 
-    constructor(car, createDate, exportDate, state, items) {
+    constructor(car, createDate, exportDate, user, state, items) {
         this.car = car;
         this.createDate = createDate;
         this.exportDate = exportDate;
@@ -24,3 +32,4 @@ export class Order {
         this.items = items;
     }
 }
+

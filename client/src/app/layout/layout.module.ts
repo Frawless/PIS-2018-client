@@ -15,6 +15,7 @@ import { AlertService } from '../_authentication/_services/alert.service';
 import { AlertComponent } from '../_authentication/_directives/alert.component';
 import { CartWidgetComponent } from "./shop/cart-widget/cart-widget.component";
 import { CartComponent } from "./shop/cart/cart.component";
+import { CheckoutComponent } from "./shop/checkout/checkout.component";
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import { CartComponent } from "./shop/cart/cart.component";
         LoginComponent,
         AlertComponent,
         CartWidgetComponent,
-        CartComponent
+        CartComponent,
+        CheckoutComponent
     ],
     exports: [
         DialogComponent,

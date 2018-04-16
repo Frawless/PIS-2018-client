@@ -78,6 +78,12 @@ export class CartService {
         this.dispatch(cart);
     }
 
+    empty(): void {
+        const cart = new ShoppingCart();
+        this.save(cart);
+        this.dispatch(cart);
+    }
+
     private calculateCart(cart: ShoppingCart) {
         cart.itemsTotal = cart.items
             .map((item) => item.quantity * this.products.find((p) => p.id === item.product_id).price)

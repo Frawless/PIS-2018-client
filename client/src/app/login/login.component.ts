@@ -20,7 +20,7 @@ import * as jwtDecode from 'jwt-decode';
     moduleId: module.id.toString(),
 })
 export class LoginComponent implements OnInit {
-    @Input() showLogin = true;
+    //@Input() showLogin = true;
 
     credentials: any = {};
     registration: any = {};
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     // https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
     ngOnInit() {
         this.showLoginButton = true;
-        this.showLogin = false;
+        this.globals.showLoginDialog = false;//this.showLogin = false;
         // Login validators
         this.credentials = this.formBuilder.group({
             username: ['', Validators.required],
@@ -124,7 +124,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.router.url]);
-                    this.showLogin = false;
+                    this.globals.showLoginDialog = false;//this.showLogin = false;
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
                     this.getUserFromToken();
@@ -167,7 +167,7 @@ export class LoginComponent implements OnInit {
     logout() {
         this.logoutRedirect();
         this.authenticationService.logout();
-        this.showLogin = false;
+        this.globals.showLoginDialog = false;//this.showLogin = false;
         this.showLoginButton = true;
         this.loginLoading = false;
         this.credentials.reset();
@@ -177,7 +177,7 @@ export class LoginComponent implements OnInit {
     showLoginDialog() {
         this.alertService.clearAlert();
         this.globals.alertLogin = true;
-        this.showLogin = true;
+        this.globals.showLoginDialog = true;//this.showLogin = true;
     }
 
     dismissLoginDialog() {

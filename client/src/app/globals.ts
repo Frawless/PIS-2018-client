@@ -15,6 +15,7 @@ export class Globals {
     showSideBar = false;
     title =  'Bakery';
     currentRole: any = Roles.NOTLOGED;
+    showLoginDialog = false;
 }
 
 
