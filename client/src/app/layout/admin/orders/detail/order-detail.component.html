@@ -164,7 +164,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of order.items;">
+              <tr *ngFor="let item of order.items;" routerLink="/shop/products/detail/{{item.product.id}}" class="clickable">
                   <td>{{item.product.name}}</td>
                   <td>{{item.countOrdered}}</td>
                   <td>{{getItemsPrice(item)}} ({{item.product.price}})</td>
