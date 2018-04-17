@@ -1,14 +1,16 @@
 <div class="row" *ngIf="product">
     <div class="col-md-12">
         <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
-        <h2><span class="current-name">{{ product.name }}</span></h2>
     </div>
+</div>
+<div class="row">
     <div class="col-6">
         <div class="img">
             <img [src]="getImage(product) || 'https://placehold.it/150x80?text=IMAGE'" class="img-responsive" style="width:100%" alt="Image">
         </div>
     </div>
     <div class="col-6 mt-3">
+        <h2><span class="current-name">{{ product.name }}</span></h2>
         <h4>{{product.price}} Kč</h4>
         <div class="mb-4 mt-3">
             <span style="font-weight: bold">Složení:</span>
