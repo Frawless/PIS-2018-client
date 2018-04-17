@@ -30,6 +30,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     public itemCount;
     public cartItems: ICartItemWithProduct[];
     public products: Product[];
+    public todayDate;
 
     private cartSubscription: Subscription;
 
@@ -45,6 +46,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
       this.cart = this.cartService.get();
+      this.setTodayDate();
 
       this.cartSubscription = this.cart.subscribe((cart) => {
           this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
@@ -169,6 +171,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
     backClicked() {
         this._location.back();
+    }
+
+    private setTodayDate() {
+        var now = new Date();
+        var d = now.getDate();
+        var m = now.getMonth();
+        var y = now.getFullYear();
+        var month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+        this.todayDate = ""+ y +"-"+ month[m]  +"-"+ d;
+
     }
 
 }
