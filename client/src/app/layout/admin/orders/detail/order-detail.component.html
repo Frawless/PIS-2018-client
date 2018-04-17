@@ -72,7 +72,7 @@
             </div>
             <input type="text" class="form-control" id="city"
                    required
-                   [ngModel]="order.user?.address.city" name="city"
+                   [ngModel]="order.address.city" name="city"
                    #city="ngModel"/>
         </div>
 
@@ -82,7 +82,7 @@
             </div>
             <input type="text" class="form-control" id="streetName"
                    required
-                   [ngModel]="order.user?.address.streetName" name="streetName"
+                   [ngModel]="order.address.streetName" name="streetName"
                    #streetName="ngModel"/>
         </div>
 
@@ -92,7 +92,7 @@
             </div>
             <input type="number" class="form-control" id="streetNumber"
                    required
-                   [ngModel]="order.user?.address?.streetNumber" name="streetNumber"
+                   [ngModel]="order.address.streetNumber" name="streetNumber"
                    #streetNumber="ngModel"/>
         </div>
 
@@ -102,7 +102,7 @@
             </div>
             <input type="number" class="form-control" id="psc"
                    required
-                   [ngModel]="order.user?.address.psc" name="psc"
+                   [ngModel]="order.address.psc" name="psc"
                    #psc="ngModel"/>
         </div>
     </div>
