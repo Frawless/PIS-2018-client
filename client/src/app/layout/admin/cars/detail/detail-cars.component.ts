@@ -31,11 +31,9 @@ export class CarsDetailComponent implements OnInit {
         this.router.navigate(['/shop/admin/cars']);
     }
 
-    delete(): void {/*
+    delete(): void {console.log(JSON.stringify(this.car));
         this.carsService.delete(this.car)
             .subscribe();
-        this.router.navigate(['/shop/admin/cars']);*/
-        console.log(this.car.date_add);
-        console.log(this.car);
+        this.router.navigate(['/shop/admin/cars']);
     }
 }

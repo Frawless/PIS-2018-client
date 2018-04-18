@@ -1,5 +1,5 @@
 export class Car {
     id: number;
-    date_add: Date;
+    dateAdd: Date;
     type: string;
 }

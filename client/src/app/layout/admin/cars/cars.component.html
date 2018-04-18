@@ -13,7 +13,7 @@
             <tr *ngFor="let car of cars" routerLink="/shop/admin/cars/detail/{{car.id}}" class="clickable">
                 <td>{{car.id}}</td>
                 <td>{{car.type}}</td>
-                <td>{{car.date_add}}</td>
+                <td>{{car.dateAdd | date: 'yyyy-MM-dd'}}</td>
             </tr>
             </tbody>
         </table>

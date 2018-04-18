@@ -4,7 +4,7 @@
     <h2>Nové vozidlo</h2>
   </div>
 
-  <form (ngSubmit)="save()" #userForm="ngForm" class="col-md-6">
+  <form (ngSubmit)="add()" #carForm="ngForm" class="col-md-6">
       <div class="form-group input-group">
           <div class="input-group-prepend">
               <span class="input-group-text">Typ:</span>
@@ -19,19 +19,19 @@
 
       <div class="form-group input-group">
           <div class="input-group-prepend">
-              <span class="input-group-text">Město:</span>
+              <span class="input-group-text">Dátum:</span>
           </div>
-          <input type="date" class="form-control" id="date_add"
+          <input type="date" class="form-control" id="dateAdd"
                  required
-                 [ngModel]="car.date_add" name="date_add"
-                 (ngModelChange)="car.date_add=$event.target.valueAsDate"
+                 min="{{todayDate}}"
+                 [ngModel]="car.dateAdd | date: 'yyyy-MM-dd'" name="dateAdd"
+                 (ngModelChange)="car.dateAdd=$event"
                  placeholder="Brno"
-                 #date_add="ngModel"/>
+                 #dateAdd="ngModel"/>
       </div>
 
       <div class="buttons">
-          <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
-          <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+          <button type="submit" class="btn btn-success" [disabled]="!carForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
       </div>
 
   </form>

@@ -174,11 +174,11 @@
               <tr *ngFor="let item of order.items;" routerLink="/shop/products/detail/{{item.product.id}}" class="clickable">
                   <td>{{item.product.name}}</td>
                   <td>{{item.countOrdered}}</td>
-                  <td>{{getItemsPrice(item)}} ({{item.product.price}})</td>
+                  <td class="font-weight-bold">{{getItemsPrice(item)}} ({{item.product.price}}) Kč</td>
               </tr>
-              <tr>
+              <tr class="font-weight-bold">
                   <td colspan="2">Celková cena</td>
-                  <td>{{getOrderPrice(order)}}</td>
+                  <td>{{getOrderPrice(order)}} Kč</td>
               </tr>
               </tbody>
           </table>

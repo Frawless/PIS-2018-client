@@ -74,6 +74,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       });
 
       this.getOrder();
+      this.order.exportDate = this.todayDate;
     }
 
     public ngOnDestroy(): void {

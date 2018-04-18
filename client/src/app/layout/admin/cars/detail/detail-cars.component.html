@@ -3,38 +3,35 @@
         <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
         <h2>Detail: <span class="current-name">vozidlo</span></h2>
     </div>
-    <div class="col-md-6">
-        <form (ngSubmit)="save()" #userForm="ngForm">
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Typ:</span>
-                </div>
-                <input type="text" class="form-control" id="city"
-                       required
-                       [ngModel]="car.type" name="city"
-                       (ngModelChange)="car.type=$event"
-                       placeholder="Dodávka"
-                       #type="ngModel"/>
+    <form (ngSubmit)="save()" #carForm="ngForm" class="col-md-6">
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Typ:</span>
             </div>
+            <input type="text" class="form-control" id="city"
+                   required
+                   [ngModel]="car.type" name="city"
+                   (ngModelChange)="car.type=$event"
+                   placeholder="Dodávka"
+                   #type="ngModel"/>
+        </div>
 
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Město:</span>
-                </div>
-                <input type="date" class="form-control" id="date_add"
-                       required
-                       [ngModel]="car.date_add" name="date_add"
-                       (ngModelChange)="car.date_add=$event.target.valueAsDate"
-                       placeholder="Brno"
-                       #date_add="ngModel"/>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Dátum:</span>
             </div>
+            <input type="date" class="form-control" id="dateAdd"
+                   required
+                   [ngModel]="car.dateAdd | date: 'yyyy-MM-dd'" name="dateAdd"
+                   (ngModelChange)="car.dateAdd=$event"
+                   placeholder="Brno"
+                   #dateAdd="ngModel"/>
+        </div>
 
-            <div class="buttons">
-                <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-            </div>
+        <div class="buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!carForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+            <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+        </div>
 
-        </form>
-
-    </div>
+    </form>
 </div>
