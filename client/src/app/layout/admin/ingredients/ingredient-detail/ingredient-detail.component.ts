@@ -51,7 +51,7 @@ export class IngredientDetailComponent implements OnInit {
               error => {
                   this.alertService.error('Ingredienci \'' + this.ingredient.name + '\' nelze smazat!');
               });
-      this.router.navigate(['/shop/admin/ingredients']);
+      this._location.back();
   }
 
     backClicked() {

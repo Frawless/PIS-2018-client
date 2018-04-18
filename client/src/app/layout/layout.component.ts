@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit {
     currentRole: string;
 
     constructor(
-        private globals: Globals,
+        public globals: Globals,
     ) {}
 
     ngOnInit() {

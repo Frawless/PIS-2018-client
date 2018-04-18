@@ -12,7 +12,7 @@ import {DataService} from "../globals";
         FormsModule,
         ReactiveFormsModule,
     ],
-    declarations: [LoginComponent],
+    // declarations: [LoginComponent],
     providers: [DataService]
 })
 export class LoginModule {}

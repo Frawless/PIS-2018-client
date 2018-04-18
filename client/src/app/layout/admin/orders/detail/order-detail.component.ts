@@ -4,6 +4,7 @@ import { OrderService } from '../service/order.service';
 import { Order } from '../order';
 import {Globals} from '../../../../globals';
 import {Location} from '@angular/common';
+import {AlertService} from '../../../../_authentication/_services';
 
 @Component({
   selector: 'app-order-detail',
@@ -23,6 +24,7 @@ export class OrderDetailComponent implements OnInit {
     private orderService: OrderService,
     private globals: Globals,
     private _location: Location,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -47,14 +49,27 @@ export class OrderDetailComponent implements OnInit {
 
     save(): void {
         this.orderService.update(this.order)
-            .subscribe();
-        // this.router.navigate(['/shop/admin/orders']);
+            .subscribe(
+                data => {
+                    this.alertService.success('Stav objednávky změněn na \'' + this.order.state + '\'');
+                },
+                error => {
+                    this.alertService.error('Stav objednávký nelze změnít!');
+                }
+            );
     }
 
     delete(): void {
         this.orderService.delete(this.order)
-            .subscribe();
-        this.router.navigate(['/shop/admin/orders']);
+            .subscribe(
+                data => {
+                    this.alertService.success('Objednávka smazána');
+                },
+                error => {
+                    this.alertService.error('Objednávku nelze smazat!');
+                }
+            );
+        this._location.back();
     }
 
     getOrderPrice(order): number {

@@ -7,10 +7,7 @@ $topnav-background-color: #FFFEF2;
     float: left;
     padding-top: 30px;
     padding-left: 30px;
-    //top: 56px;
-    //left: 235px;
     width: 200px;
-    //margin-left: -235px;
     margin-top: 0px;
     border: none;
     border-radius: 0;
@@ -26,7 +23,6 @@ $topnav-background-color: #FFFEF2;
     transition: all 0.2s ease-in-out;
     min-height: 100vh;
     height: 100%;
-    // border-top: 1px solid rgba(255,255,255,0.3);
     .list-group {
         a.list-group-item {
             background: $topnav-background-color;

@@ -5,12 +5,12 @@
             <thead>
             <tr>
                 <th>Název</th>
-                <th>Cena</th>
                 <th>Na skladě</th>
+                <th>Cena</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let product of products" routerLink="/shop/admin/products/detail/{{product.id}}" class="clickable">
+            <tr *ngFor="let product of products" routerLink="/shop/admin/products/detail/{{product.id}}" (change)="products=getProducts()"  class="clickable">
                 <td class="font-weight-bold">{{product.name}}</td>
                 <td>{{product.totalAmount}}</td>
                 <td>{{product.price}} Kč</td>

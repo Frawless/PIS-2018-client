@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         private userService: UserService,
         private alertService: AlertService,
         private formBuilder: FormBuilder,
-        private globals: Globals,
+        public globals: Globals,
         private data: DataService) {
     }
 

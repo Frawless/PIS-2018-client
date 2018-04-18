@@ -8,6 +8,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertService} from '../../_authentication/_services/alert.service';
 import {AlertComponent} from '../../_authentication/_directives/alert.component';
+import {AdminComponent} from "./admin.component";
 
 @NgModule({
     imports: [
@@ -19,13 +20,14 @@ import {AlertComponent} from '../../_authentication/_directives/alert.component'
         ReactiveFormsModule,
     ],
     declarations: [
-        AlertComponent
+        AdminComponent,
+        // AlertComponent
     ],
     exports: [
-        AlertComponent,
+        // AlertComponent,
     ],
     providers: [
-        AlertService,
+        // AlertService,
     ]
 })
 export class AdminModule {}

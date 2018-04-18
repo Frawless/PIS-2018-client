@@ -67,7 +67,7 @@ export class ProductDetailComponent implements OnInit {
               error => {
                   this.alertService.error('Produkt \'' + this.product.name + '\' nelze smazat!');
               });
-      this.router.navigate(['/shop/admin/products']);
+      this._location.back();
   }
 
     validIngredients(ingredients): boolean {

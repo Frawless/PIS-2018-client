@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { OrderService } from './service/order.service';
 import { Order } from './order';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -12,7 +13,9 @@ export class OrderComponent implements OnInit {
 
     orders: Order[];
 
-    constructor(private orderService: OrderService) { }
+    constructor(
+        private orderService: OrderService,
+        private _location: Location) { }
 
     ngOnInit() {
         this.getOrders();
@@ -24,7 +27,7 @@ export class OrderComponent implements OnInit {
     }
 
     getOrderPrice(order): number {
-        var totalPrice = 0;
+        let totalPrice = 0;
 
         order.items.forEach(element => {
             totalPrice += this.getItemsPrice(element);

@@ -84,7 +84,7 @@ export class UserComponent implements OnInit {
                 error => {
                     this.alertService.error(error);
                 });
-        this.router.navigate(['/shop/admin/users']);
+      this._location.back();
     }
 
     getOrderPrice(order): number {

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {CartItem, ShoppingCart} from "../model/shopping-cat.model";
-import {Observable} from "rxjs/Observable";
-import {Observer} from "rxjs/Observer";
-import {Product} from "../model/product";
-import {ProductsService} from "./products.service";
+import {CartItem, ShoppingCart} from '../model/shopping-cat.model';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
+import {Product} from '../model/product';
+import {ProductsService} from './products.service';
 
 @Injectable()
 export class CartService {
@@ -32,8 +32,8 @@ export class CartService {
 
     add(product: Product, quantity: number) {
         const cart = this.retrieve();
-        let item = cart.items.find((p)=> p.product_id === product.id );
-        if(item === undefined) {
+        let item = cart.items.find((p) => p.product_id === product.id );
+        if (item === undefined) {
             item = new CartItem();
             item.product_id = product.id;
             cart.items.push(item);
@@ -48,8 +48,8 @@ export class CartService {
 
     set(product: Product, quantity: number) {
         const cart = this.retrieve();
-        let item = cart.items.find((p)=> p.product_id === product.id );
-        if(item === undefined) {
+        let item = cart.items.find((p) => p.product_id === product.id );
+        if (item === undefined) {
             item = new CartItem();
             item.product_id = product.id;
             cart.items.push(item);
@@ -64,13 +64,12 @@ export class CartService {
 
     remove(product: Product) {
         const cart = this.retrieve();
-        let item = cart.items.find((p)=> p.product_id === product.id );
-        if(item === undefined) {
+        const item = cart.items.find((p) => p.product_id === product.id );
+        if (item === undefined) {
             return;
-        }
-        else {
-            let itemId = cart.items.findIndex((p)=> p.product_id === product.id );
-            cart.items.splice(itemId,1);
+        } else {
+            const itemId = cart.items.findIndex((p) => p.product_id === product.id );
+            cart.items.splice(itemId, 1);
         }
 
         this.calculateCart(cart);

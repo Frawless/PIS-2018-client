@@ -108,10 +108,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     getOrderPrice(order): number {
         let totalPrice = 0;
 
-        order.items.forEach(element => {
-            totalPrice += this.getItemsPrice(element);
-        });
-
+        if (order.items != null) {
+            order.items.forEach(element => {
+                totalPrice += this.getItemsPrice(element);
+            });
+        }
 
         return totalPrice;
     }
@@ -175,12 +176,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     private setTodayDate() {
-        var now = new Date();
-        var d = now.getDate();
-        var m = now.getMonth();
-        var y = now.getFullYear();
-        var month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-        this.todayDate = ""+ y +"-"+ month[m]  +"-"+ d;
+        let now = new Date();
+        let d = now.getDate();
+        let m = now.getMonth();
+        let y = now.getFullYear();
+        let month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        this.todayDate = '' + y + '-' + month[m]  + '-' + d;
 
     }
 

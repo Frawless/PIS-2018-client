@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {CarsService} from "../../../service/cars.service";
-import {Car} from "../../../model/car";
+import {Router} from '@angular/router';
+import {CarsService} from '../../../service/cars.service';
+import {Car} from '../../../model/car';
 import {AlertService} from '../../../../_authentication/_services';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-new',
@@ -16,7 +17,8 @@ export class CarsNewComponent implements OnInit {
   constructor(
       private router: Router,
       private alertService: AlertService,
-      private carsService: CarsService
+      private carsService: CarsService,
+      private _location: Location,
   ) { }
 
   ngOnInit() {
@@ -33,7 +35,6 @@ export class CarsNewComponent implements OnInit {
                     error => {
                       this.alertService.error('Auto \'' + this.car.type + '\' nelze přidat!');
                   });
-      //this.router.navigate(['/shop/admin/cars']);
   }
 
   reset(): void {
@@ -42,13 +43,17 @@ export class CarsNewComponent implements OnInit {
   }
 
   private setTodayDate() {
-      var now = new Date();
-      var d = now.getDate();
-      var m = now.getMonth();
-      var y = now.getFullYear();
-      var month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-      this.todayDate = ""+ y +"-"+ month[m]  +"-"+ d;
+      const now = new Date();
+      const d = now.getDate();
+      const m = now.getMonth();
+      const y = now.getFullYear();
+      const month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+      this.todayDate = '' + y + '-' + month[m]  + '-' + d;
 
   }
+
+    backClicked() {
+        this._location.back();
+    }
 
 }
