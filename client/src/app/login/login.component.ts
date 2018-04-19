@@ -1,9 +1,9 @@
 import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { routerTransition } from '../router.animations';
+import {Router, ActivatedRoute} from '@angular/router';
+import {routerTransition} from '../router.animations';
 
 
-import { AlertService, AuthenticationService } from '../_authentication/_services/index';
+import {AlertService, AuthenticationService} from '../_authentication/_services/index';
 import {UserService} from '../_authentication/_services/user.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {DataService, Globals} from '../globals';
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
         });
 
         // Loading current user
-        if  (localStorage.getItem('token') != null) {
+        if (localStorage.getItem('token') != null) {
             // this.globals.currentRole = localStorage.getItem('role');
             this.showLoginButton = false;
             this.getUserFromToken();
@@ -81,15 +81,16 @@ export class LoginComponent implements OnInit {
         // Subscribe for iddleLogout messages
         this.data.iddleLogout.subscribe(message => {
             this.iddleLogout = message;
-            if (this.iddleLogout){
-                this.logout();}
-          });
+            if (this.iddleLogout) {
+                this.logout();
+            }
+        });
     }
 
     getUserFromToken() {
         const token = localStorage.getItem('token');
         if (token) {
-            this.currentUser =  jwtDecode(token).sub;
+            this.currentUser = jwtDecode(token).sub;
         }
     }
 
@@ -124,7 +125,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.router.url]);
-                    this.globals.showLoginDialog = false;//this.showLogin = false;
+                    this.globals.showLoginDialog = false;
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
                     this.getUserFromToken();
@@ -136,7 +137,6 @@ export class LoginComponent implements OnInit {
                     this.alertService.error('Username or password is not correct!');
                     this.loginLoading = false;
                 });
-                console.log(this.credentials.controls.username.value);
     }
 
     register() {
@@ -167,7 +167,7 @@ export class LoginComponent implements OnInit {
     logout() {
         this.logoutRedirect();
         this.authenticationService.logout();
-        this.globals.showLoginDialog = false;//this.showLogin = false;
+        this.globals.showLoginDialog = false;
         this.showLoginButton = true;
         this.loginLoading = false;
         this.credentials.reset();
@@ -177,7 +177,7 @@ export class LoginComponent implements OnInit {
     showLoginDialog() {
         this.alertService.clearAlert();
         this.globals.alertLogin = true;
-        this.globals.showLoginDialog = true;//this.showLogin = true;
+        this.globals.showLoginDialog = true;
     }
 
     dismissLoginDialog() {
@@ -186,15 +186,15 @@ export class LoginComponent implements OnInit {
     }
 
     getCurrentUser() {
-      this.getUserFromToken();
-      return this.currentUser;
+        this.getUserFromToken();
+        return this.currentUser;
 
     }
 
     logoutRedirect() {
         this.getCurrentRoleFromToken();
-        if ((this.globals.currentRole >= Roles.USER )
-                && (this.router.url.indexOf('admin') > -1
+        if ((this.globals.currentRole >= Roles.USER)
+            && (this.router.url.indexOf('admin') > -1
                 || this.router.url.indexOf('user') > -1)) {
             this.router.navigateByUrl('/');
         }

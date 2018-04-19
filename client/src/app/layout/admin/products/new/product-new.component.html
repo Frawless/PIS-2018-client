@@ -12,7 +12,7 @@
               </div>
               <input type="text" class="form-control" id="name"
                      required
-                     appForbiddenName="Rohlík"
+                     pattern="{{globals.namePattern}}"
                      [ngModel]="product.name" name="name"
                      (ngModelChange)="product.name=$event"
                      placeholder="Rohlík"
@@ -24,7 +24,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text">Cena:</span>
               </div>
-              <input type="number" class="form-control" id="price"
+              <input type="number" min="1" class="form-control" id="price"
                      required
                      [ngModel]="product.price" name="price"
                      (ngModelChange)="product.price=$event"
@@ -39,7 +39,7 @@
               <div class="input-group-prepend">
                   <span class="input-group-text">Celkový počet:</span>
               </div>
-              <input type="number" class="form-control" id="totalAmount"
+              <input type="number" min="1" class="form-control" id="totalAmount"
                      required
                      [ngModel]="product.totalAmount" name="totalAmount"
                      (ngModelChange)="product.totalAmount=$event"

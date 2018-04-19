@@ -47,7 +47,7 @@
                 </div>
                 <input type="date" class="form-control" id="exportDate"
                        required
-                       min="{{todayDate}}"
+                       min="{{globals.tomorrowDate}}"
                        [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" name="exportDate"
                        (ngModelChange)="order.exportDate=$event"
                        #exportDate="ngModel"/>

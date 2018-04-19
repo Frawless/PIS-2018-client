@@ -40,7 +40,6 @@ export class DetailComponent implements OnInit {
   }
 
   addToCart() {
-      console.log(this.quantity);
       this.cartService.add(this.product, this.quantity);
   }
 

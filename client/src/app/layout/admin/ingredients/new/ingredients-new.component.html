@@ -11,6 +11,7 @@
           </div>
           <input type="text" class="form-control" id="name"
                  required
+                 pattern="{{globals.namePattern}}"
                  [ngModel]="ingredient.name" name="name"
                  (ngModelChange)="ingredient.name=$event"
                  placeholder="Mouka"
@@ -30,17 +31,6 @@
                  #supplier="ngModel"/>
       </div>
 
-      <div class="form-group input-group">
-          <div class="input-group-prepend">
-              <span class="input-group-text">Skladem:</span>
-          </div>
-          <input type="number" class="form-control" id="unit"
-                 required
-                 [ngModel]="ingredient.unit" name="unit"
-                 (ngModelChange)="ingredient.unit=$event"
-                 placeholder="50"
-                 #unit="ngModel"/>
-      </div>
       <div class="buttons">
           <button type="submit" class="btn btn-success" [disabled]="!ingredientsForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
       </div>

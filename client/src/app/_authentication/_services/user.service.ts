@@ -1,11 +1,10 @@
-﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+﻿import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { User } from '../_models/user';
+import {User} from '../_models';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
@@ -13,7 +12,8 @@ export class UserService {
 
     private usersUrl = 'http://localhost:8080/users/';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
     getUsers() {
         return this.http.get<User[]>(this.usersUrl);

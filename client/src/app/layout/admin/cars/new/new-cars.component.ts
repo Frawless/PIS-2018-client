@@ -4,6 +4,7 @@ import {CarsService} from '../../../service/cars.service';
 import {Car} from '../../../model/car';
 import {AlertService} from '../../../../_authentication/_services';
 import {Location} from '@angular/common';
+import {Globals} from '../../../../globals';
 
 @Component({
   selector: 'app-new',
@@ -19,6 +20,7 @@ export class CarsNewComponent implements OnInit {
       private alertService: AlertService,
       private carsService: CarsService,
       private _location: Location,
+      private globals: Globals
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class CarsNewComponent implements OnInit {
     this.car.dateAdd = this.todayDate;
   }
 
-  add(): void {console.log(JSON.stringify(this.car));
+  add(): void {
       this.carsService.add(this.car)
           .subscribe(data => {
                     this.alertService.success('Auto \'' + this.car.type + '\' přidáno!');

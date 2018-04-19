@@ -11,6 +11,7 @@
           </div>
           <input type="text" class="form-control" id="city"
                  required
+                 pattern="{{globals.namePattern}}"
                  [ngModel]="car.type" name="city"
                  (ngModelChange)="car.type=$event"
                  placeholder="Dodávka"
@@ -19,11 +20,11 @@
 
       <div class="form-group input-group">
           <div class="input-group-prepend">
-              <span class="input-group-text">Dátum:</span>
+              <span class="input-group-text">Datum:</span>
           </div>
           <input type="date" class="form-control" id="dateAdd"
                  required
-                 min="{{todayDate}}"
+                 min="{{globals.todayDate}}"
                  [ngModel]="car.dateAdd | date: 'yyyy-MM-dd'" name="dateAdd"
                  (ngModelChange)="car.dateAdd=$event"
                  placeholder="Brno"

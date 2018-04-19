@@ -12,6 +12,7 @@ import * as jwtDecode from 'jwt-decode';
 import {OrderService} from '../../admin/orders/service/order.service';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {Globals} from '../../../globals';
 
 interface ICartItemWithProduct extends CartItem {
     product: Product;
@@ -19,62 +20,63 @@ interface ICartItemWithProduct extends CartItem {
 }
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
-    @Input() order: Order = new Order(null, null, null, null, null, null); // = new Order(null,null,null,null,null,null,null,null,null,null);
+    @Input() order: Order = new Order(null, null, null, null, null, null);
 
     public cart: Observable<ShoppingCart>;
     public itemCount;
     public cartItems: ICartItemWithProduct[];
     public products: Product[];
-    public todayDate;
 
     private cartSubscription: Subscription;
 
     constructor(
-      private cartService: CartService,
-      private productsService: ProductsService,
-      private userService: UserService,
-      private alertService: AlertService,
-      private orderService: OrderService,
-      private router: Router,
-      private _location: Location,
-    ) { }
+        private cartService: CartService,
+        private productsService: ProductsService,
+        private userService: UserService,
+        private alertService: AlertService,
+        private orderService: OrderService,
+        private router: Router,
+        private _location: Location,
+        private globals: Globals
+    ) {
+    }
 
     ngOnInit() {
-      this.cart = this.cartService.get();
-      this.setTodayDate();
+        this.cart = this.cartService.get();
 
-      this.cartSubscription = this.cart.subscribe((cart) => {
-          this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
-          this.productsService.getProducts()
-              .subscribe(products => {
-                  this.products = products;
-                  this.cartItems = cart.items
-                      .map((item) => {
-                          const product = this.products.find((p) => p.id === item.product_id);
-                          return {
-                              ...item,
-                              product,
-                              totalCost: product.price * item.quantity };
-                      });
-                  this.order.items = cart.items
-                      .map((item) => {
-                          const product = this.products.find((p) => p.id === item.product_id);
-                          return {
-                              id: null,
-                              countOrdered: item.quantity,
-                              product: product,
-                          };
-                      });
-              });
-      });
+        this.cartSubscription = this.cart.subscribe((cart) => {
+            this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
+            this.productsService.getProducts()
+                .subscribe(products => {
+                    this.products = products;
+                    this.cartItems = cart.items
+                        .map((item) => {
+                            const product = this.products.find((p) => p.id === item.product_id);
+                            return {
+                                ...item,
+                                product,
+                                totalCost: product.price * item.quantity
+                            };
+                        });
+                    this.order.items = cart.items
+                        .map((item) => {
+                            const product = this.products.find((p) => p.id === item.product_id);
+                            return {
+                                id: null,
+                                countOrdered: item.quantity,
+                                product: product,
+                            };
+                        });
+                });
+        });
 
-      this.getOrder();
-      this.order.exportDate = this.todayDate;
+        this.getOrder();
+        this.order.exportDate = this.globals.tomorrowDate;
     }
 
     public ngOnDestroy(): void {
@@ -122,7 +124,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     send() {
-        const minimalOrder = { ...this.order};
+        const minimalOrder = {...this.order};
         // user
         delete minimalOrder.user.firstname;
         delete minimalOrder.user.lastname;
@@ -135,7 +137,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
         // product
         minimalOrder.items = minimalOrder.items
-            .map( (item) => {
+            .map((item) => {
                 const product = item.product;
                 delete product.name;
                 delete product.price;
@@ -166,7 +168,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                 },
                 error => {
                     this.alertService.error('Ojednávku se nepodařilo odeslat!');
-                    console.log(error);
                 }
             );
     }
@@ -174,15 +175,4 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     backClicked() {
         this._location.back();
     }
-
-    private setTodayDate() {
-        let now = new Date();
-        let d = now.getDate();
-        let m = now.getMonth();
-        let y = now.getFullYear();
-        let month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-        this.todayDate = '' + y + '-' + month[m]  + '-' + d;
-
-    }
-
 }

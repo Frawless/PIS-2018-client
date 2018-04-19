@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Globals} from '../globals';
 
 import * as jwtDecode from 'jwt-decode';
@@ -14,7 +14,8 @@ export class LayoutComponent implements OnInit {
 
     constructor(
         public globals: Globals,
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.getCurrentRoleFromToken();

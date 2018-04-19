@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <form (ngSubmit)="save()" #userForm="ngForm" class="row">
+  <form #userForm="ngForm" class="row">
             <div class="col-md-6">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -14,7 +14,7 @@
                     </div>
                       <input type="text" class="form-control" id="firstname"
                              required
-                             appForbiddenName="bob"
+                             pattern="{{globals.namePattern}}"
                              [ngModel]="user.firstname" name="firstname"
                              (ngModelChange)="user.firstname=$event"
                              placeholder="Josef"
@@ -28,6 +28,7 @@
                     </div>
                     <input type="text" class="form-control" id="lastname"
                            required
+                           pattern="{{globals.namePattern}}"
                            [ngModel]="user.lastname" name="lastname"
                            (ngModelChange)="user.lastname=$event"
                            placeholder="Straka"
@@ -79,6 +80,7 @@
                     </div>
                     <input type="text" class="form-control" id="city"
                            required
+                           pattern="{{globals.cityPattern}}"
                            [ngModel]="user.address?.city" name="city"
                            (ngModelChange)="user.address.city=$event"
                             placeholder="Brno"
@@ -91,6 +93,7 @@
                     </div>
                     <input type="text" class="form-control" id="streetName"
                            required
+                           pattern="{{globals.streetPattern}}"
                            [ngModel]="user.address?.streetName" name="streetName"
                            (ngModelChange)="user.address.streetName=$event"
                            placeholder="Jana Husa 1"
@@ -103,6 +106,7 @@
                     </div>
                     <input type="number" class="form-control" id="streetNumber"
                            required
+                           min="1"
                            [ngModel]="user.address?.streetNumber" name="streetNumber"
                            (ngModelChange)="user.address.streetNumber=$event"
                            placeholder="123"
@@ -115,6 +119,7 @@
                     </div>
                     <input type="number" class="form-control" id="psc"
                            required
+                           minlength="4"
                            [ngModel]="user.address?.psc" name="psc"
                            (ngModelChange)="user.address.psc=$event"
                            placeholder="60200"
@@ -136,7 +141,7 @@
             </div>
 
     <div class="buttons col-md-12">
-        <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+        <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
         <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
     </div>
   </form>

@@ -15,6 +15,7 @@
           <input type="text" class="form-control" id="username"
                  required
                  disabled
+                 pattern="{{globals.usernamePattern}}"
                  [ngModel]="order.user?.username" name="username"
                  #username="ngModel"/>
       </div>
@@ -26,6 +27,7 @@
           <input type="text" class="form-control" id="firstname"
                  required
                  disabled
+                 pattern="{{globals.namePattern}}"
                  [ngModel]="order.user?.firstname" name="firstname"
                  #firstname="ngModel"/>
       </div>
@@ -37,6 +39,7 @@
           <input type="text" class="form-control" id="lastname"
                  required
                  disabled
+                 pattern="{{globals.namePattern}}"
                  [ngModel]="order.user?.lastname" name="lastname"
                  #lastname="ngModel"/>
       </div>
@@ -119,6 +122,7 @@
           <input type="date" class="form-control" id="createDate"
                  [disabled]="!this.isAdminDetail"
                  required
+                 disabled
                  [ngModel]="order.createDate | date: 'yyyy-MM-dd'" name="createDate"
                  (ngModelChange)="order.createDate=$event"
                  #createDate="ngModel"/>
@@ -131,6 +135,7 @@
           <input type="date" class="form-control" id="exportDate"
                  [disabled]="!this.isAdminDetail"
                  required
+                 min="{{globals.todayDate}}"
                  [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" name="exportDate"
                  (ngModelChange)="order.exportDate=$event"
                  #exportDate="ngModel"/>

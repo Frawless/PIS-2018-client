@@ -6,14 +6,12 @@
             <tr>
                 <th>Název</th>
                 <th>Dodavatel</th>
-                <th>Na skladě</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let ingredient of ingredients" routerLink="/shop/admin/ingredients/detail/{{ingredient.id}}" class="clickable">
                 <td>{{ingredient.name}}</td>
                 <td>{{ingredient.supplier}}</td>
-                <td>{{ingredient.unit}}</td>
             </tr>
             </tbody>
         </table>

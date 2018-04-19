@@ -1,20 +1,19 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { Product } from '../../../model/product';
-import { Router} from '@angular/router';
-import { ProductsService } from '../../../service/products.service';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Product} from '../../../model/product';
+import {Router} from '@angular/router';
+import {ProductsService} from '../../../service/products.service';
 import {IngredientsService} from '../../../service/ingredients.service';
 import {Ingredient} from '../../../model/ingredient';
 import {AlertService} from '../../../../_authentication/_services';
 
 import {MtImagePreviewComponent} from '../../../components/image-preview/image-preview';
-import {isEmpty} from 'rxjs/operator/isEmpty';
-import {forEach} from '@angular/router/src/utils/collection';
-import {Location} from "@angular/common";
+import {Location} from '@angular/common';
+import {Globals} from '../../../../globals';
 
 @Component({
-  selector: 'app-product-new',
-  templateUrl: './product-new.component.html',
-  styleUrls: ['./product-new.component.scss']
+    selector: 'app-product-new',
+    templateUrl: './product-new.component.html',
+    styleUrls: ['./product-new.component.scss']
 })
 export class ProductNewComponent implements OnInit {
     @Input() product = new Product('', null, null, [{}]);
@@ -28,7 +27,8 @@ export class ProductNewComponent implements OnInit {
                 private productsService: ProductsService,
                 private ingredientsService: IngredientsService,
                 private alertService: AlertService,
-                private _location: Location) {
+                private _location: Location,
+                private globals: Globals) {
     }
 
     ngOnInit() {
@@ -37,8 +37,6 @@ export class ProductNewComponent implements OnInit {
 
     add(): void {
         this.product.image = btoa(this.image.source);
-
-        console.log(this.product);
 
         this.productsService.addProduct(this.product)
             .subscribe(
@@ -49,7 +47,7 @@ export class ProductNewComponent implements OnInit {
                 error => {
                     this.alertService.error('Produkt \'' + this.product.name + '\' nelze přidat!');
                 });
-            }
+    }
 
     getIngredients(): void {
         this.ingredientsService.getIngredients()
@@ -67,7 +65,7 @@ export class ProductNewComponent implements OnInit {
                 return false;
             }
         }
-        return true;
+        return !this.isEmpty(ingredients);
     }
 
     isEmpty(obj) {

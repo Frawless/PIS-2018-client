@@ -23,7 +23,7 @@ export class IngredientsNewComponent implements OnInit {
   ngOnInit() {
   }
 
-  add(): void {console.log(this.ingredient);
+  add(): void {
       this.ingredientService.addIngredient(this.ingredient)
           .subscribe(
               data => {

@@ -1,35 +1,36 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { OrderService } from '../service/order.service';
-import { Order } from '../order';
+import {OrderService} from '../service/order.service';
+import {Order} from '../order';
 import {Globals} from '../../../../globals';
 import {Location} from '@angular/common';
 import {AlertService} from '../../../../_authentication/_services';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss']
+    selector: 'app-order-detail',
+    templateUrl: './order-detail.component.html',
+    styleUrls: ['./order-detail.component.scss']
 })
 export class OrderDetailComponent implements OnInit {
-  @Input() order: Order;
+    @Input() order: Order;
 
     states = ['PENDING', 'ACCEPTED', 'DONE', 'IN_PROCESS', 'READY'];
 
     isAdminDetail = true;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private orderService: OrderService,
-    private globals: Globals,
-    private _location: Location,
-    private alertService: AlertService,
-  ) {}
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private orderService: OrderService,
+        private globals: Globals,
+        private _location: Location,
+        private alertService: AlertService,
+    ) {
+    }
 
-  ngOnInit() {
-      this.getOrderInfo();
-  }
+    ngOnInit() {
+        this.getOrderInfo();
+    }
 
     getOrderInfo(): void {
         const id = +this.route.snapshot.paramMap.get('id');
