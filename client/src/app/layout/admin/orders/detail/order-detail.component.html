@@ -148,8 +148,8 @@
           <div class="input-group-prepend">
               <span class="input-group-text">Stav:</span>
           </div>
-          <select class="form-control" id="role"
-                  [disabled]="!this.isAdminDetail"
+          <input *ngIf="!this.isAdminDetail" class="form-control" type="text" disabled value="{{order.state}}"/>
+          <select *ngIf="this.isAdminDetail" class="form-control" id="role"
                   required
                   [ngModel]="order.state"  name="state"
                   (ngModelChange)="order.state=$event"
