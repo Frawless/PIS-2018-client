@@ -32,6 +32,8 @@ export class CartService {
 
     add(product: Product, quantity: number) {
         if(quantity < 1) return;
+        if(product.totalAmount < quantity) return;
+
         const cart = this.retrieve();
         let item = cart.items.find((p) => p.product_id === product.id );
         if (item === undefined) {
@@ -39,7 +41,7 @@ export class CartService {
             item.product_id = product.id;
             cart.items.push(item);
         }
-
+        if(item.quantity + quantity > product.totalAmount) return;
         item.quantity += quantity;
 
         this.calculateCart(cart);
