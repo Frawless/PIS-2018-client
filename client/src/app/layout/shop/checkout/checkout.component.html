@@ -36,8 +36,10 @@
                 </div>
                 <input type="text" class="form-control" id="phoneNumber"
                        required
-                       disabled
+                       minlength="9"
                        [ngModel]="order.user?.phoneNumber" name="phoneNumber"
+                       (ngModelChange)="order.user.phoneNumber=$event"
+                       placeholder="567879876"
                        #phoneNumber="ngModel"/>
             </div>
 

@@ -123,7 +123,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         return items.countOrdered * items.product.price;
     }
 
+
+    userUpdate(){
+      this.userService.update(this.order.user)
+          .subscribe();
+              /*result => {
+                  this.alertService.success('Uživatel upraven');
+              },
+              error => {
+                  this.alertService.error('Uživatele nelze upravit!');
+              });*/
+
+    }
+
     send() {
+        this.userUpdate();
+
         const minimalOrder = {...this.order};
         // user
         delete minimalOrder.user.firstname;
