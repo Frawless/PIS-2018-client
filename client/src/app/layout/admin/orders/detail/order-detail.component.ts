@@ -54,9 +54,6 @@ export class OrderDetailComponent implements OnInit {
             this.alertService.error('Stav objednávký nelze změnít! Opravte prosím data.');
             return;
         }
-        else {
-
-
         this.orderService.update(this.order)
             .subscribe(
                 data => {
@@ -65,7 +62,7 @@ export class OrderDetailComponent implements OnInit {
                 error => {
                     this.alertService.error('Stav objednávký nelze změnít!');
                 }
-            );}
+            );
     }
 
     delete(): void {
