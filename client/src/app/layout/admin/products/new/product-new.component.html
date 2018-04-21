@@ -64,7 +64,7 @@
               <i class="fa fa-fw fa-plus-square"></i>
           </button>
           <div class="pull-right mt-3">
-              <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid || !this.validIngredients(product.ingredients)" (click)="add()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+              <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid || !this.validIngredients(product.ingredients)" (submit)="add()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
           </div>
       </form>
   </div>
