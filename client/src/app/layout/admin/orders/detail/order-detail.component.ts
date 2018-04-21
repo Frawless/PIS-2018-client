@@ -98,8 +98,10 @@ export class OrderDetailComponent implements OnInit {
     }
 
     protected isValid() {
+        let exportDate = new Date( this.order.exportDate );
+        let createDate = new Date( this.order.createDate );
 
-        if (this.order.createDate > this.order.exportDate)
+        if ( createDate > exportDate )
             return false;
 
         return true;
