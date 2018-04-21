@@ -51,16 +51,16 @@ export class OrderDetailComponent implements OnInit {
     save(): void {
         if ( !this.isValid() )
         {
-            this.alertService.error('Stav objednávký nelze změnít! Opravte prosím data.');
+            this.alertService.error('Objednávku nelze upravit! Opravte prosím data.');
             return;
         }
         this.orderService.update(this.order)
             .subscribe(
                 data => {
-                    this.alertService.success('Stav objednávky změněn na \'' + this.order.state + '\'');
+                    this.alertService.success('Objednávka upravena');
                 },
                 error => {
-                    this.alertService.error('Stav objednávký nelze změnít!');
+                    this.alertService.error('Objednávku nelze upravit!');
                 }
             );
     }
