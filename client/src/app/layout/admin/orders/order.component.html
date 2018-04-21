@@ -6,6 +6,10 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header> Číslo objednávky </mat-header-cell>
           <mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Jméno uživatele</mat-header-cell>
+          <mat-cell *matCellDef="let order"> {{order.user?.username}}</mat-cell>
+        </ng-container>
         <ng-container matColumnDef="createDate">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Vytvořeno </mat-header-cell>
           <mat-cell *matCellDef="let order"> {{order.createDate | date: 'yyyy-MM-dd'}} </mat-cell>

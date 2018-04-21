@@ -17,7 +17,7 @@ interface IOrderWithPrice extends Order {
 export class OrderComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
     dataSource;
-    displayedColumns = ['id', 'createDate', 'exportDate', 'state', 'price'];
+    displayedColumns = ['id', 'username', 'createDate', 'exportDate', 'state', 'price'];
 
     orders: IOrderWithPrice[];
 
