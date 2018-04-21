@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginComponent} from '../../login/login.component';
 import {UserService} from '../../_authentication/_services';
@@ -7,6 +7,13 @@ import {Globals} from '../../globals';
 import {AlertService} from '../../_authentication/_services';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Location} from '@angular/common';
+import {MatSort, MatSortable, MatTableDataSource} from '@angular/material';
+import { Order } from '../admin/orders/order';
+
+interface IOrderWithPrice extends Order {
+    order: Order;
+    price: number;
+}
 
 @Component({
     selector: 'app-user',
@@ -14,12 +21,18 @@ import {Location} from '@angular/common';
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource;
+  displayedColumns = ['id', 'createDate', 'exportDate', 'state', 'price'];
+  orders: IOrderWithPrice[];
+
     @Input() user: User;
     username: string;
     currentUser: string;
     roles = ['ADMIN', 'USER', 'EMPLOYEE'];
 
     userForm: any = {};
+
 
     constructor(
         private loginComponent: LoginComponent,
@@ -43,6 +56,18 @@ export class UserComponent implements OnInit {
     getUser(username: string) {
         this.userService.getUser(username)
             .subscribe(user => {
+              this.orders = user.orders
+                  .map( (order)=> {
+                      let price = this.getOrderPrice(order);
+                      return {
+                          ...order,
+                          order: order,
+                          price: price
+                      };
+                  });
+                this.dataSource = new MatTableDataSource(this.orders);
+                this.dataSource.sort = this.sort;
+
                     this.user = user;
                     this.user.password = '';
 

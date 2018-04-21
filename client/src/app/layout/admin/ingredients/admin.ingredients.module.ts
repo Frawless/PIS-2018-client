@@ -5,9 +5,12 @@ import { IngredientComponent } from './ingredients.component';
 import { IngredientsNewComponent } from './new/ingredients-new.component';
 import { IngredientDetailComponent } from './ingredient-detail/ingredient-detail.component';
 import { AdminIngredientsRoutingModule } from './admin.ingredients-routing.module';
+import {MatTableModule, MatSortModule} from '@angular/material';
 
 @NgModule({
   imports: [
+    MatTableModule,
+    MatSortModule,
     CommonModule,
     AdminIngredientsRoutingModule,
     FormsModule
@@ -19,4 +22,3 @@ import { AdminIngredientsRoutingModule } from './admin.ingredients-routing.modul
   ]
 })
 export class AdminIngredientsModule { }
-

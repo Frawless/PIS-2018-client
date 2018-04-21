@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {IngredientsService} from '../../service/ingredients.service';
 import {Ingredient} from '../../model/ingredient';
+import {MatSort, MatSortable, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-ingredient',
@@ -8,6 +9,9 @@ import {Ingredient} from '../../model/ingredient';
   styleUrls: ['./ingredients.component.scss']
 })
 export class IngredientComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource;
+  displayedColumns = ['name', 'supplier'];
 
   ingredients: Ingredient[];
 
@@ -19,6 +23,10 @@ export class IngredientComponent implements OnInit {
 
   getIngredients(): void {
       this.ingredientsService.getIngredients()
-          .subscribe(ingredients => this.ingredients = ingredients);
+          .subscribe(ingredients => {
+             this.ingredients = ingredients;
+             this.dataSource = new MatTableDataSource(ingredients);
+             this.dataSource.sort = this.sort;
+           });
   }
 }

@@ -6,9 +6,13 @@ import { LoginComponent } from '../../login/login.component';
 import { UserService } from '../../_authentication/_services/user.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {OrderDetailModule} from '../admin/orders/detail/order-detail.module';
+import {MatTableModule, MatSortModule} from '@angular/material';
+
 
 @NgModule({
   imports: [
+    MatTableModule,
+    MatSortModule,
     CommonModule,
     UserRoutingModule,
     FormsModule,

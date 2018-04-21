@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CarsService} from '../../service/cars.service';
 import {Car} from '../../model/car';
 import {Globals} from '../../../globals';
+import {MatSort, MatSortable, MatTableDataSource} from '@angular/material';
 
 @Component({
     selector: 'app-cars',
@@ -9,6 +10,9 @@ import {Globals} from '../../../globals';
     styleUrls: ['./cars.component.scss']
 })
 export class CarsComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+   dataSource;
+   displayedColumns = ['id', 'type', 'dateAdd'];
 
     cars: Car[];
 
@@ -23,6 +27,10 @@ export class CarsComponent implements OnInit {
 
     getCars(): void {
         this.carsService.getCars()
-            .subscribe(cars => this.cars = cars);
+            .subscribe(cars => {
+              this.cars = cars
+              this.dataSource = new MatTableDataSource(cars);
+              this.dataSource.sort = this.sort;
+            });
     }
 }

@@ -5,9 +5,13 @@ import { CarsDetailComponent } from "./detail/detail-cars.component";
 import { CarsNewComponent } from "./new/new-cars.component";
 import { CarsComponent } from "./cars.component";
 import {FormsModule} from "@angular/forms";
+import {MatTableModule, MatSortModule} from '@angular/material';
+
 
 @NgModule({
   imports: [
+    MatTableModule,
+    MatSortModule,
     CommonModule,
     CarsRoutingModule,
     FormsModule
