@@ -5,9 +5,12 @@ import { OrderRoutingModule } from './order-routing.module';
 import { OrderNewComponent } from './new/order-new.component';
 import { FormsModule } from '@angular/forms';
 import {OrderDetailModule} from './detail/order-detail.module';
+import {MatTableModule, MatSortModule} from '@angular/material';
 
 @NgModule({
   imports: [
+    MatTableModule,
+    MatSortModule,
     CommonModule,
     OrderRoutingModule,
     FormsModule,
@@ -19,4 +22,3 @@ import {OrderDetailModule} from './detail/order-detail.module';
   ]
 })
 export class OrderModule { }
-

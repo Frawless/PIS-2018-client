@@ -1,25 +1,29 @@
 <h2>Objednávky</h2>
-<div class="card">
+<div class="card mb-5">
     <div class="card-body table-responsive">
-        <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <th>Číslo objednávky</th>
-                <th>Vytvořeno</th>
-                <th>Odesláno</th>
-                <th>Stav</th>
-                <th>Cena</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let order of orders" routerLink="/shop/admin/orders/detail/{{order.id}}" class="clickable">
-                <td>{{order.id}}</td>
-                <td>{{order.createDate | date: 'yyyy-MM-dd'}}</td>
-                <td>{{order.exportDate| date: 'yyyy-MM-dd'}}</td>
-                <td>{{order.state}}</td>
-                <th>{{getOrderPrice(order)}} Kč</th>
-            </tr>
-            </tbody>
-        </table>
+      <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Číslo objednávky </mat-header-cell>
+          <mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="createDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Vytvořeno </mat-header-cell>
+          <mat-cell *matCellDef="let order"> {{order.createDate | date: 'yyyy-MM-dd'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="exportDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Odesláno </mat-header-cell>
+          <mat-cell *matCellDef="let order"> {{order.exportDate| date: 'yyyy-MM-dd'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="state">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Stav </mat-header-cell>
+          <mat-cell *matCellDef="let order"> {{order.state}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cena </mat-header-cell>
+          <mat-cell class="cellPrice" *matCellDef="let order"> {{getOrderPrice(order)}} Kč </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let order; columns:displayedColumns" routerLink="/shop/admin/orders/detail/{{order.id}}" class="clickable">  </mat-row>
+      </mat-table>
     </div>
 </div>

@@ -1,8 +1,8 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { OrderService } from './service/order.service';
 import { Order } from './order';
 import {Location} from '@angular/common';
-
+import {MatSort, MatSortable, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-orders',
@@ -10,6 +10,9 @@ import {Location} from '@angular/common';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+    dataSource;
+    displayedColumns = ['id', 'createDate', 'exportDate', 'state', 'price'];
 
     orders: Order[];
 
@@ -23,7 +26,12 @@ export class OrderComponent implements OnInit {
 
     getOrders(): void {
         this.orderService.getOrders()
-            .subscribe(orders => this.orders = orders);
+            .subscribe(orders => {
+            this.orders = orders;
+            this.dataSource = new MatTableDataSource(orders);
+            this.dataSource.sort = this.sort;
+          });
+
     }
 
     getOrderPrice(order): number {

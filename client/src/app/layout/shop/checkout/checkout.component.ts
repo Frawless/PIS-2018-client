@@ -123,8 +123,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         return items.countOrdered * items.product.price;
     }
 
-
-    userUpdate(){
+    send() {
       this.userService.update(this.order.user)
           .subscribe();
               /*result => {
@@ -133,11 +132,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
               error => {
                   this.alertService.error('Uživatele nelze upravit!');
               });*/
-
-    }
-
-    send() {
-        this.userUpdate();
 
         const minimalOrder = {...this.order};
         // user
