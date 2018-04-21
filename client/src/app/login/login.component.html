@@ -1,6 +1,6 @@
 <!--Login button-->
 <button type="button" class="btn btn-dark btn-sm ml-auto" (click)="showLoginDialog()" *ngIf="showLoginButton">
-    <i class="fa fa-user-circle-o mr-2"></i>Login/Registration
+    <i class="fa fa-user-circle-o mr-2"></i>Přihlásit/Registrovat
 </button>
 
 <!--Login adn registration dialog-->
@@ -16,20 +16,20 @@
                     <div class="col-md-10">
                         <form [formGroup]="credentials" novalidate>
                             <div class="form-group">
-                                <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Username" />
+                                <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Přihlašovací jméno" />
                                 <span  *ngIf="credentials.hasError('required', 'username') && credentials.get('username').touched">
                                     Username is required.
                                     <script>this.credentials.get('username')</script>
                                 </span>
                             </div>
                             <div class="form-group">
-                                <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Password" />
+                                <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Heslo" />
                                 <span  *ngIf="credentials.hasError('required', 'password') && credentials.get('password').touched">
                                     Password is required.
                                 </span>
                             </div>
                             <div class="form-group">
-                                <button [disabled]="loginLoading" class="btn rounded-btn" (click)="login()" >Login</button>
+                                <button [disabled]="loginLoading" class="btn rounded-btn" (click)="login()" >Přihlásit</button>
                                 <img *ngIf="loginLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                 <!--[routerLink]="['/register']"-->
                             </div>
@@ -44,19 +44,19 @@
                     <div class="col-md-10">
                         <form [formGroup]="registration" novalidate>
                             <div class="form-group">
-                                <input formControlName="firstname" type="text" class="form-control input-underline input-lg" placeholder="First Name" />
+                                <input formControlName="firstname" type="text" class="form-control input-underline input-lg" placeholder="Jméno" />
                                 <span  *ngIf="registration.hasError('required', 'firstname') && registration.get('firstname').touched">
                                     First name is required.
                                 </span>
                             </div>
                             <div class="form-group">
-                                <input formControlName="lastname" type="text" class="form-control input-underline input-lg" placeholder="Last Name" />
+                                <input formControlName="lastname" type="text" class="form-control input-underline input-lg" placeholder="Příjmení" />
                                 <span  *ngIf="registration.hasError('required', 'lastname')  && registration.get('lastname').touched">
                                     Last name is required.
                                 </span>
                             </div>
                             <div class="form-group">
-                                <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Username" />
+                                <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Přihlašovací jméno" />
                                 <span  *ngIf="registration.hasError('required', 'username') && registration.get('username').touched">
                                     Username is required.
                                 </span>
@@ -68,13 +68,13 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Password" />
+                                <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Heslo" />
                                 <span  *ngIf="registration.hasError('required', 'password') && registration.get('password').touched">
                                     Password is required.
                                 </span>
                             </div>
                             <div class="form-group">
-                                <button [disabled]="registrationLoading" class="btn rounded-btn mb-4" (click)="register()">Register</button>
+                                <button [disabled]="registrationLoading" class="btn rounded-btn mb-4" (click)="register()">Registrovat</button>
                                 <img *ngIf="registrationLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                 <!--<a [routerLink]="['/login']" class="btn btn-link">Cancel</a>-->
                             </div>
@@ -92,6 +92,6 @@
         <i class="fa fa-user-circle-o mr-2"></i>{{currentUser}}
     </button>
     <button type="button" class="btn btn-dark btn-sm ml-auto" (click)="logout()">
-        <i class="fa fa-sign-out mr-2"></i>Logout
+        <i class="fa fa-sign-out mr-2"></i>Odhlásit
     </button>
 </div>
