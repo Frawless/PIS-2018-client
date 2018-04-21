@@ -3,7 +3,8 @@ import {Ingredient} from '../../../model/ingredient';
 import {IngredientsService} from '../../../service/ingredients.service';
 import {Router} from '@angular/router';
 import {AlertService} from '../../../../_authentication/_services';
-import {Location} from "@angular/common";
+import {Location} from '@angular/common';
+import {Globals} from '../../../../globals';
 
 @Component({
   selector: 'app-new-ingredient',
@@ -17,7 +18,8 @@ export class IngredientsNewComponent implements OnInit {
       private router: Router,
       private ingredientService: IngredientsService,
       private alertService: AlertService,
-      private _location: Location
+      private _location: Location,
+      private globals: Globals
   ) { }
 
   ngOnInit() {
