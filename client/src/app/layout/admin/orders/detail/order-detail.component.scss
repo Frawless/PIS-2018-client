@@ -19,23 +19,23 @@ h2 {
 }
 
 .ng-valid[required], .ng-valid.required  {
-    border-left: 5px solid #42A948; /* green */
+    border-left: 5px solid #42A948; // green
 }
 
 .ng-valid[email], .ng-valid.email {
-    border-left: 5px solid #42A948; /* green */
+    border-left: 5px solid #42A948; // green
 }
 
 .ng-valid[appForbiddenName], .ng-valid.appForbiddenName {
-    border-left: 5px solid #42A948; /* green */
+    border-left: 5px solid #42A948; // green
 }
 
 .ng-valid[phone], .ng-valid.phone {
-    border-left: 5px solid #42A948; /* green */
+    border-left: 5px solid #42A948; // green
 }
 
 .ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; /* red */
+    border-left: 5px solid #a94442; // red
 }
 
 .buttons{
@@ -63,4 +63,13 @@ form{
 
 .clickable{
     cursor: pointer;
+}
+
+
+input:not([disabled]):invalid {
+    border-left: 5px solid #a94442; // green
+}
+
+input:not([disabled]) {
+    border-left: 5px solid #42A948; // green
 }

@@ -156,14 +156,13 @@
       </div>
 
       <div class="buttons" *ngIf="this.globals.currentRole > 1">
-          <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+          <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (submit)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
           <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
       </div>
     </div>
 
-
   </form>
-
+    
   <h2 *ngIf="this.isAdminDetail">Detail objednaných produktů</h2>
   <div class="card">
       <div class="card-body table-responsive">
