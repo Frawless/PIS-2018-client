@@ -6,9 +6,12 @@ import { ProductNewComponent } from './new/product-new.component';
 import { FormsModule } from '@angular/forms';
 import {ProductDetailModule} from './detail/product-detail.module';
 import {MtImagePreviewComponentModule} from '../../components/image-preview/image-preview.module';
+import {MatTableModule, MatSortModule} from '@angular/material';
 
 @NgModule({
   imports: [
+    MatTableModule,
+    MatSortModule,
     CommonModule,
     AdminProductsRoutingModule,
     FormsModule,
@@ -23,4 +26,3 @@ import {MtImagePreviewComponentModule} from '../../components/image-preview/imag
   ]
 })
 export class AdminProductsModule { }
-
