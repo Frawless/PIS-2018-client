@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductsService } from '../../service/products.service';
 import { Product } from '../../model/product';
-
+import {MatSort, MatSortable, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-products',
@@ -9,6 +9,9 @@ import { Product } from '../../model/product';
   styleUrls: ['./admin.products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+    dataSource;
+    displayedColumns = ['name', 'totalAmount', 'price'];
 
     products: Product[];
 
@@ -20,7 +23,11 @@ export class AdminProductsComponent implements OnInit {
 
     getProducts(): void {
         this.productsService.getProducts()
-            .subscribe(products => this.products = products);
+            .subscribe(products => {
+              this.products = products
+              this.dataSource = new MatTableDataSource(products);
+              this.dataSource.sort = this.sort;
+            });
     }
 
 }

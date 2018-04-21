@@ -1,23 +1,25 @@
 <h2>Uživatelské účty</h2>
 <div class="card">
     <div class="card-body table-responsive">
-        <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <th>Užívatelské jméno</th>
-                <th>Jméno</th>
-                <th>Příjmení</th>
-                <th>Role</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let user of users" routerLink="/shop/user/{{user.username}}" class="clickable">
-                <td style="font-weight:bold">{{user.username}}</td>
-                <td>{{user.firstname}}</td>
-                <td>{{user.lastname}}</td>
-                <td>{{user.role.name}}</td>
-            </tr>
-            </tbody>
-        </table>
+      <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Užívatelské jméno </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="firstname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Jméno </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.firstname}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Příjmení </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.lastname}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="roleName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.roleName}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let user; columns:displayedColumns" routerLink="/shop/user/{{user.username}}" class="clickable"></mat-row>
+      </mat-table>
     </div>
 </div>
