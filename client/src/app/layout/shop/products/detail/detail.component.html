@@ -21,6 +21,7 @@
         <div class="form-group input-group">
             <input type="number" class="form-control" id="quantity"
                    required
+                   min="1"
                    [ngModel]="quantity" name="quantity"
                    (ngModelChange)="quantity=$event"
                    placeholder="1"/>

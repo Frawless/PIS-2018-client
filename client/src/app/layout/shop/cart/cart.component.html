@@ -30,6 +30,7 @@
                             <input type="number" class="form-control" id="quantity" min="1"
                                    (change)="addToCart(item.product, $event.target.value)"
                                    required
+                                   min="1"
                                    [ngModel]="item.quantity" name="quantity"/>
                         </div>
                     </td>
