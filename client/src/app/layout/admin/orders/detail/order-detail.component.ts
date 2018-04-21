@@ -49,6 +49,14 @@ export class OrderDetailComponent implements OnInit {
     }
 
     save(): void {
+        if ( !this.isValid() )
+        {
+            this.alertService.error('Stav objednávký nelze změnít! Opravte prosím data.');
+            return;
+        }
+        else {
+
+
         this.orderService.update(this.order)
             .subscribe(
                 data => {
@@ -57,7 +65,7 @@ export class OrderDetailComponent implements OnInit {
                 error => {
                     this.alertService.error('Stav objednávký nelze změnít!');
                 }
-            );
+            );}
     }
 
     delete(): void {
@@ -90,5 +98,13 @@ export class OrderDetailComponent implements OnInit {
 
     backClicked() {
         this._location.back();
+    }
+
+    protected isValid() {
+
+        if (this.order.createDate > this.order.exportDate)
+            return false;
+
+        return true;
     }
 }
