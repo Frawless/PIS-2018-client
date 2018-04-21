@@ -20,7 +20,7 @@
         </ng-container>
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Cena </mat-header-cell>
-          <mat-cell class="cellPrice" *matCellDef="let order"> {{getOrderPrice(order)}} Kč </mat-cell>
+          <mat-cell class="cellPrice" *matCellDef="let order"> {{order.price}} Kč </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
         <mat-row *matRowDef="let order; columns:displayedColumns" routerLink="/shop/admin/orders/detail/{{order.id}}" class="clickable">  </mat-row>

@@ -28,6 +28,11 @@ export class OrderComponent implements OnInit {
         this.orderService.getOrders()
             .subscribe(orders => {
             this.orders = orders;
+            this.orders = orders
+                .map( (order)=> {
+                    order.price = this.getOrderPrice(order);
+                    return order;
+                });
             this.dataSource = new MatTableDataSource(orders);
             this.dataSource.sort = this.sort;
           });

@@ -24,6 +24,7 @@ export class Order {
     items: Item[];
     user: User;
     address: Address;
+    price: number;
 
     constructor(car, createDate, exportDate, user, state, items) {
         this.car = car;
