@@ -41,8 +41,12 @@ export class CartService {
             item.product_id = product.id;
             cart.items.push(item);
         }
-        if(item.quantity + quantity > product.totalAmount) return;
-        item.quantity += quantity;
+        if(item.quantity + quantity > product.totalAmount) {
+            item.quantity = product.totalAmount;
+        }
+        else {
+            item.quantity += quantity;
+        }
 
         this.calculateCart(cart);
         this.save(cart);
@@ -57,8 +61,9 @@ export class CartService {
             item.product_id = product.id;
             cart.items.push(item);
         }
-
-        item.quantity = quantity;
+        if (quantity <= product.totalAmount) {
+            item.quantity = quantity;
+        }
 
         this.calculateCart(cart);
         this.save(cart);
