@@ -5,6 +5,8 @@ import {Order} from '../order';
 import {Globals} from '../../../../globals';
 import {Location} from '@angular/common';
 import {AlertService} from '../../../../_authentication/_services';
+import {CarsService} from "../../../service/cars.service";
+import {Car} from "../../../model/car";
 
 @Component({
     selector: 'app-order-detail',
@@ -13,6 +15,7 @@ import {AlertService} from '../../../../_authentication/_services';
 })
 export class OrderDetailComponent implements OnInit {
     @Input() order: Order;
+    cars: Car[];
 
     states = ['PENDING', 'ACCEPTED', 'DONE', 'IN_PROCESS', 'READY'];
 
@@ -25,11 +28,13 @@ export class OrderDetailComponent implements OnInit {
         private globals: Globals,
         private _location: Location,
         private alertService: AlertService,
+        private carsService: CarsService,
     ) {
     }
 
     ngOnInit() {
         this.getOrderInfo();
+        if(this.isAdminDetail) this.getCars();
     }
 
     getOrderInfo(): void {
@@ -46,6 +51,11 @@ export class OrderDetailComponent implements OnInit {
             .subscribe(user => this.order.user = user);
 
 
+    }
+
+    getCars(): void {
+        this.carsService.getCars()
+            .subscribe(cars => this.cars = cars);
     }
 
     save(): void {

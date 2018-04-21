@@ -158,8 +158,20 @@
           </select>
       </div>
 
+        <div *ngIf="this.isAdminDetail" class="form-group input-group" >
+            <div class="input-group-prepend">
+                <span class="input-group-text">Vozidlo:</span>
+            </div>
+            <select class="form-control" id="car"
+                    [ngModel]="order.car"  name="car"
+                    (ngModelChange)="order.car=$event"
+                    #car="ngModel">
+                <option [selected]="order.car.id == car.id" *ngFor="let car of this.cars" [ngValue]="car">{{car.type}}</option>
+            </select>
+        </div>
+
       <div class="buttons" *ngIf="this.globals.currentRole > 1">
-          <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (submit)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+          <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
           <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
       </div>
     </div>

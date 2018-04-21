@@ -1,5 +1,6 @@
 import {Product} from '../../model/product';
 import {User} from '../../../_authentication/_models/user'
+import {Car} from "../../model/car";
 
 export class Item {
     id: number;
@@ -16,7 +17,7 @@ export class Address {
 
 export class Order {
     id: number;
-    car: number;
+    car: Car;
     createDate: string;
     exportDate: string;
     state: string;
