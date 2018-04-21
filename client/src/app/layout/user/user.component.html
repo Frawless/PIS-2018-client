@@ -120,6 +120,7 @@
                     <input type="number" class="form-control" id="psc"
                            required
                            minlength="4"
+                           min="1"
                            [ngModel]="user.address?.psc" name="psc"
                            (ngModelChange)="user.address.psc=$event"
                            placeholder="60200"

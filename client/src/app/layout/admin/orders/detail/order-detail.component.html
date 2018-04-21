@@ -98,6 +98,7 @@
             <input type="number" class="form-control" id="streetNumber"
                    [disabled]="!this.isAdminDetail"
                    required
+                   min="1"
                    [ngModel]="order.address.streetNumber" name="streetNumber"
                    #streetNumber="ngModel"/>
         </div>
@@ -109,6 +110,8 @@
             <input type="number" class="form-control" id="psc"
                    [disabled]="!this.isAdminDetail"
                    required
+                   min="1"
+                   minlength="4"
                    [ngModel]="order.address.psc" name="psc"
                    #psc="ngModel"/>
         </div>
@@ -162,7 +165,7 @@
     </div>
 
   </form>
-    
+
   <h2 *ngIf="this.isAdminDetail">Detail objednaných produktů</h2>
   <div class="card">
       <div class="card-body table-responsive">
