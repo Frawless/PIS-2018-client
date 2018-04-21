@@ -22,15 +22,14 @@
                 </ul>
             </div>
             <div class="form-group input-group">
-                <input type="number" class="form-control" id="quantityValue"
+                <input type="number" class="form-control" id="quantity"
                        required
                        min="1"
                        max="{{product?.totalAmount}}"
-                       [ngModel]="quantity" name="quantityValue"
+                       [ngModel]="quantity" name="quantity"
                        (ngModelChange)="quantity=$event"
-                       placeholder="1"
-                       #quantityValue="ngModel"/>
-                <button class="btn btn-success" [disabled]="!cartProduct.valid || !isValid()" (submit)="addToCart();">
+                       placeholder="1"/>
+                <button class="btn btn-success" [disabled]="!cartProduct.valid || !isValid()" (click)="addToCart();">
                     Přidat do košíku
                 </button>
             </div>

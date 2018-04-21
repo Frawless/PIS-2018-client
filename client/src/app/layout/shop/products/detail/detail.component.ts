@@ -52,6 +52,9 @@ export class DetailComponent implements OnInit {
     }
 
     isValid() {
+        if (!this.product) {
+            return false;
+        }
         if (this.quantity > this.product.totalAmount || this.quantity < 1) {
             return false;
         }

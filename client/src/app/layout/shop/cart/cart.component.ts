@@ -15,9 +15,9 @@ interface ICartItemWithProduct extends CartItem {
 }
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+    selector: 'app-checkout',
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, OnDestroy {
     public cart: Observable<ShoppingCart>;
@@ -26,11 +26,13 @@ export class CartComponent implements OnInit, OnDestroy {
     public products: Product[];
 
     private cartSubscription: Subscription;
-    constructor( private cartService: CartService,
-                 private productsService: ProductsService,
-                 private domSanitizer: DomSanitizer,
-                 private globals: Globals,
-                 private _location: Location) { }
+
+    constructor(private cartService: CartService,
+                private productsService: ProductsService,
+                private domSanitizer: DomSanitizer,
+                private globals: Globals,
+                private _location: Location) {
+    }
 
     ngOnInit() {
         this.cart = this.cartService.get();
@@ -46,7 +48,8 @@ export class CartComponent implements OnInit, OnDestroy {
                             return {
                                 ...item,
                                 product,
-                                totalCost: product.price * item.quantity };
+                                totalCost: product.price * item.quantity
+                            };
                         });
                 });
         });
@@ -76,5 +79,17 @@ export class CartComponent implements OnInit, OnDestroy {
 
     backClicked() {
         this._location.back();
+    }
+
+
+    recomputeProductAmount(currentAmount, item) {
+        if (currentAmount > item.product.totalAmount) {
+            item.totalCost = item.product.price * item.product.totalAmount;
+            item.quantity = item.product.totalAmount;
+            return item.product.totalAmount;
+        }
+        item.product.totalAmount = currentAmount;
+        item.quantity = currentAmount;
+        return currentAmount;
     }
 }

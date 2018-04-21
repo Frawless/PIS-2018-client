@@ -32,7 +32,7 @@
                                    required
                                    min="1"
                                    [max]="item.product.totalAmount"
-                                   [ngModel]="item.quantity" name="quantity"/>
+                                   [ngModel]="recomputeProductAmount(item.quantity, item)" name="quantity"/>
                         </div>
                     </td>
                     <td>{{item.totalCost}} Kč</td>
