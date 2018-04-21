@@ -31,6 +31,7 @@
                                    (change)="addToCart(item.product, $event.target.value)"
                                    required
                                    min="1"
+                                   [max]="item.product.totalAmount"
                                    [ngModel]="item.quantity" name="quantity"/>
                         </div>
                     </td>

@@ -111,7 +111,7 @@
                    [disabled]="!this.isAdminDetail"
                    required
                    min="1"
-                   minlength="4"
+                   pattern="{{globals.pscPattern}}"
                    [ngModel]="order.address.psc" name="psc"
                    #psc="ngModel"/>
         </div>

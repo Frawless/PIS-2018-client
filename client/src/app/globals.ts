@@ -22,6 +22,7 @@ export class Globals {
     usernamePattern = '[A-Za-z0-9]*';
     cityPattern = '[A-Z]{1}[a-z]*';
     streetPattern = '[A-Za-z0-9 ]*';
+    pscPattern = '[0-9]{4,}';
 
 
     public getTodayDate() {
