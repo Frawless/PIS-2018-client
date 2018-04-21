@@ -4,17 +4,22 @@ import { Order } from './order';
 import {Location} from '@angular/common';
 import {MatSort, MatSortable, MatTableDataSource} from '@angular/material';
 
+interface IOrderWithPrice extends Order {
+    order: Order;
+    price: number;
+}
+
 @Component({
-  selector: 'app-orders',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+    selector: 'app-orders',
+    templateUrl: './order.component.html',
+    styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
     dataSource;
     displayedColumns = ['id', 'createDate', 'exportDate', 'state', 'price'];
 
-    orders: Order[];
+    orders: IOrderWithPrice[];
 
     constructor(
         private orderService: OrderService,
@@ -27,13 +32,16 @@ export class OrderComponent implements OnInit {
     getOrders(): void {
         this.orderService.getOrders()
             .subscribe(orders => {
-            this.orders = orders;
             this.orders = orders
                 .map( (order)=> {
-                    order.price = this.getOrderPrice(order);
-                    return order;
+                    let price = this.getOrderPrice(order);
+                    return {
+                        ...order,
+                        order: order,
+                        price: price
+                    };
                 });
-            this.dataSource = new MatTableDataSource(orders);
+            this.dataSource = new MatTableDataSource(this.orders);
             this.dataSource.sort = this.sort;
           });
 
