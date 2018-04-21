@@ -31,6 +31,7 @@ export class CartService {
     }
 
     add(product: Product, quantity: number) {
+        if(quantity < 1) return;
         const cart = this.retrieve();
         let item = cart.items.find((p) => p.product_id === product.id );
         if (item === undefined) {
