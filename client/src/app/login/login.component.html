@@ -45,32 +45,32 @@
                         <form [formGroup]="registration" novalidate>
                             <div class="form-group">
                                 <input formControlName="firstname" type="text" class="form-control input-underline input-lg" placeholder="Jméno" />
-                                <span  *ngIf="registration.hasError('required', 'firstname') && registration.get('firstname').touched">
-                                    First name is required.
+                                <span  *ngIf="(registration.hasError('required', 'firstname') || registration.hasError('pattern', 'firstname')) && registration.get('firstname').touched">
+                                    Jméno je potřeba vyplňit ve správném formátu.
                                 </span>
                             </div>
                             <div class="form-group">
                                 <input formControlName="lastname" type="text" class="form-control input-underline input-lg" placeholder="Příjmení" />
-                                <span  *ngIf="registration.hasError('required', 'lastname')  && registration.get('lastname').touched">
-                                    Last name is required.
+                                <span  *ngIf="(registration.hasError('required', 'lastname') || registration.hasError('pattern', 'lastname'))  && registration.get('lastname').touched">
+                                    Příjmení je potřeba vyplňit ve správném formátu
                                 </span>
                             </div>
                             <div class="form-group">
                                 <input formControlName="username" type="text" class="form-control input-underline input-lg" placeholder="Přihlašovací jméno" />
-                                <span  *ngIf="registration.hasError('required', 'username') && registration.get('username').touched">
-                                    Username is required.
+                                <span  *ngIf="(registration.hasError('required', 'username') || registration.hasError('pattern', 'username')) && registration.get('username').touched">
+                                    Přihlašovací jméno je potřeba vyplňit ve správném formátu
                                 </span>
                             </div>
                             <div class="form-group">
                                 <input formControlName="email" type="email" class="form-control input-underline input-lg" placeholder="Email" />
                                 <span  *ngIf="registration.hasError('email', 'email') && registration.get('email').touched">
-                                    Please enter the correct email, this email not valid.
+                                    Email je potřeba vyplňit ve správném formátu
                                 </span>
                             </div>
                             <div class="form-group">
                                 <input formControlName="password" type="password" class="form-control input-underline input-lg" placeholder="Heslo" />
                                 <span  *ngIf="registration.hasError('required', 'password') && registration.get('password').touched">
-                                    Password is required.
+                                    Heslo je potřeba vyplňit ve správném formátu
                                 </span>
                             </div>
                             <div class="form-group">

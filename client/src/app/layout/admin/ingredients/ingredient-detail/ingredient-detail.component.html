@@ -7,11 +7,11 @@
   <form (ngSubmit)="save()" #ingredientsForm="ngForm" *ngIf="ingredient" class="col-md-6">
       <div class="form-group input-group">
           <div class="input-group-prepend">
-              <span class="input-group-text">Jméno:</span>
+              <span class="input-group-text">Název:</span>
           </div>
           <input type="text" class="form-control" id="name"
                  required
-                 pattern="{{globals.namePattern}}"
+                 pattern="{{globals.productPattern}}"
                  [ngModel]="ingredient.name" name="name"
                  (ngModelChange)="ingredient.name=$event"
                  placeholder="Mouka"

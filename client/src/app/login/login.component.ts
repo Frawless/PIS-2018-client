@@ -45,11 +45,9 @@ export class LoginComponent implements OnInit {
         private data: DataService) {
     }
 
-    // @TODO check this
-    // https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
     ngOnInit() {
         this.showLoginButton = true;
-        this.globals.showLoginDialog = false;//this.showLogin = false;
+        this.globals.showLoginDialog = false;
         // Login validators
         this.credentials = this.formBuilder.group({
             username: ['', Validators.required],
@@ -58,13 +56,31 @@ export class LoginComponent implements OnInit {
         });
         // Registration validators
         this.registration = this.formBuilder.group({
-            firstname: ['', [Validators.required, Validators.maxLength(40)]],
-            lastname: ['', [Validators.required, Validators.maxLength(40)]],
-            username: ['', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]],
-            email: ['', [Validators.email, Validators.required]],
-            password: ['', Validators.required],
+            firstname: ['', [
+                Validators.required,
+                Validators.maxLength(40),
+                Validators.pattern(this.globals.namePattern)
+            ]],
+            lastname: ['', [
+                Validators.required,
+                Validators.maxLength(40),
+                Validators.pattern(this.globals.namePattern)
+            ]],
+            username: ['', [
+                Validators.required,
+                Validators.maxLength(40),
+                Validators.minLength(3),
+                Validators.pattern(this.globals.usernamePattern)
+            ]],
+            email: ['', [
+                Validators.email,
+                Validators.required
+            ]],
+            password: ['', [
+                Validators.required,
+                // Validators.pattern('passwordPattern')
+            ]],
             phoneNumber: ['']
-            // @TODO jstejska: add min-length validator for password and regex validator for nam
         });
 
         // Loading current user

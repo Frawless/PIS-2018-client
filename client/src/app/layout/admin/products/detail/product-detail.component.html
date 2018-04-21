@@ -11,7 +11,7 @@
                 </div>
                 <input type="text" class="form-control" id="name"
                        required
-                       pattern="{{globals.namePattern}}"
+                       pattern="{{globals.productPattern}}"
                        [ngModel]="product.name" name="name"
                        (ngModelChange)="product.name=$event"
                        placeholder="Chleba"

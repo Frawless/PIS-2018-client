@@ -8,11 +8,11 @@
       <form  #productForm="ngForm">
           <div class="form-group input-group">
               <div class="input-group-prepend">
-                  <span class="input-group-text">Jméno:</span>
+                  <span class="input-group-text">Název:</span>
               </div>
               <input type="text" class="form-control" id="name"
                      required
-                     pattern="{{globals.namePattern}}"
+                     pattern="{{globals.productPattern}}"
                      [ngModel]="product.name" name="name"
                      (ngModelChange)="product.name=$event"
                      placeholder="Rohlík"
