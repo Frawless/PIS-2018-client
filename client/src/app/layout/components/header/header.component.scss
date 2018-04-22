@@ -27,5 +27,13 @@
         text-align: center;
         padding-top: 3em;
         padding-bottom: 1em;
+        background-image: url('back.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
 }
+
+h1 { letter-spacing: 10px; font-family: 'Droid serif', serif; font-size: 36px; font-weight: 500; font-style: italic; line-height: 44px; margin: 0 0 12px; text-align: center; }
+p {font-style: italic;}
