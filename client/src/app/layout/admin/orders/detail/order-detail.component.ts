@@ -40,7 +40,11 @@ export class OrderDetailComponent implements OnInit {
     getOrderInfo(): void {
         const id = +this.route.snapshot.paramMap.get('id');
         this.orderService.getOrder(id)
-            .subscribe(order => this.order = order);
+            .subscribe(order => {
+                this.order = order;
+                if(this.order.car == null){
+                  this.order.car = {id: 0, dateAdd: null, type: ""}; }
+              });
 
         if (this.router.url.indexOf('user') > -1) {
             this.isAdminDetail = false;
@@ -64,6 +68,7 @@ export class OrderDetailComponent implements OnInit {
             this.alertService.error('Objednávku nelze upravit! Opravte prosím data.');
             return;
         }
+
         this.orderService.update(this.order)
             .subscribe(
                 data => {

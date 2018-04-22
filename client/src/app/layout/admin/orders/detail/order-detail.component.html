@@ -162,10 +162,10 @@
                 <span class="input-group-text">Vozidlo:</span>
             </div>
             <select class="form-control" id="car"
-                    [ngModel]="order.car"  name="car"
-                    (ngModelChange)="order.car=$event"
+                    [ngModel]="order.car?.id"  name="car"
+                    (ngModelChange)="order.car.id=$event"
                     #car="ngModel">
-                <option [selected]="order.car.id == car.id" *ngFor="let car of this.cars" [ngValue]="car">{{car.type}}</option>
+                <option [selected]="order.car?.id == car.id" *ngFor="let car of this.cars" value={{car.id}}>{{car.type}}</option>
             </select>
         </div>
 
