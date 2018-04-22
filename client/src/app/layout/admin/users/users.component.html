@@ -1,6 +1,11 @@
 <h2>Uživatelské účty</h2>
 <div class="card">
     <div class="card-body table-responsive">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
       <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="username">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Užívatelské jméno </mat-header-cell>

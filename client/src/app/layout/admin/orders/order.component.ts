@@ -29,6 +29,7 @@ export class OrderComponent implements OnInit {
         this.getOrders();
     }
 
+
     getOrders(): void {
         this.orderService.getOrders()
             .subscribe(orders => {
@@ -61,4 +62,11 @@ export class OrderComponent implements OnInit {
     getItemsPrice(items): number {
         return items.countOrdered * items.product.price;
     }
+
+    applyFilter(filterValue: string) {
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+      this.dataSource.filter = filterValue;
+    }
+    
 }

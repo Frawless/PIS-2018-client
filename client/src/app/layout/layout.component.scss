@@ -20,7 +20,7 @@ alert{
   text-align: center;
 }
 app-sidebar{
-position: absolute;
+    position: relative;
 }
 
 input:not([disabled]):invalid {
