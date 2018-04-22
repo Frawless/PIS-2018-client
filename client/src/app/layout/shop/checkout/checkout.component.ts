@@ -124,6 +124,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     send() {
+      this.order.user.password = '';
       this.userService.update(this.order.user)
           .subscribe();
               /*result => {
