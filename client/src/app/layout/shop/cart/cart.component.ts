@@ -88,7 +88,7 @@ export class CartComponent implements OnInit, OnDestroy {
             item.quantity = item.product.totalAmount;
             return item.product.totalAmount;
         }
-        item.product.totalAmount = currentAmount;
+        //item.product.totalAmount = currentAmount;
         item.quantity = currentAmount;
         return currentAmount;
     }
