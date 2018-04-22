@@ -157,16 +157,15 @@
               <option [selected]="order.state == state" *ngFor="let state of this.states" [ngValue]="state">{{state}}</option>
           </select>
       </div>
-
-        <div *ngIf="this.isAdminDetail" class="form-group input-group" >
-            <div class="input-group-prepend">
+       <div *ngIf="this.isAdminDetail" class="form-group input-group" >
+           <div class="input-group-prepend">
                 <span class="input-group-text">Vozidlo:</span>
             </div>
             <select class="form-control" id="car"
-                    [ngModel]="order.car.id"  name="car"
-                    (ngModelChange)="order.car.id=$event"
+                    [ngModel]="order.car"  name="car"
+                    (ngModelChange)="order.car=$event"
                     #car="ngModel">
-                <option [selected]="order.car.id == car.id" *ngFor="let car of this.cars" [ngValue]="car.id">{{car.type}}</option>
+                <option [selected]="order.car.id == car.id" *ngFor="let car of this.cars" [ngValue]="car">{{car.type}}</option>
             </select>
         </div>
 
