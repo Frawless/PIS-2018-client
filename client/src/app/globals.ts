@@ -18,11 +18,11 @@ export class Globals {
     tomorrowDate = this.getTomorrowyDate();
 
     // Pattern regexes
-    namePattern = '^[A-Z]{1}[a-z]*$';
+    namePattern = '^[A-Ž]{1}[a-ž]*$';
     usernamePattern = '[A-z0-9]*';
-    productPattern = '[A-z ]*';
-    cityPattern = '[A-Ž]{1}[a-z]*';
-    streetPattern = '[A-z0-9 ]*';
+    productPattern = '[A-ž ]*';
+    cityPattern = '[A-Ž]{1}[a-ž]*';
+    streetPattern = '[A-ž0-9 ]*';
     pscPattern = '[0-9]{4,}';
     passwordPattern = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$';  // at least one number, one letter and 8 characters
 
