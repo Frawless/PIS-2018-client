@@ -42,7 +42,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         private orderService: OrderService,
         private router: Router,
         private _location: Location,
-        private globals: Globals
+        public globals: Globals
     ) {
     }
 

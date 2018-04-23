@@ -4,6 +4,7 @@ import {CarsService} from '../../../service/cars.service';
 import {Car} from '../../../model/car';
 import {Location} from '@angular/common';
 import {Globals} from '../../../../globals';
+import {AlertService} from '../../../../_authentication/_services';
 
 @Component({
     selector: 'app-detail',
@@ -17,6 +18,7 @@ export class CarsDetailComponent implements OnInit {
                 private route: ActivatedRoute,
                 private carsService: CarsService,
                 private _location: Location,
+                private alertService: AlertService,
                 private globals: Globals
     ) {
     }
@@ -33,14 +35,23 @@ export class CarsDetailComponent implements OnInit {
 
     save(): void {
         this.carsService.update(this.car)
-            .subscribe();
-        this.router.navigate(['/shop/admin/cars']);
+            .subscribe( data => {
+                    this.alertService.success('Auto \'' + this.car.type + '\' upraveno!');
+                },
+                error => {
+                    this.alertService.error('Auto \'' + this.car.type + '\' nelze upravit!');
+                });
     }
 
     delete(): void {
         this.carsService.delete(this.car)
-            .subscribe();
-        this.router.navigate(['/shop/admin/cars']);
+            .subscribe( data => {
+                    this.alertService.success('Auto \'' + this.car.type + '\' smazáno!');
+                },
+                error => {
+                    this.alertService.error('Auto \'' + this.car.type + '\' nelze smazat!');
+                });
+        this._location.back();
     }
 
     backClicked() {

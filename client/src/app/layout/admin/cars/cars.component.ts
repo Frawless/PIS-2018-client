@@ -29,7 +29,7 @@ export class CarsComponent implements OnInit {
         this.carsService.getCars()
             .subscribe(cars => {
               this.cars = cars;
-              this.dataSource = new MatTableDataSource(cars);
+              this.dataSource = new MatTableDataSource(this.cars);
               this.dataSource.sort = this.sort;
             });
     }

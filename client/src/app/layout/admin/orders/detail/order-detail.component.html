@@ -77,6 +77,7 @@
                    [disabled]="!this.isAdminDetail"
                    required
                    [ngModel]="order.address.city" name="city"
+                   (ngModelChange)="order.address.city=$event"
                    #city="ngModel"/>
         </div>
 
@@ -88,6 +89,7 @@
                    [disabled]="!this.isAdminDetail"
                    required
                    [ngModel]="order.address.streetName" name="streetName"
+                   (ngModelChange)="order.address.streetName=$event"
                    #streetName="ngModel"/>
         </div>
 
@@ -100,6 +102,7 @@
                    required
                    min="1"
                    [ngModel]="order.address.streetNumber" name="streetNumber"
+                   (ngModelChange)="order.address.streetNumber=$event"
                    #streetNumber="ngModel"/>
         </div>
 
@@ -113,6 +116,7 @@
                    min="1"
                    pattern="{{globals.pscPattern}}"
                    [ngModel]="order.address.psc" name="psc"
+                   (ngModelChange)="order.address.psc=$event"
                    #psc="ngModel"/>
         </div>
     </div>

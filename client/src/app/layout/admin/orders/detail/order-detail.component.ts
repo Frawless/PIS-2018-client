@@ -68,7 +68,7 @@ export class OrderDetailComponent implements OnInit {
             this.alertService.error('Objednávku nelze upravit! Opravte prosím data.');
             return;
         }
-
+        console.log(this.order);
         this.orderService.update(this.order)
             .subscribe(
                 data => {
@@ -84,13 +84,14 @@ export class OrderDetailComponent implements OnInit {
         this.orderService.delete(this.order)
             .subscribe(
                 data => {
+                    this._location.back();
                     this.alertService.success('Objednávka smazána');
                 },
                 error => {
                     this.alertService.error('Objednávku nelze smazat!');
                 }
             );
-        this._location.back();
+
     }
 
     getOrderPrice(order): number {

@@ -25,7 +25,7 @@ export class IngredientComponent implements OnInit {
       this.ingredientsService.getIngredients()
           .subscribe(ingredients => {
              this.ingredients = ingredients;
-             this.dataSource = new MatTableDataSource(ingredients);
+             this.dataSource = new MatTableDataSource(this.ingredients);
              this.dataSource.sort = this.sort;
            });
   }

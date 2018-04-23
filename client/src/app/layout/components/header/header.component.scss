@@ -4,6 +4,8 @@
         float: right;
         display: flex;
         justify-content: space-between;
+        z-index: 940;
+        top: 10px;
     }
 
     app-login {
