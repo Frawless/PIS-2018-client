@@ -4,12 +4,14 @@ import { LayoutComponent } from './layout.component';
 import { AuthGuard } from '../_authentication/_guards/auth.guard';
 import { CartComponent } from "./shop/cart/cart.component";
 import { CheckoutComponent } from "./shop/checkout/checkout.component";
+import {HomeComponent} from "./shop/home/home.component";
 
 const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
         children: [
+            { path: 'home', component: HomeComponent},
             { path: 'user/:username',
                 loadChildren: './user/user.module#UserModule',
                 data: {expectedRole: ['ADMIN', 'EMPLOYEE', 'USER']}, canActivate: [AuthGuard],
@@ -41,7 +43,7 @@ const routes: Routes = [
                 loadChildren: './admin/users/users.module#UsersModule' ,
                 data: {expectedRole: ['ADMIN', 'EMPLOYEE']}, canActivate: [AuthGuard]
             },
-            { path: '', redirectTo: '/shop' },
+            { path: '', redirectTo: '/shop/home' },
         ]
     }
 ];
