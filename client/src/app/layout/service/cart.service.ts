@@ -31,26 +31,32 @@ export class CartService {
     }
 
     add(product: Product, quantity: number) {
-        if(quantity < 1) return;
-        if(product.totalAmount < quantity) return;
+      
+      this.productsService.getProducts()
+          .subscribe(products => {
+            this.products = products;
 
-        const cart = this.retrieve();
-        let item = cart.items.find((p) => p.product_id === product.id );
-        if (item === undefined) {
-            item = new CartItem();
-            item.product_id = product.id;
-            cart.items.push(item);
-        }
-        if(item.quantity + quantity > product.totalAmount) {
-            item.quantity = product.totalAmount;
-        }
-        else {
-            item.quantity += quantity;
-        }
+            if(quantity < 1) return;
+            if(product.totalAmount < quantity) return;
 
-        this.calculateCart(cart);
-        this.save(cart);
-        this.dispatch(cart);
+            const cart = this.retrieve();
+            let item = cart.items.find((p) => p.product_id === product.id );
+            if (item === undefined) {
+                item = new CartItem();
+                item.product_id = product.id;
+                cart.items.push(item);
+            }
+            if(item.quantity + quantity > product.totalAmount) {
+                item.quantity = product.totalAmount;
+            }
+            else {
+                item.quantity += quantity;
+            }
+
+            this.calculateCart(cart);
+            this.save(cart);
+            this.dispatch(cart);
+        });
     }
 
     set(product: Product, quantity: number) {
@@ -92,7 +98,7 @@ export class CartService {
     }
 
     private calculateCart(cart: ShoppingCart) {
-        cart.itemsTotal = cart.items
+            cart.itemsTotal = cart.items
             .map((item) => item.quantity * this.products.find((p) => p.id === item.product_id).price)
             .reduce((previous, current) => previous + current, 0);
     }
