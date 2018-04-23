@@ -30,3 +30,7 @@ input:not([disabled]):invalid {
 input:not([disabled]) {
     border-left: 5px solid #42A948; // green
 }
+
+.sticky-top{
+  z-index: 920;
+}
