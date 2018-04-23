@@ -24,12 +24,17 @@ export class AdminProductsComponent implements OnInit {
     getProducts(): void {
         this.productsService.getProducts()
             .subscribe(products => {
-              this.products = products
-              this.dataSource = new MatTableDataSource(products);
+              this.products = products;
+
+              this.products.forEach(function (product) {
+                    product.image = null;
+              });
+
+              this.dataSource = new MatTableDataSource(this.products);
               this.dataSource.sort = this.sort;
             });
     }
-    
+
     applyFilter(filterValue: string) {
       filterValue = filterValue.trim(); // Remove whitespace
       filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches

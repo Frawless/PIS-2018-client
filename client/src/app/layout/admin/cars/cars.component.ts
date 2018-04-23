@@ -28,12 +28,12 @@ export class CarsComponent implements OnInit {
     getCars(): void {
         this.carsService.getCars()
             .subscribe(cars => {
-              this.cars = cars
+              this.cars = cars;
               this.dataSource = new MatTableDataSource(cars);
               this.dataSource.sort = this.sort;
             });
     }
-    
+
     applyFilter(filterValue: string) {
       filterValue = filterValue.trim(); // Remove whitespace
       filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches

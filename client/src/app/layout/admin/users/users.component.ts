@@ -36,7 +36,19 @@ export class UsersComponent implements OnInit {
                     users.roleName = users.role.name;
                     return users;
                 });
-            this.dataSource = new MatTableDataSource(users);
+
+            this.users.forEach(function (user) {
+                  user.password = null;
+                  user.id = null;
+                  user.address = null;
+                  user.email = null;
+                  user.role = null;
+                  user.orders = null;
+                  user.phoneNumber = null;
+
+            });
+            
+            this.dataSource = new MatTableDataSource(this.users);
             this.dataSource.sort = this.sort;
           });
       }
