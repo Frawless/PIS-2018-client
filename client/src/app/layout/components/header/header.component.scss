@@ -27,7 +27,7 @@
         text-align: center;
         padding-top: 3em;
         padding-bottom: 1em;
-        background-image: url('back.jpg') no-repeat center center fixed;
+        background-image: url("back.jpg") no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -40,4 +40,9 @@ p {font-style: italic;}
 
 .sticky-top{
   z-index: 920;
+}
+
+.nav-item{
+  padding-right: 20px;
+  padding-left: 20px;
 }
