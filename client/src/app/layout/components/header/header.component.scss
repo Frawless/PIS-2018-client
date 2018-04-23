@@ -22,12 +22,14 @@
     .jumbotron {
         border-radius: 0;
         margin: auto;
-        background-color: #FFCC01;
+        //background-color: #FFCC01;
         padding: 0;
         text-align: center;
         padding-top: 3em;
         padding-bottom: 1em;
-        background-image: url("back.jpg") no-repeat center center fixed;
+        background-image: url('back.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
