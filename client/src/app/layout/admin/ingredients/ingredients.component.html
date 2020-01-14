@@ -1,0 +1,22 @@
+<h2>Ingredience</h2>
+<div class="card">
+    <div class="card-body table-responsive">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Název </mat-header-cell>
+          <mat-cell *matCellDef="let ingredient"> {{ingredient.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="supplier">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Dodavatel </mat-header-cell>
+          <mat-cell *matCellDef="let ingredient"> {{ingredient.supplier}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let ingredient; columns:displayedColumns" routerLink="/shop/admin/ingredients/detail/{{ingredient.id}}" class="clickable"></mat-row>
+      </mat-table>
+    </div>
+</div>

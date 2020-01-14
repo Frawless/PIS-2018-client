@@ -108,3 +108,22 @@ $topnav-background-color: #222;
         padding:10px 0;
     }
 }
+
+button {
+  float: left;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left-color: black;
+}
+
+.form-group button{
+    float: none;
+}
+
+.profil{
+  border-radius: 0px;
+  border-left-color: black;
+  border-right-color: black;
+}

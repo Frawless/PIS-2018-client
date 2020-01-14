@@ -1,19 +1,18 @@
 $topnav-background-color: #FFFEF2;
+$header-height: 216px;
 .sidebar {
     font-size: 18px;
     border-radius: 0;
-    position: relative;
+    //position: relative;
     z-index: 1000;
     float: left;
     padding-top: 30px;
     padding-left: 30px;
-    //top: 56px;
-    //left: 235px;
-    width: 235px;
-    //margin-left: -235px;
+    width: 200px;
     margin-top: 0px;
     border: none;
     border-radius: 0;
+    border-bottom-right-radius: 50px;
     overflow-y: auto;
     background-color: $topnav-background-color;
     bottom: 0;
@@ -24,7 +23,9 @@ $topnav-background-color: #FFFEF2;
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-    // border-top: 1px solid rgba(255,255,255,0.3);
+    min-height: 100vh;
+    height: 100%;
+    min-height: calc(100vh - #{$header-height});
     .list-group {
         a.list-group-item {
             background: $topnav-background-color;
@@ -106,6 +107,7 @@ $topnav-background-color: #FFFEF2;
     }
 }
 .nested-menu {
+    cursor: pointer;
     .list-group-item {
         cursor: pointer;
     }
@@ -155,4 +157,8 @@ $topnav-background-color: #FFFEF2;
 ::-webkit-scrollbar-thumb {
     border-radius: 3px;
     -webkit-box-shadow: inset 0 0 3px rgba(255, 255, 255, 1);
+}
+
+.sticky-top{
+  z-index: 920;
 }

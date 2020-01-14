@@ -1,37 +1,45 @@
-﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+﻿import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { User } from '../_models/user';
+import {User} from '../_models';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
 export class UserService {
 
-    private usersUrl = 'http://localhost:8080/users/sing-up';
+    private usersUrl = 'http://localhost:8080/users/';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-    getAll() {
-        return this.http.get<User[]>('/api/users');
+    getUsers() {
+        return this.http.get<User[]>(this.usersUrl);
     }
 
     getById(id: number) {
         return this.http.get('/api/users/' + id);
     }
 
+    getUser(username: string) {
+        return this.http.get<User>(this.usersUrl + username);
+    }
+
     create(user: User) {
-        //return this.http.post('/api/users', user);
-        return this.http.post<User>(this.usersUrl, user, httpOptions);
+        return this.http.post<User>(this.usersUrl + 'sing-up', user, httpOptions);
     }
 
     update(user: User) {
-        return this.http.put('/api/users/' + user.id, user);
+        return this.http.put(this.usersUrl + user.username, JSON.stringify(user), httpOptions);
+    }
+
+    updateRole(user: User) {
+        return this.http.put(this.usersUrl + user.username + '/grand/role', JSON.stringify(user.role), httpOptions);
     }
 
     delete(id: number) {
-        return this.http.delete('/api/users/' + id);
+        return this.http.delete(this.usersUrl + id);
     }
 }

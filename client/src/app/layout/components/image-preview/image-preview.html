@@ -1,0 +1,7 @@
+    <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native
+(change) event listener -->
+<input type="file" name="file-2[]" id="file-2" accept="image/*" (change)="updateSource($event)" class="inputfile inputfile-2">
+<label class="input-group input-group-text" for="file-2"><span>Obrázek produktu&hellip;</span></label>
+    <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
+<br>
+<img align="center" class="image-preview mt-3" *ngIf= "source" [src]="source" src="">

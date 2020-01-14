@@ -1,8 +1,11 @@
 :host {
     .user-profile {
+        margin-top: 10px;
         float: right;
         display: flex;
         justify-content: space-between;
+        z-index: 940;
+        top: 10px;
     }
 
     app-login {
@@ -11,6 +14,7 @@
 
     .navbar {
         //margin-bottom: 50px;
+        //position: fixed;
         border-radius: 0;
         justify-content: center;
         background-color: #FFFEF2;
@@ -18,7 +22,31 @@
 
     /* Remove the jumbotron's default bottom margin */
     .jumbotron {
-        margin-bottom: 0;
-        background-color: #FFCC01;
+        border-radius: 0;
+        margin: auto;
+        //background-color: #FFCC01;
+        padding: 0;
+        text-align: center;
+        padding-top: 3em;
+        padding-bottom: 1em;
+        background-image: url('back.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
+}
+
+h1 { letter-spacing: 10px; font-family: 'Droid serif', serif; font-size: 36px; font-weight: 500; font-style: italic; line-height: 44px; margin: 0 0 12px; text-align: center; }
+p {font-style: italic;}
+
+.sticky-top{
+  z-index: 920;
+}
+
+.nav-item{
+  padding-right: 20px;
+  padding-left: 20px;
 }

@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,10 +16,18 @@ import { AuthGuard } from './_authentication/_guards/index';
 import { JwtInterceptor } from './_authentication/_helpers/index';
 import { AuthenticationService, UserService } from './_authentication/_services/index';
 
-import { ProductsService } from './layout/products/service/products.service';
+import { ProductsService } from './layout/service/products.service';
 
 // used to create fake backend
-import { Globals } from './globals';
+import {DataService, Globals} from './globals';
+import {IngredientsService} from './layout/service/ingredients.service';
+import {OrderService} from './layout/admin/orders/service/order.service';
+import {CarsService} from './layout/service/cars.service';
+import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
+import {CartService} from './layout/service/cart.service';
+import { CustomFormsModule } from 'ng2-validation';
+
+
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -37,9 +44,11 @@ export function createTranslateLoader(http: HttpClient) {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        CustomFormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgIdleKeepaliveModule.forRoot()
     ],
     exports: [],
     declarations: [
@@ -56,7 +65,12 @@ export function createTranslateLoader(http: HttpClient) {
         },
         // provider used to create fake backend
         ProductsService,
+        IngredientsService,
+        CarsService,
+        CartService,
+        OrderService,
         Globals,
+        DataService,
     ],
     bootstrap: [AppComponent]
 })

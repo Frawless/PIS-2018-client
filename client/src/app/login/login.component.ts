@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { routerTransition } from '../router.animations';
+import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {routerTransition} from '../router.animations';
 
 
-import { AlertService, AuthenticationService } from '../_authentication/_services/index';
+import {AlertService, AuthenticationService} from '../_authentication/_services/index';
 import {UserService} from '../_authentication/_services/user.service';
 import {FormBuilder, Validators} from '@angular/forms';
-import {Globals} from '../globals';
+import {DataService, Globals} from '../globals';
+import {Roles} from '../globals';
 
 import * as jwtDecode from 'jwt-decode';
 
@@ -19,7 +20,7 @@ import * as jwtDecode from 'jwt-decode';
     moduleId: module.id.toString(),
 })
 export class LoginComponent implements OnInit {
-    @Input() showLogin = true;
+    //@Input() showLogin = true;
 
     credentials: any = {};
     registration: any = {};
@@ -27,8 +28,11 @@ export class LoginComponent implements OnInit {
     registrationLoading = false;
     returnUrl: string;
     currentUser: string;
+    currentRole: string;
 
     showLoginButton: boolean;
+
+    iddleLogout = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -37,13 +41,13 @@ export class LoginComponent implements OnInit {
         private userService: UserService,
         private alertService: AlertService,
         private formBuilder: FormBuilder,
-        private globals: Globals) {
+        public globals: Globals,
+        private data: DataService) {
     }
 
-    // @TODO check this
-    // https://loiane.com/2017/08/angular-reactive-forms-trigger-validation-on-submit/
     ngOnInit() {
         this.showLoginButton = true;
+        this.globals.showLoginDialog = false;
         // Login validators
         this.credentials = this.formBuilder.group({
             username: ['', Validators.required],
@@ -52,31 +56,75 @@ export class LoginComponent implements OnInit {
         });
         // Registration validators
         this.registration = this.formBuilder.group({
-            name: ['', [Validators.required, Validators.maxLength(40)]],
-            surname: ['', [Validators.required, Validators.maxLength(40)]],
-            username: ['', [Validators.required, Validators.maxLength(40), Validators.minLength(4)]],
-            email: ['', [Validators.email, Validators.required]],
-            password: ['', Validators.required],
+            firstname: ['', [
+                Validators.required,
+                Validators.maxLength(40),
+                Validators.pattern(this.globals.namePattern)
+            ]],
+            lastname: ['', [
+                Validators.required,
+                Validators.maxLength(40),
+                Validators.pattern(this.globals.namePattern)
+            ]],
+            username: ['', [
+                Validators.required,
+                Validators.maxLength(40),
+                Validators.minLength(3),
+                Validators.pattern(this.globals.usernamePattern)
+            ]],
+            email: ['', [
+                Validators.email,
+                Validators.required
+            ]],
+            password: ['', [
+                Validators.required,
+                // Validators.pattern('passwordPattern')
+            ]],
             phoneNumber: ['']
-            // @TODO jstejska: add min-length validator for password and regex validator for names
-
         });
 
         // Loading current user
-        if  (localStorage.getItem('token') != null) {
+        if (localStorage.getItem('token') != null) {
             // this.globals.currentRole = localStorage.getItem('role');
             this.showLoginButton = false;
             this.getUserFromToken();
+            this.getCurrentRoleFromToken();
         }
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        // Subscribe for iddleLogout messages
+        this.data.iddleLogout.subscribe(message => {
+            this.iddleLogout = message;
+            if (this.iddleLogout) {
+                this.logout();
+            }
+        });
     }
 
     getUserFromToken() {
         const token = localStorage.getItem('token');
         if (token) {
-            this.currentUser =  jwtDecode(token).sub;
+            this.currentUser = jwtDecode(token).sub;
+        }
+    }
+
+    getCurrentRoleFromToken() {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const role = jwtDecode(token).roles[0].authority;
+            if (role === 'USER') {
+                this.globals.currentRole = Roles.USER;
+            } else if (role === 'EMPLOYEE') {
+                this.globals.currentRole = Roles.EMPLOYEE;
+            } else if (role === 'ADMIN') {
+                this.globals.currentRole = Roles.ADMIN;
+            } else {
+                this.globals.currentRole = Roles.NOTLOGED;
+            }
+        } else {
+            this.globals.currentRole = Roles.NOTLOGED;
         }
     }
 
@@ -93,24 +141,24 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.router.url]);
-                    this.showLogin = false;
+                    this.globals.showLoginDialog = false;
                     this.showLoginButton = false;
                     this.dismissLoginDialog();
                     this.getUserFromToken();
+                    this.getCurrentRoleFromToken();
                     this.alertService.success('Login was successful');
 
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Username or password is not correct!');
                     this.loginLoading = false;
                 });
-                console.log(this.credentials.controls.username.value);
     }
 
     register() {
         // Form validity check
         if (!this.registration.valid) {
-            this.alertService.error('Registration form is not valid');
+            this.alertService.error('Registrační formulář není validní!');
             return;
         }
 
@@ -120,36 +168,52 @@ export class LoginComponent implements OnInit {
         this.userService.create(this.registration.value)
             .subscribe(
                 data => {
-                    this.alertService.success('Registration successful', true);
+                    this.alertService.success('Registrace proběhla úspěšně!', true);
                     this.router.navigate([this.router.url]);
                     this.registrationLoading = false;
                     this.registration.reset();
+
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Uživatelské jméno \'' + this.registration.value.username + '\' je již obsazeno!');
                     this.registrationLoading = false;
                 });
     }
 
     logout() {
+        this.logoutRedirect();
         this.authenticationService.logout();
-        this.showLogin = false;
+        this.globals.showLoginDialog = false;
         this.showLoginButton = true;
         this.loginLoading = false;
         this.credentials.reset();
         this.registration.reset();
-        this.globals.currentRole = 'USER';
-        console.log('Logged out, storage is: ' + localStorage.getItem('token'));
     }
 
     showLoginDialog() {
         this.alertService.clearAlert();
         this.globals.alertLogin = true;
-        this.showLogin = true;
+        this.globals.showLoginDialog = true;
     }
 
     dismissLoginDialog() {
         // this.alertService.clearAlert();
         this.globals.alertLogin = false;
+    }
+
+    getCurrentUser() {
+        this.getUserFromToken();
+        return this.currentUser;
+
+    }
+
+    logoutRedirect() {
+        this.getCurrentRoleFromToken();
+        if ((this.globals.currentRole >= Roles.USER)
+            && (this.router.url.indexOf('admin') > -1
+                || this.router.url.indexOf('user') > -1)) {
+            this.router.navigateByUrl('/');
+        }
+        this.globals.currentRole = Roles.NOTLOGED;
     }
 }

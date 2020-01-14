@@ -1,0 +1,38 @@
+<div class="row" *ngIf="ingredient">
+  <div class="col-md-12">
+    <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+    <h2>Nová ingredience</h2>
+  </div>
+
+  <form (ngSubmit)="add()" #ingredientsForm="ngForm" class="col-md-6">
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Název:</span>
+          </div>
+          <input type="text" class="form-control" id="name"
+                 required
+                 pattern="{{globals.productPattern}}"
+                 [ngModel]="ingredient.name" name="name"
+                 (ngModelChange)="ingredient.name=$event"
+                 placeholder="Mouka"
+                 #name="ngModel"/>
+
+      </div>
+
+      <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Dodavatel:</span>
+          </div>
+          <input type="text" class="form-control" id="supplier"
+                 required
+                 [ngModel]="ingredient.supplier" name="supplier"
+                 (ngModelChange)="ingredient.supplier=$event"
+                 placeholder="Babičina pekárnička"
+                 #supplier="ngModel"/>
+      </div>
+
+      <div class="buttons">
+          <button type="submit" class="btn btn-success" [disabled]="!ingredientsForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+      </div>
+    </form>
+</div>

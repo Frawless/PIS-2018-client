@@ -1,0 +1,30 @@
+<h2>Uživatelské účty</h2>
+<div class="card">
+    <div class="card-body table-responsive">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Užívatelské jméno </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="firstname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Jméno </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.firstname}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Příjmení </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.lastname}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="roleName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.roleName}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let user; columns:displayedColumns" routerLink="/shop/user/{{user.username}}" class="clickable"></mat-row>
+      </mat-table>
+    </div>
+</div>

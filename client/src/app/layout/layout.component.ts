@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Globals} from '../globals';
 
 import * as jwtDecode from 'jwt-decode';
@@ -13,8 +13,9 @@ export class LayoutComponent implements OnInit {
     currentRole: string;
 
     constructor(
-        private globals: Globals,
-    ) {}
+        public globals: Globals,
+    ) {
+    }
 
     ngOnInit() {
         this.getCurrentRoleFromToken();
@@ -23,12 +24,7 @@ export class LayoutComponent implements OnInit {
     getCurrentRoleFromToken() {
         const token = localStorage.getItem('token');
         if (token) {
-            this.currentRole = jwtDecode(token).roles[0].authority;
+            this.globals.currentRole = jwtDecode(token).roles[0].authority;
         }
-
-    }
-
-    onChange() {
-        this.getCurrentRoleFromToken();
     }
 }

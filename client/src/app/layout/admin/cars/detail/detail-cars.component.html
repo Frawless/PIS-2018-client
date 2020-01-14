@@ -1,0 +1,40 @@
+<div class="row" *ngIf="car">
+    <div class="col-md-12">
+        <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+        <h2>Detail: <span class="current-name">vozidlo</span></h2>
+    </div>
+    <form (ngSubmit)="save()" #carForm="ngForm" class="col-md-6">
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Typ:</span>
+            </div>
+            <input type="text" class="form-control" id="city"
+                   required
+                   pattern="{{globals.namePattern}}"
+                   [ngModel]="car.type" name="city"
+                   (ngModelChange)="car.type=$event"
+                   placeholder="Dodávka"
+                   #type="ngModel"/>
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Datum:</span>
+            </div>
+            <input type="date" class="form-control" id="dateAdd"
+                   required
+                   disabled
+                   min="{{globals.todayDate}}"
+                   [ngModel]="car.dateAdd | date: 'yyyy-MM-dd'" name="dateAdd"
+                   (ngModelChange)="car.dateAdd=$event"
+                   placeholder="Brno"
+                   #dateAdd="ngModel"/>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" class="btn btn-success" [disabled]="!carForm.form.valid" ><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+            <button class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+        </div>
+
+    </form>
+</div>

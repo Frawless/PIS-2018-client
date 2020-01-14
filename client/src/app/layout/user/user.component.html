@@ -1,0 +1,199 @@
+<div *ngIf="user">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+      <h2>Profil uživatele: <span class="current-name">{{this.username}}</span></h2>
+    </div>
+  </div>
+
+  <form #userForm="ngForm" class="row">
+            <div class="col-md-6">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Jméno:</span>
+                    </div>
+                      <input type="text" class="form-control" id="firstname"
+                             required
+                             pattern="{{globals.namePattern}}"
+                             [ngModel]="user.firstname" name="firstname"
+                             (ngModelChange)="user.firstname=$event"
+                             placeholder="Josef"
+                             #firstname="ngModel"/>
+
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Příjmení:</span>
+                    </div>
+                    <input type="text" class="form-control" id="lastname"
+                           required
+                           pattern="{{globals.namePattern}}"
+                           [ngModel]="user.lastname" name="lastname"
+                           (ngModelChange)="user.lastname=$event"
+                           placeholder="Straka"
+                           #lastname="ngModel"/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email:</span>
+                    </div>
+                    <input type="email" class="form-control" id="email"
+                           required
+                           email
+                           [ngModel]="user.email" name="email"
+                           (ngModelChange)="user.email=$event"
+                           placeholder="johndoe@gmail.com"
+                           #email="ngModel"/>
+                </div>
+
+                <div class="form-group input-group" *ngIf="this.globals.currentRole > 1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Role:</span>
+                    </div>
+                        <select class="form-control" id="role"
+                                required
+                                [ngModel]="user.role.name"  name="role"
+                                (ngModelChange)="user.role.name=$event"
+                                #role="ngModel">
+                        <option [selected]="user.role.name == role"  *ngFor="let role of this.roles" [ngValue]="role">{{role}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Nové heslo:</span>
+                    </div>
+                    <input type="password" class="form-control" id="password"
+                           [ngModel]="user.password" name="password"
+                           (ngModelChange)="user.password=$event"
+                           placeholder="123456"
+                           #password="ngModel"/>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Město:</span>
+                    </div>
+                    <input type="text" class="form-control" id="city"
+                           required
+                           pattern="{{globals.cityPattern}}"
+                           [ngModel]="user.address?.city" name="city"
+                           (ngModelChange)="user.address.city=$event"
+                            placeholder="Brno"
+                           #city="ngModel"/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Ulice:</span>
+                    </div>
+                    <input type="text" class="form-control" id="streetName"
+                           required
+                           pattern="{{globals.streetPattern}}"
+                           [ngModel]="user.address?.streetName" name="streetName"
+                           (ngModelChange)="user.address.streetName=$event"
+                           placeholder="Jana Husa 1"
+                           #streetName="ngModel"/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Číslo:</span>
+                    </div>
+                    <input type="number" class="form-control" id="streetNumber"
+                           required
+                           min="1"
+                           [ngModel]="user.address?.streetNumber" name="streetNumber"
+                           (ngModelChange)="user.address.streetNumber=$event"
+                           placeholder="123"
+                           #streetNumber="ngModel"/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">PSČ:</span>
+                    </div>
+                    <input type="number" class="form-control" id="psc"
+                           required
+                           min="1"
+                           pattern="{{globals.pscPattern}}"
+                           [ngModel]="user.address?.psc" name="psc"
+                           (ngModelChange)="user.address.psc=$event"
+                           placeholder="60200"
+                           #psc="ngModel"/>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Telefon:</span>
+                    </div>
+                    <input type="text" class="form-control" id="phoneNumber"
+                           required
+                           minlength="9"
+                           [ngModel]="user.phoneNumber" name="phoneNumber"
+                           (ngModelChange)="user.phoneNumber=$event"
+                           placeholder="567879876"
+                           #phoneNumber="ngModel"/>
+                </div>
+            </div>
+
+    <div class="buttons col-md-12">
+        <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" (click)="save()"><i class="fa fa-check fa-2x" aria-hidden="true"></i></button>
+        <button *ngIf="this.globals.currentRole > 1 && this.username != this.currentUser" class="btn btn-danger pull-right" (click)="delete()"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+    </div>
+  </form>
+
+  <h2>Objednávky</h2>
+  <div class="card mb-3">
+      <div class="card-body table-responsive">
+        <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Číslo objednávky </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="createDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Vytvořeno </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.createDate | date: 'yyyy-MM-dd'}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="exportDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Odesláno </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.exportDate| date: 'yyyy-MM-dd'}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Stav </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{order.state}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cena </mat-header-cell>
+            <mat-cell class="cellPrice" *matCellDef="let order"> {{order.price}} Kč </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+          <mat-row *matRowDef="let order; columns:displayedColumns" routerLink="/shop/user/{{this.username}}/order/{{order.id}}" class="clickable"></mat-row>
+        </mat-table>
+          <!-- <table class="table table-hover table-striped">
+              <thead>
+              <tr>
+                  <th>Číslo objednávky</th>
+                  <th>Vytvořeno</th>
+                  <th>Odesláno</th>
+                  <th>Stav</th>
+                  <th>Cena</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of user?.orders" routerLink="/shop/user/{{this.username}}/order/{{order.id}}" class="clickable">
+                  <td style="font-weight:bold">{{order.id}}</td>
+                  <td>{{order?.createDate | date: 'yyyy-MM-dd'}}</td>
+                  <td>{{order?.exportDate| date: 'yyyy-MM-dd'}}</td>
+                  <td>{{order?.state}}</td>
+                  <td>{{getOrderPrice(order)}} Kč</td>
+              </tr>
+              </tbody>
+          </table> -->
+      </div>
+  </div>
+</div>

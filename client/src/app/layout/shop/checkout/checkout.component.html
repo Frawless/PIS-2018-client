@@ -1,0 +1,142 @@
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-warning" (click)="backClicked()"><i class="fa fa-mail-reply" aria-hidden="true"></i> Zpět</button>
+        <h2><i class="fa fa-fw fa-shopping-cart"></i>Pokladna</h2>
+    </div>
+</div>
+
+    <form #orderForm="ngForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Jméno:</span>
+                </div>
+                <input type="text" class="form-control" id="firstname"
+                       required
+                       disabled
+                       [ngModel]="order.user?.firstname" name="firstname"
+                       #firstname="ngModel"/>
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Příjmení:</span>
+                </div>
+                <input type="text" class="form-control" id="lastname"
+                       required
+                       disabled
+                       [ngModel]="order.user?.lastname" name="lastname"
+                       #lastname="ngModel"/>
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Telefoní číslo:</span>
+                </div>
+                <input type="text" class="form-control" id="phoneNumber"
+                       required
+                       minlength="9"
+                       [ngModel]="order.user?.phoneNumber" name="phoneNumber"
+                       (ngModelChange)="order.user.phoneNumber=$event"
+                       placeholder="567879876"
+                       #phoneNumber="ngModel"/>
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Datum expedice:</span>
+                </div>
+                <input type="date" class="form-control" id="exportDate"
+                       required
+                       min="{{globals.tomorrowDate}}"
+                       [ngModel]="order.exportDate | date: 'yyyy-MM-dd'" name="exportDate"
+                       (ngModelChange)="order.exportDate=$event"
+                       #exportDate="ngModel"/>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-md-6">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Město:</span>
+                </div>
+                <input type="text" class="form-control" id="city"
+                       required
+                       [ngModel]="order.address?.city" name="city"
+                       (ngModelChange)="order.address.city=$event"
+                       #city="ngModel"/>
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Ulice:</span>
+                </div>
+                <input type="text" class="form-control" id="streetName"
+                       required
+                       [ngModel]="order.address?.streetName" name="streetName"
+                       (ngModelChange)="order.address.streetName=$event"
+                       #streetName="ngModel"/>
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Číslo:</span>
+                </div>
+                <input type="number" class="form-control" id="streetNumber"
+                       required
+                       [ngModel]="order.address?.streetNumber" name="streetNumber"
+                       (ngModelChange)="order.address.streetNumber=$event"
+                       #streetNumber="ngModel"/>
+            </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">PSČ:</span>
+                </div>
+                <input type="number" class="form-control" id="psc"
+                       required
+                       pattern="{{globals.pscPattern}}"
+                       [ngModel]="order.address?.psc" name="psc"
+                       (ngModelChange)="order.address.psc=$event"
+                       #psc="ngModel"/>
+            </div>
+        </div>
+    </div>
+
+    <h2>Detail objednaných produktů</h2>
+    <div class="card">
+        <div class="card-body table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Název zboží</th>
+                    <th>Počet</th>
+                    <th>Cena</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of order.items;">
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.countOrdered}}</td>
+                    <td>{{getItemsPrice(item)}} ({{item.product.price}}) Kč</td>
+                </tr>
+                <tr class="font-weight-bold">
+                    <td colspan="2">Celková cena</td>
+                    <td>{{getOrderPrice(order)}} Kč</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="buttons pull-right mt-3 mb-3">
+        <button type="submit" class="btn btn-success" [disabled]="!orderForm.form.valid" (click)="send()">
+            <i class="fa fa-check fa-2x" aria-hidden="true"></i> Odeslat objednávku</button>
+    </div>
+
+</form>

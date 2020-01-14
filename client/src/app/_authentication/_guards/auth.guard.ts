@@ -11,6 +11,12 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
         const token = localStorage.getItem('token');
+
+        if (!token) {
+            this.router.navigate(['/shop']);
+            return false;
+        }
+
         const role = jwtDecode(token).roles[0].authority;
 
         const expectedRole = route.data.expectedRole;

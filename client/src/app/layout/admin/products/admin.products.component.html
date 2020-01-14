@@ -1,0 +1,26 @@
+<h2>Přehled produktů</h2>
+<div class="card">
+    <div class="card-body table-responsive">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <mat-table class="table table-hover table-striped" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Název </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalAmount">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Na skladě </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.totalAmount}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cena </mat-header-cell>
+          <mat-cell class="cellPrice" *matCellDef="let product"> {{product.price}} Kč </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let product; columns:displayedColumns" routerLink="/shop/admin/products/detail/{{product.id}}" (change)="products=getProducts()"  class="clickable"></mat-row>
+      </mat-table>
+    </div>
+</div>

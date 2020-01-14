@@ -1,0 +1,42 @@
+.image-preview{
+    max-width: 100%;
+    max-height: 250px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.inputfile {
+    display: none;
+
+}
+
+.inputfile + label {
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 6px 10px;
+
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+/* style 2 */
+
+.inputfile-2 + label {
+    color: gray;
+    border: 1px solid currentColor;
+}
+
+.inputfile-2:focus + label,
+.inputfile-2.has-focus + label,
+.inputfile-2 + label:hover {
+    color: black;
+}
+
